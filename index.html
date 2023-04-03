@@ -9,10 +9,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="topnav">
-        <div>
+        <div class="topnav-left">
+            <a href="./search.php">Search</a>
+            <form class="searchbar" action="./search.php">
+                <input type="text" name="search" placeholder="Search your next problem...."/>
+                <button type="submit">
+                    <img src="./assets/imgs/search.svg" onerror="Search" />
+                </button>   
+            </form>
             <a href="about.html">About</a>
             <a href="help.html">Help</a>
         </div>
@@ -24,7 +34,65 @@
             <a href="register.html">Register</a>
         </div>
     </header>
-    <h1>Bine ati venit</h1> 
-    <p>Bine asdf</p>
+   
+    <div class="main">
+        <div class="index-grid">
+            
+            <div id= "sidenav">
+                <div class="sidenav-container">
+                    <h1>Search</h1>
+                    <form class="searchbar" action="./search.php">
+                        <input type="text" name="search" placeholder="Search your next problem..."/>
+                        <button type="submit">
+                            <img src="./assets/imgs/search.svg" onerror="Search" />
+                        </button>
+                    </form>
+                </div>
+                <div class="sidenav-container">
+                    <h1>Links</h1>
+                    <a href="login.html">Login</a>
+                    <a href="register.html">Register</a>
+                    <a href="./about.html">About Us - Who made this</a>
+                    <a href="./help.html">Help - How to navigate</a>
+                    <a href="https://ezinfo.ro">EZinfo - Our sponsor</a>
+                </div>
+            </div>
+
+            <div id="news">
+                <h1 style="text-align: center;"">News</h1>
+                <div class="news-box">
+                    <div class="news-content">
+                        <p class="news-date">
+                                Date: 02/01/2022
+                        </p>
+                        <h2>
+                                This is second News
+                        </h2>
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam temporibus, necessitatibus in nulla id amet molestiae perferendis beatae. Aperiam neque odio laudantium possimus ipsam numquam accusamus harum qui saepe asperiores.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae voluptatibus totam ratione adipisci dolor accusantium sit itaque neque eum mollitia, dolore, aliquid deserunt atque laborum minima dicta odio ipsa ut!
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos iusto cupiditate ipsa quas, iure necessitatibus natus aspernatur voluptatum minus, sapiente ratione optio. Quia delectus eligendi nostrum! Laudantium sapiente id veniam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, accusantium culpa. Ea officiis eligendi deserunt modi consectetur libero quidem voluptas atque obcaecati illo asperiores eius assumenda, molestias sed magnam ex. Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium ea a obcaecati, repellendus nihil, nemo, nostrum in eligendi laboriosam sit dolore error. Atque, debitis! Amet velit et magnam perferendis obcaecati?Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste ratione similique doloremque dolores deleniti, magni eligendi laborum, fuga placeat voluptatum culpa aperiam? Odio minus cupiditate, voluptatibus facere natus deserunt maiores?
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos iusto cupiditate ipsa quas, iure necessitatibus natus aspernatur voluptatum minus, sapiente ratione optio. Quia delectus eligendi nostrum! Laudantium sapiente id veniam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, accusantium culpa. Ea officiis eligendi deserunt modi consectetur libero quidem voluptas atque obcaecati illo asperiores eius assumenda, molestias sed magnam ex. Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium ea a obcaecati, repellendus nihil, nemo, nostrum in eligendi laboriosam sit dolore error. Atque, debitis! Amet velit et magnam perferendis obcaecati?Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste ratione similique doloremque dolores deleniti, magni eligendi laborum, fuga placeat voluptatum culpa aperiam? Odio minus cupiditate, voluptatibus facere natus deserunt maiores?
+                        </p>
+                        
+                        
+                    </div>  
+                </div>
+                <div class="news-box">
+                    <div class="news-content">
+                        <p class="news-date">
+                                Date: 02/01/2022
+                        </p>
+                        <h2>
+                                This is our first news
+                        </h2>
+                        <p>We created this website to help students for the daily programming challenges of tomorrow. Hope to lik, shr, and subscrib. Tell yo mamma abot it.</p>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

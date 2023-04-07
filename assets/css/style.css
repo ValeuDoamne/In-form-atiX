@@ -8,7 +8,7 @@ body {
     color: #F6E9E9;
 }
 
-a, h1, h2, h3, h4, p {
+a, h2, h3, h4, p {
     font-family: 'Noto Sans', sans-serif;
 }
 
@@ -17,6 +17,7 @@ a {
 }
 
 h1 {
+    font-family: 'Noto Sans', sans-serif;
     color: #E16428;
 }
 
@@ -241,4 +242,83 @@ h1 {
 
 #sidenav h1 {
     text-align: center;
+}
+
+/* Start About Section */
+.mainAbout { 
+    margin-top: 85px;
+    text-align:center;
+}
+  
+.mainAbout h1 {
+    margin-top: 15px;
+    font-size: 33px;
+    color:#f2f2f2;
+    border-bottom: 3px solid #E16428;
+    display: inline-block;
+}
+
+.mainAbout h2 {
+    margin-top: 15px;
+    font-size: 33px;
+    color:#f2f2f2;
+    border-bottom: 3px solid #E16428;
+    display: inline-block;
+}
+ 
+.card-container {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+
+    border-radius: 20px;
+    border: 1px solid #E16428;
+    background-color: #272121;
+    color: #f2f2f2;
+    padding: 20px;
+    margin: 30px;
+    width: 290px;
+    text-align: center;
+}
+  
+  .card .userpic {
+    border-radius: 20px;
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+}
+
+  .card .connections {
+    width:20px;
+    height:20px;
+    margin-top:20px;
+}
+  
+  .card .name {
+    font-size: 23px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    font-family: 'Noto Sans', sans-serif;
+}
+  
+  .card .info {
+    font-size: 12px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+  .informationCard {
+    border-radius: 20px;
+    border: 1px solid #E16428;
+    background-color: #272121;
+    color: #f2f2f2;
+    padding: 20px;
+    margin: 30px;
+    width: 1270px;
+    text-align: justify;
+    font-family: 'Noto Sans', sans-serif;
 }

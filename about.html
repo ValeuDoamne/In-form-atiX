@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About us</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="topnav">
+        <div class="topnav-left">
+            <a href="./search.php">Search</a>
+            <form class="searchbar" action="./search.php">
+                <input type="text" name="search" placeholder="Search your next problem...."/>
+                <button type="submit">
+                    <img src="./assets/imgs/search.svg" onerror="Search" />
+                </button>   
+            </form>
+            <a href="about.html">About</a>
+            <a href="help.html">Help</a>
+        </div>
+        <div>
+            <a href="index.html" class="title">In-form-atiX</a>
+        </div>
+        <div>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+        </div>
+    </header>
+
+    <div class="mainAbout">
+        <h1>About the team</h1>
+
+        <div class ="card-container">
+            <div class="card" itemscope itemtype="https://schema.org/Person">
+                <img src="./assets/imgs/defaultCardAbout.svg" class="userpic" itemprop="image">
+                <p class="name" itemprop="name"><span itemprop="givenName">Constantin-Cosmin</span> <span itemprop="familyName">Alexa</span></h2>
+                <p class="info" itemprop="email">constantin.alexa@info.uaic.ro</p>
+                <p class="info" itemprop="affiliation">Faculty of Computer Science, Iasi</p>
+                <a href = "https://github.com/ValeuDoamne" itemprop="url"><img src="./assets/imgs/githubCardAbout.svg" class="connections"></a>
+            </div>
+        
+            <div class="card" itemscope itemtype="https://schema.org/Person">
+                <img src="./assets/imgs/defaultCardAbout.svg" class="userpic" itemprop="image">
+                <p class="name" itemprop="name"><span itemprop="givenName">Ioan</span> <span itemprop="familyName">Grasu</span></h2>
+                <p class="info" itemprop="email">ioan.grasu@info.uaic.ro</p>
+                <p class="info" itemprop="affiliation">Faculty of Computer Science, Iasi</p>
+                <a href = "https://github.com/lGnyte" itemprop="url"><img src="./assets/imgs/githubCardAbout.svg" class="connections"></a>
+            </div>
+            
+            <div class="card" itemscope itemtype="https://schema.org/Person">
+                <img src="./assets/imgs/defaultCardAbout.svg" class="userpic" itemprop="image">
+                <p class="name" itemprop="name"><span itemprop="givenName">Alexandru</span> <span itemprop="familyName">Niță</span></h2>
+                <p class="info" itemprop="email"> alexandru.nita@info.uaic.ro</p>
+                <p class="info" itemprop="affiliation">Faculty of Computer Science, Iasi</p>
+                <a href = "https://github.com/Allexor" itemprop="url"><img src="./assets/imgs/githubCardAbout.svg" class="connections"></a>
+            </div>
+        </div>
+
+        <h2>About the site</h2>
+
+        <div class="card-container">
+            <div class = "informationCard">
+                <p>Să se implementeze o aplicație web destinată elevilor de liceu ce are ca scop învățarea programării prin intermediul de probleme. Problemele informatice vor fi propuse de anumite clase de utilizatori (profesorii) și vor fi aprobate de către administratori. O problemă poate avea anumite TAG-uri (ca de exemplu: usoara/medie/grea, capitolul informatic din care face parte e.g programare dinamica, bkt, etc.) Profesorii vor putea construi clase și adăuga elevii (care au deja cont) în aceste clase în baza unor identificatori (email, username, etc.). De asemenea, profesorii vor putea da teme fie propunând probleme fie alegând din mulțimea de probleme existente. Elevii vor putea să rezolve probleme și să trimită soluțiile lor pentru o evaluare realizată de către profesor, vor putea comenta la o anumita problema pentru a oferi ponturi colegilor sau marca problemele cu un număr de stele (1-5). Problemele vor putea fi accesibile altor aplicații web prin intermediul unui API (REST/GraphQL). De asemenea o problema poate fi exportata/importată într-un format open (XML / JSON / CSV, etc.) Se vor construi rapoarte oferind statistici pentru utilizator (cate probleme a trimis, cate sunt corecte, etc.) si rapoarte privitoare la fiecare problema (cati utilizatori au incercat-o, cati au reusit sa o faca, etc.).</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

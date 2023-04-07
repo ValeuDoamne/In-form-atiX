@@ -1,5 +1,5 @@
  /* Add a black background color to the top navigation */
- html, body {
+html, body {
     margin: 0px;
 }
 
@@ -246,12 +246,12 @@ h1 {
 
 /* Start About Section */
 .mainAbout { 
-    margin-top: 60px;
+    margin-top: 85px;
     text-align:center;
 }
   
 .mainAbout h1 {
-    margin-top: 20px;
+    margin-top: 15px;
     font-size: 33px;
     color:#f2f2f2;
     border-bottom: 3px solid #E16428;
@@ -259,7 +259,7 @@ h1 {
 }
 
 .mainAbout h2 {
-    margin-top: 20px;
+    margin-top: 15px;
     font-size: 33px;
     color:#f2f2f2;
     border-bottom: 3px solid #E16428;
@@ -268,10 +268,12 @@ h1 {
  
 .card-container {
     display:flex;
+    flex-wrap: wrap;
     justify-content: center;
 }
 
 .card {
+
     border-radius: 20px;
     border: 1px solid #E16428;
     background-color: #272121;
@@ -309,14 +311,13 @@ h1 {
     font-family: 'Noto Sans', sans-serif;
 }
 
-  .informationCard
-  {
+  .informationCard {
     border-radius: 20px;
     border: 1px solid #E16428;
     background-color: #272121;
     color: #f2f2f2;
     padding: 20px;
-    margin: 35px;
+    margin: 30px;
     width: 1270px;
     text-align: justify;
     font-family: 'Noto Sans', sans-serif;

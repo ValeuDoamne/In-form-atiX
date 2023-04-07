@@ -14,31 +14,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="topnav">
-        <div class="topnav-left">
-            <a href="./search.php">Search</a>
-            <form class="searchbar" action="./search.php">
-                <input type="text" name="search" placeholder="Search your next problem...."/>
-                <button type="submit">
-                    <img src="./assets/imgs/search.svg" onerror="Search" />
-                </button>   
-            </form>
-            <a href="about.html">About</a>
-            <a href="help.html">Help</a>
-        </div>
-        <div>
-            <a href="index.html" class="title">In-form-atiX</a>
-        </div>
-        <div>
-            <a href="login.html">Login</a>
-            <a href="register.html">Register</a>
-        </div>
+    <header class="topnav"> 
+        
+        <a href="index.html" class="title">In-form-atiX</a>
+        
+            <input class="toggle"  id="toggle" type="checkbox" /> 
+            <label class="hamburger" for="toggle">
+                <div class="top"></div>
+                <div class="meat"></div>
+                <div class="bottom"></div>
+            </label>
+            <nav class="menu">   
+                <a href="./search.php">Search</a>
+                <a href="about.html">About</a>
+                <a href="help.html">Help</a>
+                <a href="login.html">Login</a>
+                <a href="register.html">Register</a>
+            </nav>
     </header>
    
     <div class="main">
         <div class="index-grid">
-            
-            <div id= "sidenav">
+            <div class= "sidenav">
                 <div class="sidenav-container">
                     <h1>Search</h1>
                     <form class="searchbar" action="./search.php">
@@ -58,9 +55,9 @@
                 </div>
             </div>
 
-            <div id="news">
+            <div class="news">
                 <h1 style="text-align: center;"">News</h1>
-                <div class="news-box">
+                <div class="news-container">
                     <div class="news-content">
                         <p class="news-date">
                                 Date: 02/01/2022
@@ -80,7 +77,7 @@
                         
                     </div>  
                 </div>
-                <div class="news-box">
+                <div class="news-container">
                     <div class="news-content">
                         <p class="news-date">
                                 Date: 02/01/2022

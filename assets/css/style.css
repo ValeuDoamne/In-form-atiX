@@ -16,6 +16,14 @@ a {
     text-decoration: none;
 }
 
+a{
+  color:#E16428;
+}
+
+p.small {
+  font-size:smaller;
+}
+
 .main h1 {
     color: #E16428;
 }
@@ -117,6 +125,15 @@ main.centered-page h1 {
   font-size: 2.75em;
 }
 
+/* pseudo-elements for handling autocompletion styles */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #222 inset !important;
+    -webkit-text-fill-color: #F6E9E9 !important;
+}
+
 form.login {
   background-color: #222;
   max-width: 350px;
@@ -165,15 +182,7 @@ form.login input[type] {
   margin: 1em 0;
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0 30px #363636 inset !important;
-    -webkit-text-fill-color: #F6E9E9 !important;
-}
-
-form.login button[type="submit"] {
+form.login button[type="button"] {
   background-color: #E16428;
   border: none;
   color: #F6E9E9;
@@ -186,7 +195,7 @@ form.login button[type="submit"] {
   cursor: pointer;
 }
 
-form.login button[type="submit"]:hover {
+form.login button[type="button"]:hover {
   background-color: rgba(225, 100, 40, 0.7);
 }
 

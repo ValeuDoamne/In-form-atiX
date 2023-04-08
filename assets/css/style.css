@@ -22,7 +22,7 @@ p.small {
   font-size: smaller;
 }
 
-h1 {
+.main h1 {
     font-family: 'Noto Sans', sans-serif;
     color: #E16428;
 }

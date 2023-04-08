@@ -193,6 +193,7 @@ form.login button[type="button"]:hover {
 
 .news-container {
     margin-top: 20px;
+    margin-left: 20px;
     margin-right: 10px;
     padding: 1rem;
     background-image: linear-gradient(to bottom right, #F6E9E9, #E16428);

@@ -13,7 +13,7 @@ a, h2, h3, h4, p {
 
 
 
-a{
+a {
   text-decoration: none;
   color:#E16428;
 }
@@ -27,45 +27,49 @@ h1 {
     color: #E16428;
 }
 
+.topnav {
+    background-color: #272121; 
+    overflow: hidden;
+    display: flex;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    justify-content: space-between;
+}
+
+.topnav .topnav-hamburger, .topnav .toggle {
+   display: none; 
+}
+
+.topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    height: 100%;
+}
+
+.topnav a:hover {
+    background-color: #f2f2f2;
+    color: black;
+}
+
+.topnav .title
+{
+    color: #E16428;
+    font-size: large;
+    font-family: "Roboto";
+}
+
 main { 
   margin-top: 85px;
 }
 
 .main {
     margin-top: 40px;
-}
-
-.topnav .topnav-left {
-    display: flex;
-    justify-content: flex-start;
-}
-
-.topnav .searchbar {
-    display: flex;
-    flex-wrap: nowrap;
-    width: 100%;
-    height:  100%;
-    flex-direction: row;
-    align-items: center;
-}
-
-.topnav .searchbar input {
-    margin: 0;
-    font-size: 16px;
-    font-family: 'Noto Sans', sans-serif;
-    color: #272721;
-    padding: 5px;
-}
-.topnav .searchbar button {
-    all:unset;
-    margin: 0;
-    font-size: 16px;
-    background-color: #E16428;
-    padding-left: 10px;
-    padding-right: 15px;
-    border-radius: 2px;
-    height: 35px;
-    width: 100%;
 }
 
 main.centered-page {
@@ -93,7 +97,7 @@ main.centered-page h1 {
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
+input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px #222 inset !important;
     -webkit-text-fill-color: #F6E9E9 !important;
 }

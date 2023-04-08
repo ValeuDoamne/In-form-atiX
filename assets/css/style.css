@@ -1,4 +1,3 @@
- /* Add a black background color to the top navigation */
 html, body {
     margin: 0px;
 }
@@ -8,23 +7,23 @@ body {
     color: #F6E9E9;
 }
 
-a, h1, h2, h3, h4, p {
+a, h2, h3, h4, p {
     font-family: 'Noto Sans', sans-serif;
 }
 
-a {
-    text-decoration: none;
-}
+
 
 a{
+  text-decoration: none;
   color:#E16428;
 }
 
 p.small {
-  font-size:smaller;
+  font-size: smaller;
 }
 
-.main h1 {
+h1 {
+    font-family: 'Noto Sans', sans-serif;
     color: #E16428;
 }
 
@@ -34,48 +33,6 @@ main {
 
 .main {
     margin-top: 40px;
-}
-
-.topnav {
-    background-color: #272121; 
-    overflow: hidden;
-    display: flex;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    justify-content: space-between;
-}
-
-  
-  /* Style the links inside the navigation bar */
-.topnav a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-    height: 100%;
-}
-  
-  /* Change the color of links on hover */
-.topnav a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-  
-  /* Hide the link that should open and close the topnav on small screens */
-.topnav .icon {
-    display: none;
-}
-
-.topnav .title
-{
-    color: #E16428;
-    font-size: large;
-    font-family: "Roboto";
 }
 
 .topnav .topnav-left {
@@ -212,6 +169,7 @@ form.login button[type="button"]:hover {
   }
 }
 
+
 .index-grid {
     display: grid;
     grid-template-columns: 30% 60% 10%;
@@ -220,16 +178,16 @@ form.login button[type="button"]:hover {
 
 /* Start News Section */
 
-#news {
+.news {
     margin-left: 10px;
     font-family: 'Noto Sans', sans-serif;
 }
 
-#news h1 {
+.news h1 {
     text-align: center;
 }
 
-.news-box {
+.news-container {
     margin-top: 20px;
     margin-right: 10px;
     padding: 1rem;
@@ -240,7 +198,7 @@ form.login button[type="button"]:hover {
     cursor:pointer;     
 }
 
-.news-box:hover {
+.news-container:hover {
     padding: 1rem;
     border-radius: 20px;
     background-image: linear-gradient(to bottom right,  #E16428, #363333);
@@ -249,37 +207,39 @@ form.login button[type="button"]:hover {
     padding: 3px;
 }
 
-.news-box h2 {
+.news-container h2 {
     text-align: center;
     padding-bottom: 20px;
 }
 
-.news-box .news-content .news-date {
+.news-container .news-content .news-date {
     white-space:nowrap;
 }
 
-.news-box .news-content {
+.news-container .news-content {
     border-radius: 20px;
     background: #222;
     color: white;
     padding: 2rem;
 }
 
-.news-box .news-content p {
+.news-container .news-content p {
     text-indent: 2em;
 }
 
-#sidenav {
+/* Start Sidenav Section */
+
+.sidenav {
     border-right: solid;
     border-image: linear-gradient(to bottom, #363333, #E16428) 1;
 }
 
-#sidenav .sidenav-container {
+.sidenav .sidenav-container {
     border-width: 10px;
     margin: 20px;
 }
 
-#sidenav .sidenav-container .searchbar {
+.sidenav .sidenav-container .searchbar {
     background-color: #F6E9E9;
     color:#272121;
     width: 300px;
@@ -293,7 +253,7 @@ form.login button[type="button"]:hover {
     justify-content: space-between;
 }
 
-#sidenav .sidenav-container .searchbar input {
+.sidenav .sidenav-container .searchbar input {
     all: unset;
     font-size: 16px;
     font-family: 'Noto Sans', sans-serif;
@@ -302,7 +262,8 @@ form.login button[type="button"]:hover {
     width: 100%;
     padding: 6px 10px;
 }
-#sidenav .sidenav-container .searchbar button {
+
+.sidenav .sidenav-container .searchbar button {
     all: unset;
     cursor: pointer;
     height: 100%;
@@ -314,7 +275,7 @@ form.login button[type="button"]:hover {
     border-radius: 2px;
 }
 
-#sidenav .sidenav-container a {
+.sidenav .sidenav-container a {
     border: solid;
     border-width: 5px;
     padding: 10px;
@@ -323,26 +284,20 @@ form.login button[type="button"]:hover {
     color:#f2f2f2;
     display: block;
 }
-#sidenav .sidenav-container a:hover {
+
+.sidenav .sidenav-container a:hover {
     border: solid;
     border-width: 5px;
     border-image: linear-gradient(to top,#E16428 ,#363333 ) 1;
-    background-color: #f2f2f2;
+    background-color: #222;
     transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1), box-shadow 0.8s cubic-bezier(0.76, 0, 0.24, 1);
     transform: scale(1.01);
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.25), 0 0 48px rgba(0, 0, 0, 0.35);
     color:#E16428;
     display: block;
 }
-#sidenav .sidenav-container a:active {
-    border: solid;
-    border-width: 5px;
-    border-image: linear-gradient(to top,#E16428 ,#363333 ) 1;
-    background-color: #f2f2f2;
-    color:#E16428;
-    display: block;
-}
-#sidenav .sidenav-container a:visited {
+
+.sidenav .sidenav-container a:active {
     border: solid;
     border-width: 5px;
     border-image: linear-gradient(to top,#E16428 ,#363333 ) 1;
@@ -351,6 +306,183 @@ form.login button[type="button"]:hover {
     display: block;
 }
 
-#sidenav h1 {
+.sidenav .sidenav-container a:visited {
+    border: solid;
+    border-width: 5px;
+    border-image: linear-gradient(to top,#E16428 ,#363333 ) 1;
+    background-color: #222;
+    color:#E16428;
+    display: block;
+}
+
+.sidenav h1 {
     text-align: center;
+}
+
+/* Start About Section */
+.mainAbout { 
+  margin-top: 85px;
+  text-align:center;
+}
+  
+.mainAbout h1 {
+  margin-top: 15px;
+  font-size: 33px;
+  color:#f2f2f2;
+  border-bottom: 3px solid #E16428;
+  display: inline-block;
+}
+
+.mainAbout h2 {
+  margin-top: 15px;
+  font-size: 33px;
+  color:#f2f2f2;
+  border-bottom: 3px solid #E16428;
+  display: inline-block;
+}
+ 
+.card-container {
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  border-radius: 20px;
+  border: 1px solid #E16428;
+  background-color: #272121;
+  color: #f2f2f2;
+  padding: 20px;
+  margin: 30px;
+  width: 290px;
+  text-align: center;
+}
+  
+.card .userpic {
+  border-radius: 20px;
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+}
+
+.card .connections {
+  width:20px;
+  height:20px;
+  margin-top:20px;
+}
+  
+.card .name {
+  font-size: 23px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.card .info {
+  font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.informationCard {
+  border-radius: 20px;
+  border: 1px solid #E16428;
+  background-color: #272121;
+  color: #f2f2f2;
+  padding: 20px;
+  margin: 30px;
+  width: 1270px;
+  text-align: justify;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+/* Responsive Final */
+
+@media only screen and (max-width: 850px) {
+  .topnav {
+      display: block;
+  }
+
+  .topnav .hamburger {
+      float: right;
+      height: 45px;
+      margin-right: 10px;
+      margin-top: 10px;
+      display: -ms-grid;
+      display: grid;
+      grid-template-rows: repeat(3, 1fr);
+      justify-items: center;
+      z-index: 120;
+  }
+
+  .topnav .hamburger div {
+      background-color: #E16428;
+      position: relative;
+      width: 40px;
+      height: 5px;
+      margin-top: 3px;
+      -moz-transition: all 0.2s ease-in-out;
+      -webkit-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+  }
+
+  .topnav .toggle {
+      display: none;
+  }
+
+  .topnav .toggle:checked + .hamburger .top {
+      -moz-transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+              transform: rotate(-45deg);
+      margin-top: 22.5px;
+  }
+
+  .topnav .toggle:checked + .hamburger .meat {
+      -moz-transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      transform: rotate(45deg);
+      margin-top: -5px;
+  }
+    
+  .toggle:checked + .hamburger .bottom {
+      -moz-transform: scale(0);
+      -webkit-transform: scale(0);
+      transform: scale(0);
+  }
+
+  .toggle:checked ~ .menu {
+      height: 380px;
+  }
+
+  .menu {
+      width: 100%;
+      background-color: #272121;
+      margin: 0;
+      display: -ms-grid;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      list-style: none;
+      clear: both;
+      width: auto;
+      text-align: center;
+      height: 0px;
+      overflow: hidden;
+      transition: height .4s ease;
+      z-index: 120;
+      -webkit-transition: all 0.3s ease;
+      transition: all 0.3s ease;
+  }
+
+  .index-grid {
+      grid-template-columns: 100%;
+      grid-template-rows: 50% 50%;
+  }
+
+  .sidenav {
+      border-right: none;
+      border-bottom: solid;
+      border-image: linear-gradient(to right, #363333, #E16428) 1;
+  }
 }

@@ -11,8 +11,15 @@ a, h2, h3, h4, p {
     font-family: 'Noto Sans', sans-serif;
 }
 
-a {
-    text-decoration: none;
+
+
+a{
+  text-decoration: none;
+  color:#E16428;
+}
+
+p.small {
+  font-size: smaller;
 }
 
 h1 {
@@ -20,47 +27,148 @@ h1 {
     color: #E16428;
 }
 
+main { 
+  margin-top: 85px;
+}
 
 .main {
     margin-top: 40px;
 }
 
-.topnav {
-    background-color: #272121; 
-    overflow: hidden;
+.topnav .topnav-left {
     display: flex;
-    position: fixed;
+    justify-content: flex-start;
+}
+
+.topnav .searchbar {
+    display: flex;
+    flex-wrap: nowrap;
     width: 100%;
-    top: 0;
-    justify-content: space-between;
+    height:  100%;
+    flex-direction: row;
+    align-items: center;
 }
 
-.topnav .topnav-hamburger, .topnav .toggle {
-   display: none; 
+.topnav .searchbar input {
+    margin: 0;
+    font-size: 16px;
+    font-family: 'Noto Sans', sans-serif;
+    color: #272721;
+    padding: 5px;
+}
+.topnav .searchbar button {
+    all:unset;
+    margin: 0;
+    font-size: 16px;
+    background-color: #E16428;
+    padding-left: 10px;
+    padding-right: 15px;
+    border-radius: 2px;
+    height: 35px;
+    width: 100%;
 }
 
-.topnav a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-    height: 100%;
+main.centered-page {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
-.topnav a:hover {
-    background-color: #f2f2f2;
-    color: black;
+main.centered-page h1 {
+  display: inline-block;
+  border-bottom: solid 3px #E16428;
+  padding: 0 0.25em;
+  margin: 1.5em 0.4em;
 }
 
-.topnav .title
-{
-    color: #E16428;
-    font-size: large;
-    font-family: "Roboto";
+@media screen and (min-width: 500px) {
+  main.centered-page h1 {
+    font-size: 2.75em;
+    margin: 1.5em 1em;
+    padding: 0 0.75em;
+  }
 }
+
+/* pseudo-elements for handling autocompletion styles */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #222 inset !important;
+    -webkit-text-fill-color: #F6E9E9 !important;
+}
+
+form.login {
+  background-color: #222;
+  max-width: 350px;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 10px;
+  padding: 1.5em 2em;
+  box-shadow: 0 0.6em 1em #272121;
+  text-align: left;
+}
+
+form.login p {
+  text-align: center;
+  margin-bottom: 1.5em;
+}
+
+form.login label[for] {
+  cursor: text;
+  position: absolute;
+  transform: translateY(-3.75em) translateX(0.4em);
+  color: gray;
+  transition: transform 0.2s;
+}
+
+form.login input:focus {
+  outline: 1px solid #E16428;
+  border-radius: 5px;
+}
+
+form.login input:focus + label {
+  transform: translateY(-4em) translateX(0.4em)!important;
+  color:#E16428;
+}
+
+form.login input:placeholder-shown + label {
+  transform: translateY(-2.25em) translateX(0.4em); 
+}
+
+form.login input[type] {
+  background-color: inherit;
+  color: #F6E9E9;
+  border: none;
+  border-bottom: 1px solid #363333;
+  padding: 0.5em; 
+  width:100%;
+  margin: 1em 0;
+}
+
+form.login button[type="button"] {
+  background-color: #E16428;
+  border: none;
+  color: #F6E9E9;
+  border-radius:30px;
+  display: block;
+  margin: 2em auto 0 auto;
+  padding: 0.5em 5em;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+form.login button[type="button"]:hover {
+  background-color: rgba(225, 100, 40, 0.7);
+}
+
+@media screen and (max-width:400px){
+  form.login {
+    margin: 0.5em;
+  }
+}
+
 
 .index-grid {
     display: grid;

@@ -1,96 +1,98 @@
 html, body {
-    margin: 0px;
+
+  margin: 0;
 }
 
 body {
-    background-color: #363333;
-    color: #F6E9E9;
+  background-color: #363333;
+  color: #F6E9E9;
 }
 
 a, h2, h3, h4, p {
-    font-family: 'Noto Sans', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
 }
 
-
-
 a {
-  text-decoration: none;
-  color:#E16428;
+text-decoration: none;
+color:#E16428;
 }
 
 p.small {
-  font-size: smaller;
+font-size: smaller;
 }
 
 .main h1 {
-    font-family: 'Noto Sans', sans-serif;
-    color: #E16428;
+  font-family: 'Noto Sans', sans-serif;
+  color:#f2f2f2;
+  border-bottom: 3px solid #E16428;
+  display: inline-block;
 }
 
 .topnav {
-    background-color: #272121; 
-    overflow: hidden;
-    display: flex;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    justify-content: space-between;
+  background-color: #272121; 
+  overflow: hidden;
+  display: flex;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  justify-content: space-between;
 }
 
 .topnav .topnav-hamburger, .topnav .toggle {
-   display: none; 
+ display: none; 
 }
 
 .topnav a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-    height: 100%;
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  height: 100%;
 }
 
 .topnav a:hover {
-    background-color: #f2f2f2;
-    color: black;
+  background-color: #f2f2f2;
+  color: black;
 }
 
-.topnav .title
-{
-    color: #E16428;
-    font-size: large;
-    font-family: "Roboto";
+.topnav .title {
+  color: #E16428;
+  font-size: large;
+  font-family: "Roboto";
 }
 
 main { 
-  margin-top: 85px;
+margin-top: 85px;
 }
 
 .main {
-    margin-top: 40px;
-}
-
-main.centered-page {
-  margin-left: auto;
-  margin-right: auto;
+  margin-top: 40px;
   text-align: center;
 }
 
+main.centered-page {
+margin-left: auto;
+margin-right: auto;
+text-align: center;
+}
+
 main.centered-page h1 {
-  display: inline-block;
-  border-bottom: solid 3px #E16428;
-  padding: 0 0.25em;
-  margin: 1.5em 0.4em;
+font-family: 'Noto Sans', sans-serif;
+display: inline-block;
+border-bottom: solid 3px #E16428;
+padding: 0 0.25em;
+margin: 1.5em 0.4em;
 }
 
 @media screen and (min-width: 500px) {
-  main.centered-page h1 {
-    font-size: 2.75em;
-    margin: 1.5em 1em;
-    padding: 0 0.75em;
-  }
+main.centered-page h1 {
+  font-size: 2.75em;
+  margin: 1.5em 1em;
+  padding: 0 0.75em;
+}
 }
 
 /* pseudo-elements for handling autocompletion styles */
@@ -98,8 +100,8 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #222 inset !important;
-    -webkit-text-fill-color: #F6E9E9 !important;
+  -webkit-box-shadow: 0 0 0 30px #222 inset !important;
+  -webkit-text-fill-color: #F6E9E9 !important;
 }
 
 form.login, 
@@ -192,106 +194,111 @@ form.register button.anchor {
   form.login, form.register {
     margin: 0.5em;
   }
+
 }
 
-
 .index-grid {
-    display: grid;
-    grid-template-columns: 30% 60% 10%;
-    padding: 20px;
+  display: grid;
+  grid-template-columns: 30% 60% 10%;
+  padding: 20px;
 }
 
 /* Start News Section */
 
 .news {
-    margin-left: 10px;
-    font-family: 'Noto Sans', sans-serif;
+  margin-left: 10px;
+  font-family: 'Noto Sans', sans-serif;
 }
 
 .news h1 {
-    text-align: center;
+  text-align: center;
 }
 
 .news-container {
-    margin: 20px;
-    padding: 1rem;
-    background-image: linear-gradient(to bottom right, #F6E9E9, #E16428);
-    border-radius: 20px;
-    transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1), box-shadow 0.8s cubic-bezier(0.76, 0, 0.24, 1);
-    padding: 3px;
-    cursor:pointer;     
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  padding: 1rem;
+  background-image: linear-gradient(to bottom right, #F6E9E9, #E16428);
+  border-radius: 20px;
+  transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1), box-shadow 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+  padding: 3px;
+  cursor:pointer;     
 }
 
 .news-container:hover {
-    padding: 1rem;
-    border-radius: 20px;
-    background-image: linear-gradient(to bottom right,  #E16428, #363333);
-    transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1), box-shadow 0.8s cubic-bezier(0.76, 0, 0.24, 1);
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.25), 0 0 48px rgba(0, 0, 0, 0.35);
-    padding: 3px;
+  padding: 1rem;
+  border-radius: 20px;
+  background-image: linear-gradient(to bottom right,  #E16428, #363333);
+  transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1), box-shadow 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.25), 0 0 48px rgba(0, 0, 0, 0.35);
+  padding: 3px;
 }
 
 .news-container h2 {
-    text-align: center;
-    padding-bottom: 20px;
+  text-align: center;
+  padding-bottom: 20px;
 }
 
 .news-container .news-content .news-date {
-    white-space:nowrap;
+  white-space:nowrap;
+  text-align: left;
 }
 
 .news-container .news-content {
-    border-radius: 20px;
-    background: #222;
-    color: white;
-    padding: 2rem;
+  text-align: justify;
+  border-radius: 20px;
+  background: #222;
+  color: white;
+  padding: 2rem;
 }
 
 .news-container .news-content p {
-    text-indent: 2em;
+  text-indent: 2em;
 }
 
 /* Start Sidenav Section */
 
 .sidenav {
-    border-right: solid;
-    border-image: linear-gradient(to bottom, #363333, #E16428) 1;
+  border-right: solid;
+  border-image: linear-gradient(to bottom, #363333, #E16428) 1;
 }
 
 .sidenav .sidenav-container {
-    border-width: 10px;
-    margin: 20px;
+  border-width: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
 }
 
 .sidenav .sidenav-container .searchbar {
-    background-color: #F6E9E9;
-    color:#272121;
-    width: 300px;
-    height: 44px;
-    width: 100%;
+  text-align: left;
+  background-color: #F6E9E9;
+  color:#272121;
+  width: 300px;
+  height: 44px;
+  width: 100%;
 
-    border-radius: 5px;
-    display: flex;
-    flex-direction: row;
-    align-items:center;
-    justify-content: space-between;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  justify-content: space-between;
 }
 
 .sidenav .sidenav-container .searchbar input {
-    all: unset;
-    font-size: 16px;
-    font-family: 'Noto Sans', sans-serif;
-    color: #272721;
-    height: 100%;
-    width: 100%;
-    padding: 6px 10px;
+  all: unset;
+  font-size: 16px;
+  font-family: 'Noto Sans', sans-serif;
+  color: #272721;
+  height: 100%;
+  width: 100%;
+  padding: 6px 10px;
 }
 
 .sidenav .sidenav-container .searchbar button {
     all: unset;
     cursor: pointer;
-    height: 100%;
-    width: 100%;
     width: 44px;
     height: 44px;
     background-color: #E16428;
@@ -300,125 +307,140 @@ form.register button.anchor {
 }
 
 .sidenav .sidenav-container a {
-    border: solid;
-    border-width: 5px;
-    padding: 10px;
-    border-image: linear-gradient(to top,#E16428 ,#363333 ) 1;
-    background-color: #222;
-    color:#f2f2f2;
-    display: block;
+  text-align: left;
+  border: solid;
+  border-width: 5px;
+  padding: 10px;
+  border-image: linear-gradient(to top,#E16428 ,#363333 ) 1;
+  background-color: #222;
+  color:#f2f2f2;
+  display: block;
 }
 
 .sidenav .sidenav-container a:hover {
-    border: solid;
-    border-width: 5px;
-    border-image: linear-gradient(to top,#E16428 ,#363333 ) 1;
-    background-color: #222;
-    transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1), box-shadow 0.8s cubic-bezier(0.76, 0, 0.24, 1);
-    transform: scale(1.01);
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.25), 0 0 48px rgba(0, 0, 0, 0.35);
-    color:#E16428;
-    display: block;
+  border: solid;
+  border-width: 5px;
+  border-image: linear-gradient(to top,#E16428 ,#363333 ) 1;
+  background-color: #222;
+  transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1), box-shadow 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+  transform: scale(1.01);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.25), 0 0 48px rgba(0, 0, 0, 0.35);
+  color:#E16428;
+  display: block;
 }
 
 .sidenav .sidenav-container a:active {
-    border: solid;
-    border-width: 5px;
-    border-image: linear-gradient(to top,#E16428 ,#363333 ) 1;
-    background-color: #222;
-    color:#E16428;
-    display: block;
+  border: solid;
+  border-width: 5px;
+  border-image: linear-gradient(to top,#E16428 ,#363333 ) 1;
+  background-color: #222;
+  color:#E16428;
+  display: block;
 }
 
 .sidenav .sidenav-container a:visited {
-    border: solid;
-    border-width: 5px;
-    border-image: linear-gradient(to top,#E16428 ,#363333 ) 1;
-    background-color: #222;
-    color:#E16428;
-    display: block;
+  border: solid;
+  border-width: 5px;
+  border-image: linear-gradient(to top,#E16428 ,#363333 ) 1;
+  background-color: #222;
+  color:#E16428;
+  display: block;
 }
 
 .sidenav h1 {
-    text-align: center;
+  text-align: center;
 }
 
 /* Start About Section */
 .mainAbout { 
-  margin-top: 85px;
-  text-align:center;
+margin-top: 85px;
+text-align:center;
 }
-  
+
 .mainAbout h1 {
-  margin-top: 15px;
-  font-size: 33px;
-  color:#f2f2f2;
-  border-bottom: 3px solid #E16428;
-  display: inline-block;
+margin-top: 15px;
+font-family: 'Noto Sans', sans-serif;
+font-size: 33px;
+color:#f2f2f2;
+border-bottom: 3px solid #E16428;
+display: inline-block;
 }
 
 .mainAbout h2 {
-  margin-top: 15px;
-  font-size: 33px;
-  color:#f2f2f2;
-  border-bottom: 3px solid #E16428;
-  display: inline-block;
+margin-top: 15px;
+font-family: 'Noto Sans', sans-serif;
+font-size: 33px;
+color:#f2f2f2;
+border-bottom: 3px solid #E16428;
+display: inline-block;
 }
- 
+
 .card-container {
-  display:flex;
-  flex-wrap: wrap;
-  justify-content: center;
+display:flex;
+flex-wrap: wrap;
+justify-content: center;
 }
 
 .card {
-  border-radius: 20px;
-  border: 1px solid #E16428;
-  background-color: #272121;
-  color: #f2f2f2;
-  padding: 20px;
-  margin: 30px;
-  width: 290px;
-  text-align: center;
+border-radius: 20px;
+border: 1px solid #E16428;
+background-color: #272121;
+color: #f2f2f2;
+padding: 20px;
+margin: 30px;
+width: 290px;
+text-align: center;
 }
-  
+
 .card .userpic {
-  border-radius: 20px;
-  width: 100px;
-  height: 100px;
-  margin: 5px;
+border-radius: 20px;
+width: 100px;
+height: 100px;
+margin: 5px;
 }
 
 .card .connections {
-  width:20px;
-  height:20px;
-  margin-top:20px;
+width:20px;
+height:20px;
+margin-top:20px;
 }
-  
+
 .card .name {
-  font-size: 23px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  font-family: 'Noto Sans', sans-serif;
+font-size: 23px;
+font-weight: bold;
+margin-bottom: 15px;
+font-family: 'Noto Sans', sans-serif;
 }
 
 .card .info {
-  font-size: 12px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  font-family: 'Noto Sans', sans-serif;
+font-size: 12px;
+margin-top: 5px;
+margin-bottom: 5px;
+font-family: 'Noto Sans', sans-serif;
 }
 
 .informationCard {
-  border-radius: 20px;
-  border: 1px solid #E16428;
-  background-color: #272121;
-  color: #f2f2f2;
-  padding: 20px;
-  margin: 30px;
-  width: 1270px;
-  text-align: justify;
-  font-family: 'Noto Sans', sans-serif;
+border-radius: 20px;
+border: 1px solid #E16428;
+background-color: #272121;
+color: #f2f2f2;
+padding: 20px;
+margin: 30px;
+width: 1270px;
+text-align: justify;
+font-family: 'Noto Sans', sans-serif;
+}
+
+/* Help page layout */
+
+.help-layout {
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 20px;
+}
+
+.help-layout p {
+  text-indent: 10px;
 }
 
 /* register.html */
@@ -536,7 +558,6 @@ form.register button.anchor {
   }
 
   .menu {
-      width: 100%;
       background-color: #272121;
       margin: 0;
       display: -ms-grid;
@@ -547,17 +568,17 @@ form.register button.anchor {
       clear: both;
       width: auto;
       text-align: center;
-      height: 0px;
+      height: 0;
       overflow: hidden;
-      transition: height .4s ease;
       z-index: 120;
       -webkit-transition: all 0.3s ease;
       transition: all 0.3s ease;
   }
 
-  .index-grid {
-      grid-template-columns: 100%;
-      grid-template-rows: 50% 50%;
+  /* Change the display to flex */
+  .index-grid { 
+	display: flex;
+	flex-direction: column;
   }
 
   .sidenav {

@@ -45,22 +45,46 @@
         </div>
       </div>
       <div id="student">
-        student form
+        <form class="register" id="student-register" autocomplete="off">
+          <h2>Register as Student</h2>
+          <input type="hidden" autocomplete="false"></input>
+          <p>Fill in the form below with the register details.</p>
+          <input type="email" name="email" id="register_email" placeholder=" " required />
+          <label for="register_email">E-mail</label>
+          <input type="text" name="username" id="register_username" placeholder=" " required />
+          <label for="register_username">Username</label>
+          <input type="text" name="fullName" id="register_fullName" placeholder=" " required />
+          <label for="register_fullName">Full Name</label>
+          <input type="password" name="password" id="register_password" placeholder=" " required />
+          <label for="register_password">Password</label>
+          <input type="password" name="confirmPassword" id="register_confirmPassword" placeholder=" " required />
+          <label for="register_confirmPassword">Confirm Password</label>
+          <button type="button" class="submit" onclick="registerStudent()">Register</button>
+          <p class="small">Are you a teacher? Register as a <button type="button" class="anchor" onclick="setAccountType('teacher')">teacher</button>.</p>
+        </form>
       </div>
       <div id="teacher">
-        teacher form
+        <form class="register" id="teacher-register" autocomplete="off">
+          <h2>Register as Teacher</h2>
+          <input type="hidden" autocomplete="false"></input>
+          <p>Fill in the form below with the register details.</p>
+          <input type="email" name="email" id="register_teacher_email" placeholder=" " required />
+          <label for="register_teacher_email">E-mail</label>
+          <input type="text" name="username" id="register_teacher_username" placeholder=" " required />
+          <label for="register_teacher_username">Username</label>
+          <input type="text" name="fullName" id="register_teacher_fullName" placeholder=" " required />
+          <label for="register_teacher_fullName">Full Name</label>
+          <input type="password" name="password" id="register_teacher_password" placeholder=" " required />
+          <label for="register_teacher_fullName">School / University</label>
+          <input type="school" name="school" id="register_teacher_school" placeholder=" " required />
+          <label for="register_teacher_school">School</label>
+          <input type="password" name="confirmPassword" id="register_teacher_confirmPassword" placeholder=" " required />
+          <label for="register_teacher_confirmPassword">Confirm Password</label>
+          <button type="button" class="submit" onclick="registerTeacher()">Register</button>
+          <p class="small">Are you a student? Register as a <button type="button" class="anchor" onclick="setAccountType('student')">student</button>.</p>
+        </form>
       </div>
     </div>
-    <!-- <form class="register" autocomplete="off">
-      <input type="hidden" autocomplete="false"></input>
-      <p>Fill in the form below with the authentication details in order to gain access to the platform.</p>
-      <input type="text" name="username" id="login_username" placeholder=" " />
-      <label for="login_username">Username</label>
-      <input type="password" name="password" id="login_password" placeholder=" " />
-      <label for="login_password">Password</label>
-      <button type="button" onclick="login()">Login</button>
-      <p class="small">Don't have an account? Register <a href="/register.html">here</a>.</p>
-    </form> -->
   </main>
   <script src="assets/js/register.js"></script>
 </body>

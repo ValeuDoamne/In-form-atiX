@@ -39,3 +39,19 @@ function renderPage(){
     document.getElementById("select-account-type").classList.remove("hidden");
   }
 }
+
+/**
+ * Student register temporary function
+ */
+function registerStudent(){
+  alert("Registered as student!");
+  window.location.replace('/');
+}
+
+/**
+ * Teacher register temporary function
+ */
+function registerTeacher(){
+  alert("Registered as teacher!");
+  window.location.replace('/');
+}

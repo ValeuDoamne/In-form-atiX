@@ -102,7 +102,8 @@ input:-webkit-autofill:active {
     -webkit-text-fill-color: #F6E9E9 !important;
 }
 
-form.login {
+form.login, 
+form.register {
   background-color: #222;
   max-width: 350px;
   margin-right: auto;
@@ -113,12 +114,13 @@ form.login {
   text-align: left;
 }
 
-form.login p {
+form.login p, form.register p {
   text-align: center;
   margin-bottom: 1.5em;
 }
 
-form.login label[for] {
+form.login label[for], 
+form.register label[for] {
   cursor: text;
   position: absolute;
   transform: translateY(-3.75em) translateX(0.4em);
@@ -126,21 +128,25 @@ form.login label[for] {
   transition: transform 0.2s;
 }
 
-form.login input:focus {
+form.login input:focus, 
+form.register input:focus {
   outline: 1px solid #E16428;
   border-radius: 5px;
 }
 
-form.login input:focus + label {
+form.login input:focus + label, 
+form.register input:focus + label {
   transform: translateY(-4em) translateX(0.4em)!important;
   color:#E16428;
 }
 
-form.login input:placeholder-shown + label {
+form.login input:placeholder-shown + label, 
+form.register input:placeholder-shown + label{
   transform: translateY(-2.25em) translateX(0.4em); 
 }
 
-form.login input[type] {
+form.login input[type],
+form.register input[type] {
   background-color: inherit;
   color: #F6E9E9;
   border: none;
@@ -150,7 +156,8 @@ form.login input[type] {
   margin: 1em 0;
 }
 
-form.login button[type="button"] {
+form.login button.submit,
+form.register button.submit {
   background-color: #E16428;
   border: none;
   color: #F6E9E9;
@@ -163,12 +170,26 @@ form.login button[type="button"] {
   cursor: pointer;
 }
 
-form.login button[type="button"]:hover {
+form.login button.submit:hover,
+form.register button.submit:hover {
   background-color: rgba(225, 100, 40, 0.7);
 }
 
+form.register > h2 {
+  text-align: center;
+}
+
+form.register button.anchor {
+  background-color: inherit;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-weight: bold;
+  color:#E16428;
+}
+
 @media screen and (max-width:400px){
-  form.login {
+  form.login, form.register {
     margin: 0.5em;
   }
 }

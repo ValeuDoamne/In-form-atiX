@@ -400,6 +400,16 @@ form.login button[type="button"]:hover {
   font-family: 'Noto Sans', sans-serif;
 }
 
+/* Help page layout */
+
+.help-layout {
+	margin: 10px;
+}
+
+.help-layout p {
+  text-indent: 10px;
+}
+
 /* Responsive Final */
 
 @media only screen and (max-width: 850px) {
@@ -478,9 +488,10 @@ form.login button[type="button"]:hover {
       transition: all 0.3s ease;
   }
 
-  .index-grid {
-      grid-template-columns: 100%;
-      grid-template-rows: 50% 50%;
+  /* Change the display to flex */
+  .index-grid { 
+	display: flex;
+	flex-direction: column;
   }
 
   .sidenav {

@@ -1,5 +1,5 @@
 html, body {
-    margin: 0px;
+    margin: 0;
 }
 
 body {
@@ -61,7 +61,7 @@ p.small {
 {
     color: #E16428;
     font-size: large;
-    font-family: "Roboto";
+    font-family: "Roboto" sans-serif;
 }
 
 main { 
@@ -269,8 +269,6 @@ form.login button[type="button"]:hover {
 .sidenav .sidenav-container .searchbar button {
     all: unset;
     cursor: pointer;
-    height: 100%;
-    width: 100%;
     width: 44px;
     height: 44px;
     background-color: #E16428;
@@ -471,7 +469,6 @@ form.login button[type="button"]:hover {
   }
 
   .menu {
-      width: 100%;
       background-color: #272121;
       margin: 0;
       display: -ms-grid;
@@ -482,9 +479,8 @@ form.login button[type="button"]:hover {
       clear: both;
       width: auto;
       text-align: center;
-      height: 0px;
+      height: 0;
       overflow: hidden;
-      transition: height .4s ease;
       z-index: 120;
       -webkit-transition: all 0.3s ease;
       transition: all 0.3s ease;

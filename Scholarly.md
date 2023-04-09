@@ -43,7 +43,7 @@ Table of Contents
 
 ## 1. Introduction
 ### 1.1 Purpose 
-The purpose of the product is to help highschool students in solving **algorithmic** problems for a future career in the IT industry and help teachers in managing class their class by setting homeworks.
+The purpose of the product is to help highschool students in solving **algorithmic** problems for a future career in the IT industry and help teachers in managing their class by setting homeworks.
 
 ### 1.2 Intended Audience and Reading Suggestions
 This document is intended for developers, administrators and users. 

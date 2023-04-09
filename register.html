@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
+  <title>Login</title>
+</head>
+<body>
+  <header class="topnav">
+    <a href="index.html" class="title">In-form-atiX</a>
+    <input class="toggle" id="toggle" type="checkbox" />
+    <label class="hamburger" for="toggle">
+      <div class="top"></div>
+      <div class="meat"></div>
+      <div class="bottom"></div>
+    </label>
+    <nav class="menu">
+      <a href="./search.php">Search</a>
+      <a href="about.html">About</a>
+      <a href="help.html">Help</a>
+      <a href="login.html">Login</a>
+      <a href="register.html">Register</a>
+    </nav>
+  </header>
+  <main class="centered-page">
+    <h1>Register a New Account</h1>
+    <div id="register-container">
+      <div id="select-account-type" class="active">
+        <h2>Select your account type</h2>
+        <div>
+          <h3>Student</h3>
+          <img src="assets/imgs/student.svg" alt="Student" />
+          <button type="button" onclick="setAccountType('student')">I'm a student</button>
+        </div>
+        <div>
+          <h3>Teacher</h3>
+          <img src="assets/imgs/teacher.svg" alt="Teacher" />
+          <button type="button" onclick="setAccountType('teacher')">I'm a teacher</button>
+        </div>
+      </div>
+      <div id="student">
+        <form class="register" id="student-register" autocomplete="off">
+          <h2>Register as Student</h2>
+          <input type="hidden" autocomplete="false"></input>
+          <p>Fill in the form below with the register details.</p>
+          <input type="email" name="email" id="register_email" placeholder=" " required />
+          <label for="register_email">E-mail</label>
+          <input type="text" name="username" id="register_username" placeholder=" " required />
+          <label for="register_username">Username</label>
+          <input type="text" name="fullName" id="register_fullName" placeholder=" " required />
+          <label for="register_fullName">Full Name</label>
+          <input type="password" name="password" id="register_password" placeholder=" " required />
+          <label for="register_password">Password</label>
+          <input type="password" name="confirmPassword" id="register_confirmPassword" placeholder=" " required />
+          <label for="register_confirmPassword">Confirm Password</label>
+          <button type="button" class="submit" onclick="registerStudent()">Register</button>
+          <p class="small">Are you a teacher? Register as a <button type="button" class="anchor" onclick="setAccountType('teacher')">teacher</button>.</p>
+        </form>
+      </div>
+      <div id="teacher">
+        <form class="register" id="teacher-register" autocomplete="off">
+          <h2>Register as Teacher</h2>
+          <input type="hidden" autocomplete="false"></input>
+          <p>Fill in the form below with the register details.</p>
+          <input type="email" name="email" id="register_teacher_email" placeholder=" " required />
+          <label for="register_teacher_email">E-mail</label>
+          <input type="text" name="username" id="register_teacher_username" placeholder=" " required />
+          <label for="register_teacher_username">Username</label>
+          <input type="text" name="fullName" id="register_teacher_fullName" placeholder=" " required />
+          <label for="register_teacher_fullName">Full Name</label>
+          <input type="password" name="password" id="register_teacher_password" placeholder=" " required />
+          <label for="register_teacher_fullName">School / University</label>
+          <input type="school" name="school" id="register_teacher_school" placeholder=" " required />
+          <label for="register_teacher_school">School</label>
+          <input type="password" name="confirmPassword" id="register_teacher_confirmPassword" placeholder=" " required />
+          <label for="register_teacher_confirmPassword">Confirm Password</label>
+          <button type="button" class="submit" onclick="registerTeacher()">Register</button>
+          <p class="small">Are you a student? Register as a <button type="button" class="anchor" onclick="setAccountType('student')">student</button>.</p>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script src="assets/js/register.js"></script>
+</body>
+</html>

@@ -400,6 +400,62 @@ form.login button[type="button"]:hover {
   font-family: 'Noto Sans', sans-serif;
 }
 
+/* register.html */
+
+#register-container > div {
+  display: none;
+}
+
+#register-container > div.active {
+  display: block;
+}
+
+#register-container #select-account-type {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#register-container #select-account-type.hidden {
+  display: none;
+}
+
+#register-container #select-account-type > div {
+  margin: 1em;
+  padding: 1em 3em 2em 3em;
+  border-radius:6px;
+  background-color: #222;
+  box-shadow: 0 0.6em 1em #272121;
+}
+
+#register-container #select-account-type > h2 {
+  width: 100%;
+}
+
+#select-account-type h3 {
+  color:#E16428;
+}
+
+#select-account-type img {
+  padding: 0.5em 2em;
+}
+
+#select-account-type button[type="button"] {
+  margin-top:1em;
+  padding: 0.5em 1em;
+  font-size:larger;
+  border-radius:3px;
+  border:none;
+  background-color: #E16428;
+  color:white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#select-account-type button[type="button"]:hover {
+  background-color: rgba(225, 100, 40, 0.7);
+}
+
 /* Responsive Final */
 
 @media only screen and (max-width: 850px) {

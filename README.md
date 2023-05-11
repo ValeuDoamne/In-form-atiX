@@ -4,6 +4,30 @@ Situl de probleme de informatica.
 
 Static generated site at: https://valeudoamne.github.io/In-form-atiX/
 
+
+Pentru a rula local trebuie instalat `docker` si `docker-compose`
+
+## Building
+
+In directorul proiectului de ruleza
+
+```
+docker-compose build
+```
+
+## Running
+
+```
+docker-compose up -d
+```
+Optiunea `-d` pentru rularea containerelor in background
+
+## About
+
+La adresa `http://localhost` se afla site-ul web unde modificarile din directorul `frontend` se vor vedea in timp real.
+
+La adresa `http://localhost:8000` se afla API REST al paginii.
+
 Membri:
 * Alexa Constantin-Cosmin (@ValeuDoamne)
 * Grasu Ioan (@lGnyte)

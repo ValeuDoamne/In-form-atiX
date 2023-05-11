@@ -1,0 +1,49 @@
+version: "3"
+
+services:
+  frontend:
+    image: nginx:latest
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+      - ./certs:/etc/nginx/certs
+    ports:
+      - "80:80"   # remove in production
+      - "443:443"
+    depends_on:
+      - backend
+    restart: always
+
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend/src:/var/www/html
+      - ./certs:/etc/nginx/certs
+    environment:
+      - DB_HOST=database
+      - DB_USER=redacted
+      - DB_PASSWORD=redacted
+      - DB_DATABASE=redacted
+      - SERVER_NAME=backend
+      - HTTPS_ONLY=true
+    ports:
+      - "8000:443"
+    depends_on:
+      - database
+    restart: always
+
+  database:
+    image: postgres:latest
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres # redacted username
+      - POSTGRES_PASSWORD=postgres # redacted password
+      - POSTGRES_DB=informatix
+    restart: always
+
+volumes:
+  db_volume:
+
+networks:
+  default:
+    name: web_project 

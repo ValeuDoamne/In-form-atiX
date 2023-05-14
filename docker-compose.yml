@@ -20,9 +20,9 @@ services:
       - ./certs:/etc/nginx/certs
     environment:
       - DB_HOST=database
-      - DB_USER=redacted
-      - DB_PASSWORD=redacted
-      - DB_DATABASE=redacted
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_DATABASE=informatix
       - SERVER_NAME=backend
       - HTTPS_ONLY=true
     ports:
@@ -32,7 +32,7 @@ services:
     restart: always
 
   database:
-    image: postgres:latest
+    build: ./model
     volumes:
       - db_volume:/var/lib/postgresql/data
     environment:

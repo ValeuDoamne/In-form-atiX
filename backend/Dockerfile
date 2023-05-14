@@ -16,7 +16,7 @@ RUN sed -i "s/^listen =.*/listen = 0.0.0.0:9000/" /etc/php/7.4/fpm/pool.d/www.co
 COPY default.conf /etc/nginx/conf.d/default.conf
 
 # Copy the PHP files to the container
-COPY src/* /var/www/html/
+#COPY src/* /var/www/html/
 
 # Change ownership of the PHP files to the nginx user
 RUN mkdir -p /var/www/html

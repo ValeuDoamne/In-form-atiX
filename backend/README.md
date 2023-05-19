@@ -83,8 +83,7 @@ Inregistrare profesor:
     }
 ```
 
-Inregistrare admin:
-```
+Inregistrare admin: ```
     Method: POST
 
     /api/v1/register
@@ -99,7 +98,36 @@ Inregistrare admin:
     }
 ```
 
-# Login
+```
+    Inregistrararea va returna pentru username luat:
+    {
+        "status": "Invalid",
+        "message": "The username is already taken",
+    }
+    
+    Inregistrararea va returna pentru email luat:
+    {
+        "status": "Invalid",
+        "message": "The email is already taken",
+    }
+
+    Inregistrararea va returna pentru eroare la insertie:
+    {
+        "status": "Error",
+        "message": "Failed to register user.",
+    }
+    
+    Inregistrararea va returna pentru succes:
+    {
+        "status": "Success",
+        "message": "User registered successfully!",
+    }
+    
+```
+
+
+
+### Login
 
 ```
     /api/v1/login
@@ -113,5 +141,19 @@ Inregistrare admin:
     body: {
         "username": "username_sau_email",
         "password": "parola clear text"
+    }
+
+```
+    Va returna succes: 
+    {
+        "status": "Success",
+        "token": "JWT token", // <- Trebuie salvat in memoria locala
+        "message": "Login successful",
+    }
+
+    Va returna invalid:
+    {
+        "status": "Invalid",
+        "message": "Login failed",
     }
 ```

@@ -83,7 +83,8 @@ Inregistrare profesor:
     }
 ```
 
-Inregistrare admin: ```
+Inregistrare admin: 
+```
     Method: POST
 
     /api/v1/register
@@ -142,6 +143,7 @@ Inregistrare admin: ```
         "username": "username_sau_email",
         "password": "parola clear text"
     }
+```
 
 ```
     Va returna succes: 

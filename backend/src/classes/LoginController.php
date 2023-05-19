@@ -45,7 +45,11 @@ class LoginController implements Controller
 			$usertype = $this->gateway->usertype($usernameOrEmail, $password);
 			$jwt = JWT::generateToken($userid, $usertype, Secrets::JWTSecret);
 			header("Authorization: Bearer " . $jwt);
-			Utils::sendsuccess("Login successful");
+			Utils::sendmsg([
+				"status" => "Success",	
+				"message" => "Login successful",
+				"token" => $jwt,
+			]);
 		} else {
 			Utils::sendinvalid("Login failed");
 		}

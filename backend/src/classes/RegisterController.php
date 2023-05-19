@@ -36,7 +36,7 @@ class RegisterController implements Controller
 					Utils::sendinvalid("This email is already taken");
 				}
 			} else {
-				Utils::senderr("Not a valid email");
+				Utils::sendinvalid("Not a valid email");
 			}
 		}
 		if(isset($_GET["username"]))

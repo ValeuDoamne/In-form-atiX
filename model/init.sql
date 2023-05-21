@@ -13,8 +13,8 @@ CREATE TABLE users (
 	email        TEXT NOT NULL,
 	password     TEXT NOT NULL,
 	data_created TIMESTAMP DEFAULT NOW(),
-	CONSTRAINT unique_username UNIQUE username,
-	CONSTRAINT unique_email    UNIQUE email
+	CONSTRAINT unique_username UNIQUE (username),
+	CONSTRAINT unique_email    UNIQUE (email)
 );
 
 
@@ -67,7 +67,7 @@ CREATE TABLE test_cases (
 CREATE TABLE tags (
 	id SERIAL NOT NULL PRIMARY KEY,
 	name TEXT,
-	CONSTRAINT unique_name UNIQUE name
+	CONSTRAINT unique_name UNIQUE (name)
 );
 
 CREATE TABLE problems_tags (

@@ -9,6 +9,7 @@ spl_autoload_register(function ($class) {
 set_error_handler("ErrorHandler::handleError");
 set_exception_handler("ErrorHandler::handleException");
 header("Content-type: application/json; charset=UTF-8");
+header("HTTP/1.1 200 OK");
 
 DatabaseConnectionPool::init("informatix", "postgres", "postgres", "database");
 

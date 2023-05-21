@@ -122,7 +122,7 @@ CREATE TABLE homeworks (
 );
 
 CREATE TABLE homework_problems (
-	homework_id INTEGER REFERENCES homework(id),
+	homework_id INTEGER REFERENCES homeworks(id),
 	problem_id INTEGER REFERENCES problems(id),
 	CONSTRAINT unique_homework_problem UNIQUE (homework_id, problem_id)
 );

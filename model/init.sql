@@ -21,7 +21,7 @@ CREATE TABLE users (
 CREATE TABLE schools (
 	id SERIAL NOT NULL PRIMARY KEY,
 	name TEXT NOT NULL,
-	CONSTRAINT unique_name UNIQUE (name)
+	CONSTRAINT unique_school_name UNIQUE (name)
 );
 
 CREATE TABLE teachers_schools (
@@ -67,7 +67,7 @@ CREATE TABLE test_cases (
 CREATE TABLE tags (
 	id SERIAL NOT NULL PRIMARY KEY,
 	name TEXT,
-	CONSTRAINT unique_name UNIQUE (name)
+	CONSTRAINT unique_tag_name UNIQUE (name)
 );
 
 CREATE TABLE problems_tags (

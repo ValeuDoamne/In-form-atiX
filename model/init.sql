@@ -21,7 +21,7 @@ CREATE TABLE users (
 CREATE TABLE schools (
 	id SERIAL NOT NULL PRIMARY KEY,
 	name TEXT NOT NULL,
-	CONSTRAINT unique_name UNIQUE name
+	CONSTRAINT unique_name UNIQUE (name)
 );
 
 CREATE TABLE teachers_schools (

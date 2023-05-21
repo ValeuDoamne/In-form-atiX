@@ -21,7 +21,7 @@ CREATE TABLE users (
 CREATE TABLE schools (
 	id SERIAL NOT NULL PRIMARY KEY,
 	name TEXT NOT NULL,
-	CONSTRAINT unique_name UNIQUE name
+	CONSTRAINT unique_school_name UNIQUE (name)
 );
 
 CREATE TABLE teachers_schools (
@@ -67,7 +67,7 @@ CREATE TABLE test_cases (
 CREATE TABLE tags (
 	id SERIAL NOT NULL PRIMARY KEY,
 	name TEXT,
-	CONSTRAINT unique_name UNIQUE (name)
+	CONSTRAINT unique_tag_name UNIQUE (name)
 );
 
 CREATE TABLE problems_tags (
@@ -122,7 +122,7 @@ CREATE TABLE homeworks (
 );
 
 CREATE TABLE homework_problems (
-	homework_id INTEGER REFERENCES homework(id),
+	homework_id INTEGER REFERENCES homeworks(id),
 	problem_id INTEGER REFERENCES problems(id),
 	CONSTRAINT unique_homework_problem UNIQUE (homework_id, problem_id)
 );

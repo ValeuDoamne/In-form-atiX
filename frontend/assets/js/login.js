@@ -2,10 +2,10 @@
  * Temporary login simulation
  */
 function login(){
-  localStorage.clear('auth');
   const username = document.querySelector("form.login input[name='username']").value;
   const password = document.querySelector("form.login input[name='password']").value;
 
+  //send data to backend
   fetch("http://localhost:8000/api/v1/login", {
     method: 'POST',
     headers: {
@@ -17,12 +17,9 @@ function login(){
   .then(data => {
     console.log(data);
     if (data.status == "Success") {
-      const token = data.token;
-      localStorage.setItem('token', token);
+      localStorage.setItem('token', data.token);
     } else if (data.status == "Invalid") {
-      console.log("Invalid username or password");
-    } else {
-      return data;
+      console.log(data.message);
     }
   })
   .catch(console.error)
@@ -30,9 +27,6 @@ function login(){
     //redirect to homepage
     // window.location.replace('/');
   });
-
-  //save data in localstorage
-  // localStorage.setItem('auth', JSON.stringify({username, password}));
 }
 
 
@@ -40,13 +34,13 @@ function login(){
  * Temporary check for a "logged in" user
  */
 function checkAuthState(){
-  const authData = JSON.parse(localStorage.getItem('auth'));
-  if(!authData || !Object.keys(authData).includes("username")) {
+  const token = localStorage.getItem('token');
+  if(!token) {
     return;
   }
   const location = document.getElementById("auth-check");
   const usernameP = document.createElement("p");
-  usernameP.appendChild(document.createTextNode(`Authenticated user: ${authData.username}`));
+  usernameP.appendChild(document.createTextNode(`A user is logged in!`));
   location.insertAdjacentElement('afterbegin', usernameP);
 }
 

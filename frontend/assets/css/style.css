@@ -1,5 +1,4 @@
 html, body {
-
   margin: 0;
 }
 
@@ -194,7 +193,27 @@ form.register button.anchor {
   form.login, form.register {
     margin: 0.5em;
   }
+}
 
+.notification-box.error {
+  border: 1px solid rgba(255, 0, 0, 0.5);
+  background-color: rgba(255, 0, 0, 0.05);
+  border-radius: 10px;
+  padding: 0.5em 1em;
+  font-size:small;
+  margin: 1em 0;
+  color: rgb(251, 89, 89);
+}
+
+
+.notification-box.success {
+  border: 1px solid rgba(0, 255, 0, 0.5);
+  background-color: rgba(0, 255, 0, 0.05);
+  border-radius: 10px;
+  padding: 0.5em 1em;
+  font-size:small;
+  margin: 0.5em 0;
+  color: rgb(106, 254, 106);
 }
 
 .index-grid {

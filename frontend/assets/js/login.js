@@ -1,5 +1,5 @@
 /**
- * Temporary login simulation
+ * Function to handle the login form submission
  */
 function login(){
   const username = document.querySelector("form.login input[name='username']").value;
@@ -15,36 +15,44 @@ function login(){
   })
   .then(response => response.json())
   .then(data => {
-    console.log(data);
     if (data.status == "Success") {
+      //set token in local storage
       localStorage.setItem('token', data.token);
+      //display success notification
+      displayNotification("success", "Successfully logged in!");
+      window.location.replace('/');
     } else if (data.status == "Invalid") {
-      console.log(data.message);
+      console.log(data);
+      //display invalid notification
+      displayNotification("error", "Invalid username or password!");
     }
   })
-  .catch(console.error)
-  .finally(() => {
-    //redirect to homepage
-    // window.location.replace('/');
+  .catch(err => {
+    console.log(err);
+    //display error notification
+    displayNotification("error", "An error occurred!");
   });
 }
 
-
 /**
- * Temporary check for a "logged in" user
+ * Helper function to display a notification on the page
+ * @param {string} type The message type (added as classname to the notification box)
+ * @param {string} message The message to display in the notification box
  */
-function checkAuthState(){
-  const token = localStorage.getItem('token');
-  if(!token) {
-    return;
-  }
-  const location = document.getElementById("auth-check");
-  const usernameP = document.createElement("p");
-  usernameP.appendChild(document.createTextNode(`A user is logged in!`));
-  location.insertAdjacentElement('afterbegin', usernameP);
+function displayNotification(type, message){
+  const notificationBox = document.querySelector(".notification-box");
+  //remove all children
+  notificationBox.textContent = "";
+  //reset classes
+  notificationBox.classList = "notification-box";
+  //add message
+  notificationBox.classList.add(type);
+  notificationBox.appendChild(document.createTextNode(message));
 }
 
-// add on load event to check for the authstate
-document.addEventListener("DOMContentLoaded", function() {
-  checkAuthState();
+//add keypress event listener to the login button
+document.addEventListener("keypress", function(event){
+  if (event.key == "Enter") {
+    login();
+  }
 });

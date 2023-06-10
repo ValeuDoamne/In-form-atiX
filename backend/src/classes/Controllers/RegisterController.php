@@ -65,7 +65,7 @@ class RegisterController implements Controller
 		}
 		$password = filter_var($this->get_if_exists($json_message, "password"), FILTER_SANITIZE_STRIPPED);
 		$name = filter_var($this->get_if_exists($json_message, "name"), FILTER_SANITIZE_STRIPPED);
-		
+			
 		switch ($type) {
 			case "student":
 				$this->gateway->register_student($email, $username, $name, $password);

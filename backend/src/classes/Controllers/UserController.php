@@ -12,6 +12,11 @@ class UserController implements Controller
 
 	public function handle(string $method, string $uri): void
 	{
+
+		if(Utils::isAuthorized() === false) {
+			Utils::senderr("Not authorized");
+		}
+
 		$parts = explode("/", $uri);
 		$id = $parts[4] ?? null;
 

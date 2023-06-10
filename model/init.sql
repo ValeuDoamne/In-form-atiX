@@ -50,6 +50,7 @@ CREATE TABLE programming_languages (
 
 CREATE TABLE problems (
 	id SERIAL NOT NULL PRIMARY KEY,
+	name TEXT,
 	description TEXT,
 	solution    TEXT,
 	solution_programming_language_id INTEGER REFERENCES programming_languages(id),
@@ -99,9 +100,10 @@ CREATE TABLE submissions (
 	score      INTEGER CHECK (score >= 0 AND score <= 100),
 	date_submitted TIMESTAMP DEFAULT NOW()
 );
-	
+
 CREATE TABLE unreleased_problems (
 	id SERIAL NOT NULL PRIMARY KEY,
+	name TEXT,
 	description TEXT,
 	solution    TEXT,
 	solution_programming_language_id INTEGER REFERENCES programming_languages(id),

@@ -6,6 +6,7 @@ class Utils
 	{
 		echo json_encode($data);
 	}
+	
 	public static function recvmsg() : array
 	{
 		$message = json_decode(file_get_contents('php://input'), true);
@@ -22,7 +23,7 @@ class Utils
 	{
 		echo json_encode(
 			[
-				"status" => "Success",
+				"status" => 200,
 				"message" => $message,
 			]
 		);
@@ -31,7 +32,7 @@ class Utils
 	public static function sendinvalid(string $message): void {
 		echo json_encode(
 				[
-					"status" => "Invalid",
+					"status" => 400,
 					"message" => $message
 				]
 		);	
@@ -40,10 +41,21 @@ class Utils
 	public static function senderr(string $message): void {
 		echo json_encode(
 				[
-					"status" => "Error",
+					"status" => 500,
 					"message" => $message
 				]
 		);
 		exit(0);
+	}
+
+	public static function getAuthorization(): array {
+		$token = JWT::getBearerToken();
+		return JWT::validateAuthorization($token);
+	}
+
+	public static function isAuthorized(): bool {
+		if(self::getAuthorization() == null)
+			return false;
+		return true;	
 	}
 }

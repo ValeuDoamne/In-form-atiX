@@ -43,7 +43,7 @@ class LoginController implements Controller
 		if ($result === true) {
 			$userid = $this->gateway->userid($usernameOrEmail, $password);
 			$usertype = $this->gateway->usertype($usernameOrEmail, $password);
-			$jwt = JWT::generateToken($userid, $usertype, Secrets::JWTSecret);
+			$jwt = JWT::generateToken($userid, $usertype);
 			header("Authorization: Bearer " . $jwt);
 			Utils::sendmsg([
 				"status" => "Success",	

@@ -9,15 +9,15 @@ class Route {
 
 	public static function handle(string $method, string $uri): void
 	{
-		$is_handle = false;
+		$is_handled = false;
 		foreach(self::$routes as $key => $handler) {
 			if(substr($uri, 0, strlen($key)) === $key) {
-				$is_handle = true;
+				$is_handled = true;
 				$handler->handle($method, $uri);
 				break;
 			}
 		}
-		if(! $is_handle ) {
+		if(! $is_handled ) {
 			http_response_code(404);
 		}
 	}

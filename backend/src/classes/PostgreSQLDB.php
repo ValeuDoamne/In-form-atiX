@@ -36,7 +36,28 @@ class PostgreSQLDB {
 
 		return $result;
 	}
-	
+
+    public function records_are_present($name, $query, ...$params): bool {
+		if (!$this->conn) {
+			throw new Exception("PostgreSQL the connection has been closed");
+        }
+        
+        $result = pg_prepare($this->conn, $name, $query);
+
+		if (!$result) {
+			throw new Exception("Failed to prepare query");
+		}
+		$result = pg_execute($this->conn, $name, $params);
+		if (!$result) {
+			throw new Exception("PostgreSQL faild to execute prepared statement ". pg_last_error($this->conn));
+		}
+
+        if(pg_num_rows($result) > 0) {
+            return true;
+        }
+        return false; 
+    }
+
     public function close(): void {
         pg_close($this->conn);
         $this->conn = null;

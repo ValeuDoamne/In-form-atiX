@@ -49,27 +49,30 @@ class JWT {
 			http_response_code(401);
 			header("Location: /login.html");
 		}
-		return $payload;	
+		return $payload;
 	}
 	
-	private static function getAuthorizationHeader(){
+    private static function getAuthorizationHeader(): string
+    {
 		$headers = null;
 		if (isset($_SERVER['Authorization'])) {
 			$headers = trim($_SERVER["Authorization"]);
-		}
-		else if (isset($_SERVER['HTTP_AUTHORIZATION'])) { //Nginx or fast CGI
+		} else if (isset($_SERVER['HTTP_AUTHORIZATION'])) { //Nginx or fast CGI
 			$headers = trim($_SERVER["HTTP_AUTHORIZATION"]);
-		} elseif (function_exists('apache_request_headers')) {
+		} else if (function_exists('apache_request_headers')) {
 			$requestHeaders = apache_request_headers();
 			$requestHeaders = array_combine(array_map('ucwords', array_keys($requestHeaders)), array_values($requestHeaders));
 			if (isset($requestHeaders['Authorization'])) {
 				$headers = trim($requestHeaders['Authorization']);
 			}
-		}
+        }
+        if($headers === null)
+            return "";
 		return $headers;
 	}
 
-	public static function getBearerToken() {
+    public static function getBearerToken(): string
+    {
 		$headers = self::getAuthorizationHeader();
 		if (!empty($headers)) {
 			if (preg_match('/Bearer\s(\S+)/', $headers, $matches)) {

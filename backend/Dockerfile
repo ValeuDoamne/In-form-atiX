@@ -2,7 +2,7 @@ FROM nginx:latest
 
 # Install PHP and Postgres driver for PHP
 RUN apt-get update && \
-    apt-get install -y php-fpm php-pgsql && \
+    apt-get install -y php-fpm php-pgsql php-curl && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

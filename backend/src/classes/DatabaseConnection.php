@@ -7,7 +7,8 @@ class DatabaseConnection {
         self::$connection = new PostgreSQLDB($dbname, $user, $password, $host, $port);
     }
     
-    public static function getConnection() {
+    public static function getConnection(): PostgreSQLDB
+    {
         return self::$connection;
     }
 }

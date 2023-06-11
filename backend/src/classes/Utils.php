@@ -23,7 +23,7 @@ class Utils
 	{
 		echo json_encode(
 			[
-				"status" => 200,
+				"status" =>  "Success",
 				"message" => $message,
 			]
 		);
@@ -32,7 +32,7 @@ class Utils
 	public static function sendinvalid(string $message): void {
 		echo json_encode(
 				[
-					"status" => 400,
+					"status" => "Invalid",
 					"message" => $message
 				]
 		);	
@@ -41,7 +41,7 @@ class Utils
 	public static function senderr(string $message): void {
 		echo json_encode(
 				[
-					"status" => 500,
+					"status" => "Error",
 					"message" => $message
 				]
 		);
@@ -51,11 +51,5 @@ class Utils
 	public static function getAuthorization(): array {
 		$token = JWT::getBearerToken();
 		return JWT::validateAuthorization($token);
-	}
-
-	public static function isAuthorized(): bool {
-		if(self::getAuthorization() == null)
-			return false;
-		return true;	
 	}
 }

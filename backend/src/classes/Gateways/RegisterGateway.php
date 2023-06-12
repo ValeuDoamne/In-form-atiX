@@ -2,7 +2,7 @@
 
 class RegisterGateway
 {
-	private $conn;
+	private PostgreSQLDB $conn;
 	
 	public function __construct(PostgreSQLDB $conn) {
 		$this->conn = $conn;
@@ -25,10 +25,7 @@ class RegisterGateway
 	}
 
 	public function register_student(string $email, string $username, string $name, string $password): void {
-		if( $this->is_valid_username_email($username, $email) === false)
-		{
-			return;
-		}	
+		$this->is_valid_username_email($username, $email);
 		
 		$hashedPassword = hash('sha512', $password . Secrets::passwordSalt);
 
@@ -58,10 +55,7 @@ class RegisterGateway
 	}
 
 	public function register_teacher(string $email, string $username, string $name, string $password, string $school): void {
-		if( $this->is_valid_username_email($username, $email) === false)
-		{
-			return;
-		}	
+		$this->is_valid_username_email($username, $email);
 	
 		$this->register_academic($school);
 		
@@ -90,10 +84,7 @@ class RegisterGateway
 	public function register_admin(string $email, string $username, string $name, string $password, string $secretCode): void {
 		if(Secrets::secretAdminCode == $secretCode) {
 		
-			if( $this->is_valid_username_email($username, $email) === false)
-			{
-				return;
-			}	
+			$this->is_valid_username_email($username, $email);
 
 			$hashedPassword = hash('sha512', $password . Secrets::passwordSalt);
 
@@ -114,18 +105,13 @@ class RegisterGateway
 		}
 	}
 
-	private function is_valid_username_email(string $username, string $email): bool
+	private function is_valid_username_email(string $username, string $email): void 
 	{
 		if($this->check_username($username) === true) {
-			http_response_code(409);
-			Utils::sendinvalid("The username is already taken");
-			return false;
+			throw new ClientException("The username is already taken", 409);
 		}
 		if($this->check_email($email) === true) {
-			http_response_code(409);
-			Utils::sendinvalid("The email is already taken");
-			return false;
+			throw new ClientException("The email is already taken", 409);
 		}
-		return true;
 	}
 }

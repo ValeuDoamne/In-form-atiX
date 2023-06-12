@@ -29,7 +29,7 @@ Pentru request-urile de tip ``POST`` se asteapta ca body sa fie un singur JSON
 
 ## API Endpoints
 
-### Register
+### [Register](docs/Register.md)
 
 ```
 /api/v1/register

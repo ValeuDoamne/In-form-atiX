@@ -13,33 +13,29 @@ class LoginGateway
 		$query = "SELECT * FROM users WHERE (username=$1 OR email=$1) AND (password=$2)";
 		$hashedPassword = hash("sha512", $password . Secrets::passwordSalt);
 		$result = $this->conn->execute_prepared("login_authenticate", $query, $usernameORemail, $hashedPassword);
-		
-		return pg_num_rows($result) === 1;
+        
+        return pg_num_rows($result) === 1;
 	}
 
-	public function userid(string $usernameORemail, string $password): int 
+    /**
+     * @return array<string,array|bool>
+     */
+    public function user_details(string $usernameORemail, string $password): array 
 	{
-		$query = "SELECT id FROM users WHERE (username=$1 OR email=$1) AND (password=$2)";
+		$query = "SELECT u.id, ut.name FROM users u JOIN user_types ut ON u.user_type_id = ut.id WHERE (username=$1 OR email=$1) AND (password=$2)";
 		$hashedPassword = hash("sha512", $password . Secrets::passwordSalt);
-		$result = $this->conn->execute_prepared("login_userid", $query, $usernameORemail, $hashedPassword);
+		$result = $this->conn->execute_prepared("login_user_details", $query, $usernameORemail, $hashedPassword);
 		
 		$row = pg_fetch_assoc($result);
-		
-		return $row["id"];
+
+        if ($row === false) {
+			Utils::senderr("User could not be logged in!");
+        }
+                
+        return [
+                    "user_id" => $row["id"],
+                    "user_type" => $row["name"]
+               ];
 	}
 
-	public function usertype(string $usernameORemail, string $password): string
-	{
-		$query = "SELECT ut.name FROM users u JOIN user_types ut ON u.user_type_id = ut.id WHERE (username=$1 OR email=$1) AND (password=$2)";
-		$hashedPassword = hash("sha512", $password . Secrets::passwordSalt);
-		$result = $this->conn->execute_prepared("usertype", $query, $usernameORemail, $hashedPassword);
-		$row = pg_fetch_assoc($result);
-
-		if ($row === false)
-		{
-			Utils::senderr("User is not logged in");
-		}
-
-		return $row["name"];
-	}
 }

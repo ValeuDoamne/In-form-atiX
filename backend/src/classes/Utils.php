@@ -52,4 +52,8 @@ class Utils
 		$token = JWT::getBearerToken();
 		return JWT::validateAuthorization($token);
 	}
+    
+    public static function filter(string $filtered): string {
+        return trim(filter_var($filtered, FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+    }
 }

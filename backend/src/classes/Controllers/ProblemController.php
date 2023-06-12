@@ -16,7 +16,7 @@ class ProblemController implements Controller {
 				break;
 			case "POST":
 				$this->handle_post($uri);
-				break;
+                break;
 			case "DELETE":
 				$this->handle_delete($uri);
 				break;
@@ -25,27 +25,25 @@ class ProblemController implements Controller {
 				header("Allow: GET, POST");
 		}
 	}
-    
+ 
     private function handle_get(string $uri): void {
         if (strcmp($uri, "/api/v1/problems/all") === 0) {
             $this->send_all_problems();
         } else if (strcmp($uri, "/api/v1/problems/all/tags") === 0) {
             $this->send_all_tags();
-        } else if (preg_match("/^\/api\/v1\/problems\/\d+\/tags/", $uri)){
-            $splited_uri = explode("/", $uri);
-            $splited_uri = array_reverse($splited_uri);
-            $problem_id = intval($splited_uri[1], 10);
+        } else if (preg_match("/^\/api\/v1\/problems\/(\d+)\/tags$/", $uri, $matches)){
+            $problem_id = intval($matches[1], 10);
             $this->send_problem_tags_with_id($problem_id); 
-        } else if (preg_match("/^\/api\/v1\/problems\/\d+\/raport/", $uri)){
-            $splited_uri = explode("/", $uri);
-            $splited_uri = array_reverse($splited_uri);
-            $problem_id = intval($splited_uri[1], 10);
+        } else if (preg_match("/^\/api\/v1\/problems\/(\d+)\/raport$/", $uri, $matches)){
+            $problem_id = intval($matches[1], 10);
             $this->send_problem_raport_with_id($problem_id); 
-        } else if (preg_match("/^\/api\/v1\/problems\/\d+/", $uri)) {
-            $splited_uri = explode("/", $uri);
-            $problem_id = end($splited_uri);
+        } else if (preg_match("/^\/api\/v1\/problems\/(\d+)$/", $uri, $matches)) {
+            $problem_id = intval($matches[1], 10);
             $this->send_problem_with_id($problem_id); 
-        } else  {
+        } else if (preg_match("/^\/api\/v1\/problems\/(\d+)\/submissions$/", $uri, $matches)) {
+            $problem_id = intval($matches[1], 10);
+            $this->send_submissions_of_problem($problem_id); 
+        } else {
             http_response_code(404);
             Utils::sendinvalid("Not found");
         }
@@ -106,14 +104,20 @@ class ProblemController implements Controller {
         ]);    
     }
     
+    private function send_submissions_of_problem(int $problem_id): void {
+        $submissions = $this->gateway->get_submissions($this->authorization["user_id"], $problem_id);
+        Utils::sendmsg([
+            "status" => "Success",
+            "submissions" => $submissions 
+        ]);
+    } 
+
 	private function handle_post(string $uri): void {
-        if (preg_match("/^\/api\/v1\/problems\/\d+\/tag/", $uri)) {
-            $splited_uri = explode("/", $uri);
-            $splited_uri = array_reverse($splited_uri);
-            $problem_id = intval($splited_uri[1], 10);
+        if (preg_match("/^\/api\/v1\/problems\/(\d+)\/tags$/", $uri, $matches)) {
+            $problem_id = intval($matches[1], 10);
             
             $json_message = Utils::recvmsg();
-            $tag = filter_var($json_message["tag"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $tag = Utils::filter($json_message["tag"]);
             
             if($this->authorization["user_type"] === "teacher" || $this->authorization["user_type"] === "admin") { 
                 $this->tag_problem($problem_id, $tag);
@@ -121,14 +125,12 @@ class ProblemController implements Controller {
                 http_response_code(401);
                 Utils::sendinvalid("Not Authorized"); 
             }
-        } else if (preg_match("/^\/api\/v1\/problems\/\d+\/submit/", $uri)) {
-            $splited_uri = explode("/", $uri);
-            $splited_uri = array_reverse($splited_uri);
-            $problem_id = intval($splited_uri[1], 10);
+        } else if (preg_match("/^\/api\/v1\/problems\/(\d+)\/submit$/", $uri, $matches)) {
+            $problem_id = intval($matches[1], 10);
             
             $json_message = Utils::recvmsg();
-            $source_code = filter_var($json_message["source_code"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $programming_language = filter_var($json_message["programming_language"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $source_code = Utils::filter($json_message["source_code"]);
+            $programming_language = Utils::filter($json_message["programming_language"]);
             
             $this->submit_problem($problem_id, $source_code, $programming_language);
         } else {
@@ -149,15 +151,31 @@ class ProblemController implements Controller {
         if($this->gateway->exists_programming_language($programming_language) === false) {
            throw new ClientException("No such programming language"); 
         }
+        if($this->gateway->add_submission($this->authorization["user_id"], $problem_id, $source_code, $programming_language) === true) {
+            Utils::sendsuccess("Successfully submitted solution to problem with id $problem_id");
+        } else {
+            Utils::senderr("The submmision could not be saved for problem with id $problem_id");
+        }
     }
-
-    private function handle_delete($uri): void {
-        if (preg_match("/^\/api\/v1\/problems\/\d+/", $uri)) {
-            $splited_uri = explode("/", $uri);
-            $splited_uri = array_reverse($splited_uri);
-            $problem_id = intval($splited_uri[0], 10);
+    
+    private function handle_delete(string $uri): void {
+        if (preg_match("/^\/api\/v1\/problems\/(\d+)$/", $uri, $matches)) {
+            $problem_id = intval($matches[1], 10);
             
-            $this->delete_problem($problem_id);            
+            $this->delete_problem($problem_id); 
+        } else if (preg_match("/^\/api\/v1\/problems\/all\/tags$/", $uri)) {
+
+            $json_message = Utils::recvmsg();
+            $tag = Utils::filter($json_message["tag"]);
+
+            $this->delete_tag($tag); 
+        } else if (preg_match("/^\/api\/v1\/problems\/(\d+)\/tags$/", $uri, $matches)) {
+            $problem_id = intval($matches[1], 10);
+
+            $json_message = Utils::recvmsg();
+            $tag = Utils::filter($json_message["tag"]);
+
+            $this->delete_tag_from_problem($problem_id, $tag); 
         } else {
             http_response_code(404);
             Utils::sendinvalid("Not found");;
@@ -176,7 +194,34 @@ class ProblemController implements Controller {
         } else {
             Utils::senderr("Could not delete problem with id $problem_id");
         } 
+    }
+    
+    private function delete_tag_from_problem(int $problem_id, string $tag): void {
+        if($this->authorization["user_type"] !== "admin" && $this->authorization["user_type"] !== "teacher") { 
+            http_response_code(401);
+            Utils::sendinvalid("Not Authorized");
+            return;
+        }
+        
+        if($this->gateway->delete_tag_from_problem($problem_id, $tag) === true) {
+            Utils::sendsuccess("Succesfully deleted tag '$tag' from problem with id $problem_id");
+        } else {
+            Utils::sendinvalid("There is no problem with id $problem_id and '$tag'");
+        } 
+    }
+    
+    private function delete_tag(string $tag): void {
+        if($this->authorization["user_type"] !== "admin" && $this->authorization["user_type"] !== "teacher") { 
+            http_response_code(401);
+            Utils::sendinvalid("Not Authorized");
+            return;
+        }
 
-    }    
+        if($this->gateway->delete_tag($tag) === true) {
+            Utils::sendsuccess("Succesfully deleted tag '$tag' from database");
+        } else {
+            Utils::sendinvalid("There is no tag '$tag' in the database");
+        } 
+    }
 
 }

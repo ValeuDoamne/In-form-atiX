@@ -50,8 +50,7 @@ class PostgreSQLDB {
 		$result = pg_execute($this->conn, $name, $params);
 		if (!$result) {
 			throw new Exception("PostgreSQL faild to execute prepared statement ". pg_last_error($this->conn));
-		}
-
+        }
         if(pg_num_rows($result) > 0) {
             return true;
         }

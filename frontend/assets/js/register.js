@@ -49,27 +49,40 @@ function renderPage(){
 /* after the the user typed the username and unfocused the input it will be checked */
 function checkUsername(){
     const username = document.querySelector(window.location.hash+" form.register input[name='username']").value;
-    fetch("http://localhost:8000/api/v1/register?username="+username)
-    .then(response => response.json())
-    .then(data => {
-        displayNotification(data.status, data.message);
-    }).catch(err => {
-        console.log(err);
-        displayNotification("error", "An error ocurred");
-    });
+    if(filterUsername(username)) {
+        fetch("http://localhost:8000/api/v1/register?username="+username)
+        .then(response => response.json())
+        .then(data => {
+            displayNotification(data.status, data.message);
+        }).catch(err => {
+            console.log(err);
+            displayNotification("error", "An error ocurred");
+        });
+    }
 }
+/* check if the email provided is valid */
+const validateEmail = (email) => {
+  return String(email)
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    ) !== null;
+};
 
 /* after the the user typed the email and unfocused the input it will be checked */
 function checkEmail(){
     const email = document.querySelector(window.location.hash+" form.register input[name='email']").value;
-    fetch("http://localhost:8000/api/v1/register?email="+email)
-    .then(response => response.json())
-    .then(data => {
-        displayNotification(data.status, data.message);
-    }).catch(err => {
+    if(validateEmail(email)) {
+      fetch("http://localhost:8000/api/v1/register?email="+email)
+      .then(response => response.json())
+      .then(data => {
+         displayNotification(data.status, data.message);
+      }).catch(err => {
         console.log(err);
         displayNotification("error", "An error ocurred");
-    });
+      });
+    } else {
+      displayNotification("invalid", "Not a valid email address");
+    }
 }
 
 function filterUsername(username) {
@@ -109,6 +122,11 @@ function registerStudent(){
  
   /* Filter from the client what the user does not need to set */
   if(filterUsername(username) === false || filterPassword(password) === false) {
+    return;
+  }
+ 
+  if(validateEmail(email) === false) {
+    displayNotification("invalid", "Not a valid email address");
     return;
   }
 
@@ -153,6 +171,11 @@ function registerTeacher(){
 
   /* Filter from the client what the user does not need to set */
   if(filterUsername(username) === false || filterPassword(password) === false) {
+    return;
+  }
+  
+  if(validateEmail(email) === false) {
+    displayNotification("invalid", "Not a valid email address");
     return;
   }
 

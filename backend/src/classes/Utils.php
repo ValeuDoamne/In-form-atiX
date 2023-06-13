@@ -6,6 +6,7 @@ class Utils
 	{
 		echo json_encode($data);
 	}
+	
 	public static function recvmsg() : array
 	{
 		$message = json_decode(file_get_contents('php://input'), true);
@@ -22,7 +23,7 @@ class Utils
 	{
 		echo json_encode(
 			[
-				"status" => "Success",
+				"status" =>  "Success",
 				"message" => $message,
 			]
 		);
@@ -46,4 +47,13 @@ class Utils
 		);
 		exit(0);
 	}
+
+	public static function getAuthorization(): array {
+		$token = JWT::getBearerToken();
+		return JWT::validateAuthorization($token);
+	}
+    
+    public static function filter(string $filtered): string {
+        return trim(filter_var($filtered, FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+    }
 }

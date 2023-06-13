@@ -2,7 +2,7 @@
 
 class RegisterController implements Controller 
 {
-	private $gateway;
+	private RegisterGateway $gateway;
 
 	public function __construct(RegisterGateway $gateway) 
 	{
@@ -24,7 +24,7 @@ class RegisterController implements Controller
 		}
 	}
 
-	private function handle_duplicates() {
+	private function handle_duplicates(): void {
 		if(isset($_GET["email"])) {
 			$email = $_GET["email"];
 			if(filter_var($email, FILTER_VALIDATE_EMAIL))
@@ -41,42 +41,46 @@ class RegisterController implements Controller
 		}
 		if(isset($_GET["username"]))
 		{
-			$username = $_GET["username"];
-			$username = filter_var($username, FILTER_SANITIZE_STRING);
-			if($this->gateway->check_username($username) === true)
-			{
-				Utils::sendinvalid("This username is already taken");
-			}
+            $username = $_GET["username"];
+            if(filter_var($username, FILTER_VALIDATE_EMAIL) === false) {
+                $username = Utils::filter($username);
+                if($this->gateway->check_username($username) === true)
+                {
+                    Utils::sendinvalid("This username is already taken");
+                }
+            } else {
+                Utils::sendinvalid("An username cannot be an email address");
+            }
 		}
 	}
 
-	private function handle_register()
+	private function handle_register(): void
 	{
 		$json_message = Utils::recvmsg();
 
-		$type = filter_var($this->get_if_exists($json_message, "type"), FILTER_SANITIZE_STRIPPED);
-		$username = filter_var($this->get_if_exists($json_message, "username"), FILTER_SANITIZE_STRIPPED);
-		$email = filter_var($this->get_if_exists($json_message, "email"), FILTER_SANITIZE_STRIPPED);
+		$type = Utils::filter($this->get_if_exists($json_message, "type"));
+		$username = Utils::filter($this->get_if_exists($json_message, "username"));
+		$email = trim($this->get_if_exists($json_message, "email"));
 		if(filter_var($email, FILTER_VALIDATE_EMAIL))
 		{
 			$email = filter_var($email, FILTER_SANITIZE_EMAIL);
 		} else {
-			throw new Exception("Not a valid email address");
+			throw new ClientException("Not a valid email address");
 		}
-		$password = filter_var($this->get_if_exists($json_message, "password"), FILTER_SANITIZE_STRIPPED);
-		$name = filter_var($this->get_if_exists($json_message, "name"), FILTER_SANITIZE_STRIPPED);
-		
+		$password = trim($this->get_if_exists($json_message, "password"));
+		$name = Utils::filter($this->get_if_exists($json_message, "name"));
+			
 		switch ($type) {
 			case "student":
 				$this->gateway->register_student($email, $username, $name, $password);
 				break;
 			case "teacher": {
-				$school = filter_var($this->get_if_exists($json_message, "school"), FILTER_SANITIZE_STRIPPED);
+				$school = Utils::filter($this->get_if_exists($json_message, "school"));
 				$this->gateway->register_teacher($email, $username, $name, $password, $school);
 				break;
 			}
 			case "admin": {
-				$secretCode = filter_var($this->get_if_exists($json_message, "secret_code"), FILTER_SANITIZE_STRIPPED);
+				$secretCode = trim($this->get_if_exists($json_message, "secret_code"));
 				$this->gateway->register_admin($email, $username, $name, $password, $secretCode);
 				break;
 			}
@@ -90,8 +94,7 @@ class RegisterController implements Controller
 	{
 		if(isset($queried, $field)) {
 			return $queried[$field];
-		}
-		Utils::senderr("Field " . $field . " required for registration");
-		exit(0);
+        }
+        throw new ClientException("Field $field required for registration");
 	}
 }

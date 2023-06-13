@@ -2,7 +2,7 @@
 
 class LoginController implements Controller
 {
-	private $gateway;
+	private LoginGateway $gateway;
 
 	public function __construct(LoginGateway $gateway)
 	{
@@ -25,7 +25,7 @@ class LoginController implements Controller
 		}		
 	}
 	
-	private function handle_login() {
+	private function handle_login(): void {
 		$json_message = Utils::recvmsg();
 
 		$usernameOrEmail = $json_message["username"];
@@ -34,16 +34,15 @@ class LoginController implements Controller
 		if (filter_var($usernameOrEmail, FILTER_VALIDATE_EMAIL)) {
 			$usernameOrEmail = filter_var($usernameOrEmail, FILTER_SANITIZE_EMAIL);
 		} else {
-			$usernameOrEmail = filter_var($usernameOrEmail, FILTER_SANITIZE_STRIPPED);
+			$usernameOrEmail = Utils::filter($usernameOrEmail);
 		}
 	
-		$password = filter_var($password, FILTER_SANITIZE_STRIPPED);
+		$password = trim($password);
 
-		$result = $this->gateway->authenticate($usernameOrEmail, $password);
-		if ($result === true) {
-			$userid = $this->gateway->userid($usernameOrEmail, $password);
-			$usertype = $this->gateway->usertype($usernameOrEmail, $password);
-			$jwt = JWT::generateToken($userid, $usertype, Secrets::JWTSecret);
+		$user_exists = $this->gateway->authenticate($usernameOrEmail, $password);
+		if ($user_exists) {
+			$details = $this->gateway->user_details($usernameOrEmail, $password);
+			$jwt = JWT::generateToken($details["user_id"], $details["user_type"]);
 			header("Authorization: Bearer " . $jwt);
 			Utils::sendmsg([
 				"status" => "Success",	

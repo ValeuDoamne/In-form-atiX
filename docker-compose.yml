@@ -19,6 +19,7 @@ services:
       - ./backend/src:/var/www/html
       - ./certs:/etc/nginx/certs
     environment:
+      - EXECUTOR="executor.hackersoffii.com"
       - DB_HOST=database
       - DB_USER=postgres
       - DB_PASSWORD=postgres

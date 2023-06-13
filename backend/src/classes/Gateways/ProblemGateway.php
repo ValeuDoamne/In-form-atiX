@@ -11,7 +11,7 @@ class ProblemGateway
     private function problem_exists(int $problem_id): void {
         if($this->conn->records_are_present("problem_exists", "SELECT * FROM problems WHERE id=$1", $problem_id) === false)
         {
-            throw new ClientException("Problem with id $problem_id does not exist");
+            throw new ClientException("Problem with id $problem_id does not exist", 404);
         }
     }
 

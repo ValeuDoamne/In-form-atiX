@@ -108,10 +108,10 @@ class RegisterGateway
 	private function is_valid_username_email(string $username, string $email): void 
 	{
 		if($this->check_username($username) === true) {
-			throw new ClientException("The username is already taken", 409);
+			throw new ClientException("The username is already taken");
 		}
 		if($this->check_email($email) === true) {
-			throw new ClientException("The email is already taken", 409);
+			throw new ClientException("The email is already taken");
 		}
 	}
 }

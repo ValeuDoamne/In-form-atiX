@@ -34,7 +34,9 @@ class RegisterController implements Controller
 				if( $result === true)
 				{
 					Utils::sendinvalid("This email is already taken");
-				}
+                } else {
+					Utils::sendsuccess("Is valid email");
+                }
 			} else {
 				Utils::sendinvalid("Not a valid email");
 			}
@@ -44,9 +46,14 @@ class RegisterController implements Controller
             $username = $_GET["username"];
             if(filter_var($username, FILTER_VALIDATE_EMAIL) === false) {
                 $username = Utils::filter($username);
+                if(strlen($username) === 0) {
+                    throw new ClientException("The username cannot be empty");
+                }
                 if($this->gateway->check_username($username) === true)
                 {
                     Utils::sendinvalid("This username is already taken");
+                } else {
+                    Utils::sendsuccess("This username is valid");
                 }
             } else {
                 Utils::sendinvalid("An username cannot be an email address");

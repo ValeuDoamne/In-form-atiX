@@ -42,12 +42,24 @@ class JWT {
 		}
 	    return true;	
 	}
-	
+    
+    private static function isUserInvalid(int $user_id): bool {
+        $db_connection = DatabaseConnection::getConnection();
+        if($db_connection === null){
+            return false;
+        }
+        if($db_connection->records_are_present("check_jwt_userid", "SELECT * FROM users WHERE id=$1", $user_id)) {
+            return false;
+        }
+        return true;
+    }
+
 	public static function validateAuthorization(string $jwtToken): array {
 		$payload = self::decodeToken($jwtToken);
-		if(self::isExpired($payload["exp"])) {
+            if(self::isExpired($payload["exp"]) || self::isUserInvalid($payload["user_id"])) {
 			http_response_code(401);
-			header("Location: /login.html");
+            header("Location: /login.html");
+            exit(0);
 		}
 		return $payload;
 	}

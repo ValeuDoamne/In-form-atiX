@@ -17,12 +17,12 @@ class JWT {
     {
 		$tokenParts = explode('.', $jwtToken);
 		if(count($tokenParts) !== 3) {
-			throw new Exception("Not a valid JWT");
+			throw new ClientException("Not a valid JWT", 401);
 		}
 		$signature = self::base64UrlDecoder($tokenParts[2]); 
 		$valid = hash_hmac('sha512', $tokenParts[0] . "." . $tokenParts[1], Secrets::JWTSecret, true);
 		if (!hash_equals($valid, $signature)) {
-			throw new Exception("Not a valid JWT");
+			throw new ClientException("Not a valid JWT", 401);
 		}
 		$header = self::base64UrlDecoder($tokenParts[0]); 
 		$payload = json_decode(self::base64UrlDecoder($tokenParts[1]), true);

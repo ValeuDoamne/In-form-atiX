@@ -57,14 +57,6 @@ CREATE TABLE problems (
     date_submitted TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE test_cases (
-    id SERIAL NOT NULL PRIMARY KEY,
-    problem_id INTEGER REFERENCES problems(id) ON DELETE CASCADE,
-    input TEXT,
-    output TEXT,
-    time_constaint FLOAT
-);
-
 CREATE TABLE tags (
     id SERIAL NOT NULL PRIMARY KEY,
     name TEXT,
@@ -108,22 +100,16 @@ CREATE TABLE unreleased_problems (
     description TEXT,
     solution    TEXT,
     solution_programming_language_id INTEGER REFERENCES programming_languages(id),
-    author INTEGER REFERENCES users(id) ON DELETE CASCADE, 
+    author INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    status TEXT,
     date_submitted TIMESTAMP DEFAULT NOW()
-);
-
-CREATE TABLE unreleased_test_cases (
-    id SERIAL NOT NULL PRIMARY KEY,
-    unreleased_problems_id INTEGER REFERENCES unreleased_problems(id),
-    input TEXT,
-    output TEXT,
-    time_constraint FLOAT
 );
 
 CREATE TABLE homeworks (
     id SERIAL NOT NULL PRIMARY KEY,
     name TEXT,
     time_limit TIMESTAMP DEFAULT (NOW()+INTERVAL '2 DAY'),
+    status TEXT,
     classroom_id INTEGER REFERENCES classrooms(id) ON DELETE CASCADE
 );
 
@@ -131,6 +117,13 @@ CREATE TABLE homework_problems (
     homework_id INTEGER REFERENCES homeworks(id) ON DELETE CASCADE,
     problem_id INTEGER REFERENCES problems(id) ON DELETE CASCADE,
     CONSTRAINT unique_homework_problem UNIQUE (homework_id, problem_id)
+);
+
+CREATE TABLE admin_posts(
+    id SERIAL NOT NULL PRIMARY KEY,
+    content TEXT,
+    author INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    date_created TIMESTAMP DEFAULT NOW()
 );
 
 INSERT INTO user_types(name) VALUES ('admin'), ('teacher'), ('student');

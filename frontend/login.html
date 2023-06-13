@@ -9,40 +9,24 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
+  <script src="assets/js/login.js"></script>
+  <script type="module" src="./assets/js/main.js"></script>
   <title>Login</title>
 </head>
 <body>
-  <header class="topnav">
-    <a href="index.html" class="title">In-form-atiX</a>
-    <input class="toggle"  id="toggle" type="checkbox">
-    <label class="hamburger" for="toggle">
-      <span class="top"></span>
-      <span class="meat"></span>
-      <span class="bottom"></span>
-    </label>
-    <nav class="menu">
-      <a href="./search.php">Search</a>
-      <a href="about.html">About</a>
-      <a href="help.html">Help</a>
-      <a href="login.html">Login</a>
-      <a href="register.html">Register</a>
-    </nav>
-  </header>
-
+  <header></header>
   <main class="centered-page">
     <h1>Login to Your&nbsp;Account</h1>
     <form class="login" autocomplete="off">
       <p>Fill in the form below with the authentication details in order to gain access to the platform.</p>
-      <input type="text" name="username" id="login_username" placeholder=" ">
-      <label for="login_username">Username</label>
-      <input type="password" name="password" id="login_password" placeholder=" ">
-      <label for="login_password">Password</label>
+      <div class="notification-box"></div>
+      <input type="text" name="username" id="login-username" placeholder=" ">
+      <label for="login-username">Username</label>
+      <input type="password" name="password" id="login-password" placeholder=" ">
+      <label for="login-password">Password</label>
       <button type="button" class="submit" onclick="login()">Login</button>
       <p class="small">Don't have an account? Register <a href="/register.html">here</a>.</p>
     </form>
-    <div id="auth-check"></div>
   </main>
-  <!-- for now, import a js file that simulates the login process -->
-  <script src="assets/js/login.js"></script>
 </body>
 </html>

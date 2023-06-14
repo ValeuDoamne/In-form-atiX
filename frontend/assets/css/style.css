@@ -8,16 +8,16 @@ body {
 }
 
 a, h2, h3, h4, p, li, span {
-    font-family: 'Noto Sans', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
 }
 
 a {
-text-decoration: none;
-color:#E16428;
+  text-decoration: none;
+  color:#E16428;
 }
 
 p.small {
-font-size: smaller;
+  font-size: smaller;
 }
 
 .main h1 {
@@ -41,7 +41,7 @@ font-size: smaller;
  display: none; 
 }
 
-.topnav a, .topnav span {
+.topnav a {
   float: left;
   display: block;
   color: #f2f2f2;
@@ -65,7 +65,7 @@ font-size: smaller;
 }
 
 main { 
-margin-top: 85px;
+  margin-top: 85px;
 }
 
 .main {
@@ -74,17 +74,17 @@ margin-top: 85px;
 }
 
 main.centered-page {
-margin-left: auto;
-margin-right: auto;
-text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 main.centered-page h1 {
-font-family: 'Noto Sans', sans-serif;
-display: inline-block;
-border-bottom: solid 3px #E16428;
-padding: 0 0.25em;
-margin: 1.5em 0.4em;
+  font-family: 'Noto Sans', sans-serif;
+  display: inline-block;
+  border-bottom: solid 3px #E16428;
+  padding: 0 0.25em;
+  margin: 1.5em 0.4em;
 }
 
 @media screen and (min-width: 500px) {
@@ -326,13 +326,13 @@ form.register button.anchor {
 }
 
 .sidenav .sidenav-container .searchbar button {
-    all: unset;
-    cursor: pointer;
-    width: 44px;
-    height: 44px;
-    background-color: #E16428;
-    padding-left: 10px;
-    border-radius: 2px;
+  all: unset;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  background-color: #E16428;
+  padding-left: 10px;
+  border-radius: 2px;
 }
 
 .sidenav .sidenav-container a {
@@ -529,17 +529,17 @@ form.register button.anchor {
 }
 
 .problemInfo textarea.com{
-    width: 89%;
-    height: 89px;
-    padding: 15px;
-    border-radius: 5px;
-    outline: none;
-    resize: none;
-    color:#f2f2f2;
-    font-size: 16px;
-    border-color: #E16428;
-    background-color: #272121;
-  }
+  width: 89%;
+  height: 89px;
+  padding: 15px;
+  border-radius: 5px;
+  outline: none;
+  resize: none;
+  color:#f2f2f2;
+  font-size: 16px;
+  border-color: #E16428;
+  background-color: #272121;
+}
 
 .problemInfo button {
   font-size: 16px;
@@ -570,7 +570,7 @@ form.register button.anchor {
 }
 
 .starsRating i.ratingChecked {
-    color: yellow;
+  color: yellow;
 }
 
 .overallRating {
@@ -732,87 +732,88 @@ form.register button.anchor {
 
 @media only screen and (max-width: 850px) {
   .topnav {
-      display: block;
+    display: block;
   }
 
   .topnav .hamburger {
-      float: right;
-      height: 45px;
-      margin-right: 10px;
-      margin-top: 10px;
-      display: -ms-grid;
-      display: grid;
-      grid-template-rows: repeat(3, 1fr);
-      justify-items: center;
-      z-index: 120;
+    float: right;
+    height: 45px;
+    margin-right: 10px;
+    margin-top: 10px;
+    display: -ms-grid;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    justify-items: center;
+    z-index: 120;
+    cursor: pointer;
   }
 
   .topnav .hamburger span {
-      background-color: #E16428;
-      position: relative;
-      width: 40px;
-      height: 5px;
-      margin-top: 3px;
-      -moz-transition: all 0.2s ease-in-out;
-      -webkit-transition: all 0.2s ease-in-out;
-      transition: all 0.2s ease-in-out;
+    background-color: #E16428;
+    position: relative;
+    width: 40px;
+    height: 5px;
+    margin-top: 3px;
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
   }
 
   .topnav .toggle {
-      display: none;
+    display: none;
   }
 
   .topnav .toggle:checked + .hamburger .top {
-      -moz-transform: rotate(-45deg);
-      -webkit-transform: rotate(-45deg);
-              transform: rotate(-45deg);
-      margin-top: 22.5px;
+    -moz-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+    margin-top: 22.5px;
   }
 
   .topnav .toggle:checked + .hamburger .meat {
-      -moz-transform: rotate(45deg);
-      -webkit-transform: rotate(45deg);
-      transform: rotate(45deg);
-      margin-top: -5px;
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    margin-top: -5px;
   }
     
   .toggle:checked + .hamburger .bottom {
-      -moz-transform: scale(0);
-      -webkit-transform: scale(0);
-      transform: scale(0);
+    -moz-transform: scale(0);
+    -webkit-transform: scale(0);
+    transform: scale(0);
   }
 
   .toggle:checked ~ .menu {
-      height: 380px;
+    height: 380px;
   }
 
   .menu {
-      background-color: #272121;
-      margin: 0;
-      display: -ms-grid;
-      display: flex;
-      flex-direction: column;
-      padding: 0;
-      list-style: none;
-      clear: both;
-      width: auto;
-      text-align: center;
-      height: 0;
-      overflow: hidden;
-      z-index: 120;
-      -webkit-transition: all 0.3s ease;
-      transition: all 0.3s ease;
+    background-color: #272121;
+    margin: 0;
+    display: -ms-grid;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    list-style: none;
+    clear: both;
+    width: auto;
+    text-align: center;
+    height: 0;
+    overflow: hidden;
+    z-index: 120;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
   }
 
   /* Change the display to flex */
   .index-grid { 
-	display: flex;
-	flex-direction: column;
+	  display: flex;
+	  flex-direction: column;
   }
 
   .sidenav {
-      border-right: none;
-      border-bottom: solid;
-      border-image: linear-gradient(to right, #363333, #E16428) 1;
+    border-right: none;
+    border-bottom: solid;
+    border-image: linear-gradient(to right, #363333, #E16428) 1;
   }
 }

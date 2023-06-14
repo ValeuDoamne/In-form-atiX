@@ -41,7 +41,7 @@ p.small {
  display: none; 
 }
 
-.topnav a {
+.topnav a, .topnav span.modal-button {
   float: left;
   display: block;
   color: #f2f2f2;

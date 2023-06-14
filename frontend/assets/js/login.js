@@ -46,7 +46,7 @@ function displayNotification(type, message){
   //reset classes
   notificationBox.classList = "notification-box";
   //add message
-  notificationBox.classList.add(type);
+  notificationBox.classList.add(type.toLowerCase());
   notificationBox.appendChild(document.createTextNode(message));
 }
 

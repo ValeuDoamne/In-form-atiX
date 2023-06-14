@@ -43,6 +43,9 @@ class ProblemController implements Controller {
         } else if (preg_match("/^\/api\/v1\/problems\/(\d+)\/submissions$/", $uri, $matches)) {
             $problem_id = intval($matches[1], 10);
             $this->send_submissions_of_problem($problem_id); 
+        } else if (preg_match("/^\/api\/v1\/problems\/(\d+)\/comments$/", $uri, $matches)) {
+            $problem_id = intval($matches[1], 10);
+            $this->send_problem_comments_with_id($problem_id); 
         } else {
             http_response_code(404);
             Utils::sendinvalid("Not found");
@@ -112,6 +115,14 @@ class ProblemController implements Controller {
         ]);
     } 
 
+    private function send_problem_comments_with_id($problem_id): void {
+        $comments = $this->gateway->get_problem_comments($problem_id);
+        Utils::sendmsg([
+            "status" => "Success",
+            "comments" => $comments 
+        ]);
+    }
+
 	private function handle_post(string $uri): void {
         if (preg_match("/^\/api\/v1\/problems\/(\d+)\/tags$/", $uri, $matches)) {
             $problem_id = intval($matches[1], 10);
@@ -133,6 +144,13 @@ class ProblemController implements Controller {
             $programming_language = Utils::filter($json_message["programming_language"]);
             
             $this->submit_problem($problem_id, $source_code, $programming_language);
+        } else if (preg_match("/^\/api\/v1\/problems\/(\d+)\/comments$/", $uri, $matches)) {
+            $problem_id = intval($matches[1], 10);
+
+            $json_message = Utils::recvmsg();
+            $comment = Utils::filter($json_message["comment"]);
+
+            $this->post_comment($problem_id, $comment);
         } else {
             http_response_code(404);
             Utils::sendinvalid("Not found");
@@ -157,6 +175,14 @@ class ProblemController implements Controller {
             Utils::senderr("The submmision could not be saved for problem with id $problem_id");
         }
     }
+
+    private function post_comment(int $problem_id, string $comment): void {
+      if($this->gateway->add_comment($this->authorization["user_id"], $problem_id, $comment) === true) {
+          Utils::sendsuccess("Succesfully added comment to problem with id $problem_id");
+      } else {
+          Utils::senderr("Could not add comment to problem with id $problem_id");
+      }
+    }
     
     private function handle_delete(string $uri): void {
         if (preg_match("/^\/api\/v1\/problems\/(\d+)$/", $uri, $matches)) {
@@ -176,6 +202,13 @@ class ProblemController implements Controller {
             $tag = Utils::filter($json_message["tag"]);
 
             $this->delete_tag_from_problem($problem_id, $tag); 
+        } else if (preg_match("/^\/api\/v1\/problems\/(\d+)\/comments$/", $uri, $matches)) {
+            $problem_id = intval($matches[1], 10);
+
+            $json_message = Utils::recvmsg();
+            $comment_id = Utils::filter($json_message["commentId"]);
+
+            $this->delete_comment($problem_id, $comment_id);
         } else {
             http_response_code(404);
             Utils::sendinvalid("Not found");;
@@ -221,6 +254,21 @@ class ProblemController implements Controller {
             Utils::sendsuccess("Succesfully deleted tag '$tag' from database");
         } else {
             Utils::sendinvalid("There is no tag '$tag' in the database");
+        } 
+    }
+
+    private function delete_comment(int $problem_id, int $comment_id): void {
+        $comment_author = $this->gateway->get_comment_author($comment_id);
+        if($this->authorization["user_type"] !== "admin" && $this->authorization["user_id"] !== $comment_author) { 
+            http_response_code(401);
+            Utils::sendinvalid("Not Authorized");
+            return;
+        }
+
+        if($this->gateway->delete_comment($problem_id, $comment_id) === true) {
+            Utils::sendsuccess("Succesfully deleted comment with id $comment_id from problem with id $problem_id");
+        } else {
+            Utils::sendinvalid("There is no comment with id $comment_id in problem with id $problem_id");
         } 
     }
 

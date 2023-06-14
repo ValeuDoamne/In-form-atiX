@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="module" src="./assets/js/main.js"></script>
+    <script src="./assets/js/ratingproblem.js" defer></script>
+</head>
+<body>
+    <header>  
+    </header>
+    <div class="mainProblem">
+        <h1>LimbajFormal</h1>
+        <div class="problemContainer">
+
+            <div class="problemInfo">
+                <h4>Cerinţa:</h4>
+                <p>
+                    RAU-Gigel se pregătește pentru admiterea la facultate. Curios din fire, el împrumută niște cursuri de la un prieten student, de unde află despre limbajele formale, gramatici, automate finite, expresii regulate și multe alte lucruri interesante. Găsește acolo și o problemă:
+                    Se consideră un alfabet X format din N simboluri (diferite două câte două). Pe mulțimea X este definită o relație de ordine totală (să o numim lexicografică) astfel: orice două elemente a și b alegem din X (a diferit de b), avem fie a &lt; b, fie b &lt; a.
+                    Câte cuvinte se pot forma cu simboluri din alfabetul X astfel încât simbolurile prezente în cuvânt să fie în ordine strict crescătoare (de la stânga spre dreapta) și să nu existe în cuvânt două simboluri consecutive lexicografic?
+                    Deoarece calculele devin destul de complicate, RAU-Gigel ar avea nevoie de ajutorul vostru. În plus, numerele obținute s-ar putea să fie destul de mari, RAU-Gigel ar vrea să le calculați modulo MOD. 
+                </p>
+
+                <br>
+
+                <h4>Date de Intrare:</h4>
+                <p>
+                    Fișierul de intrare limbajformal.in conține pe prima linie numărul N reprezentând numărul de simboluri din alfabet. 
+                </p>
+
+                <br>
+
+                <h4>Date de ieşire:</h4>
+                <p>
+                    Fișierul de ieșire limbajformal.out va conține un singur rând, pe care se află un sigur număr reprezentând răspunsul la întrebare. 
+                </p>
+                    
+                <br>
+
+                <h4>Restricţii şi precizări:</h4>
+                <p>
+                    1 ≤ N ≤ 1.000.000.000, MOD = 1.000.000.009
+                    <br>
+                    Cuvintele au cel puțin un simbol
+                    <br>
+                    Pentru teste în valoare de 10 de puncte: N  ≤ 10
+                    <br>
+                    Pentru teste în valoare de încă 30 de puncte: N  ≤ 1.000.000
+                    <br>
+                </p>
+
+                <br>
+
+                <h4>Exemplu:</h4>
+                <p>
+                    limbajformal.in
+                    <br>
+                    5
+                    <br><br>
+                    limbajformal.out
+                    <br>
+                    12
+                </p>
+
+                <br>
+
+                <h4>Explicație:</h4>
+                <p>
+                    Alfabetul conține 5 simboluri. Să le notăm A, B, C, D, E, cu A &lt; B &lt; C &lt; D &lt; E.
+                    <br>
+                    Există 12 cuvinte care respectă cerințele problemei:
+                    <br>
+                    A, B, C, D, E, AC, AD, AE, BD, BE, CE, ACE
+                    <br>
+                    Secvența AB nu este validă pentru că simbolurile A și B sunt consecutive lexicografic.
+                    <br>
+                    Secvența ADE nu este validă pentru că simbolurile D și E sunt consecutive lexicografic.
+                </p>
+            </div>
+
+            <div class = "problemInfo">
+                <h3>Upload fișier:
+                    <select name="languages" id="languages">
+                        <option value="C/C++">C/C++</option>
+                        <option value="Python">Python</option>
+                        <option value="Java">Java</option>
+                        <option value="Rust">Rust</option>
+                      </select> 
+                     <input type="file" id="upload" accept=".txt, .c, .cpp, .py, .java, .rs">
+                </h3>
+                <h3>Editor web:</h3>
+                <textarea placeholder="Introduceti aici codul..."></textarea>
+                <br>
+                <button type="button">Submit</button> 
+            </div>
+
+            <div class = "problemInfo">
+                <h3>Lasă un comentariu:</h3>
+                <textarea class="com" placeholder="Introduceti aici comentariul..."></textarea>
+                <br>
+                <button type="button">Submit</button> 
+                <h3>Comentarii:</h3>
+                <div class = "comment">
+                    <p>
+                        comentariu 1 comentariu 1 comentariu 1 comentariu 1
+                    </p>
+                </div>
+                <div class = "comment">
+                    <p>
+                        comentariu 2 comentariu 2 comentariu 2 comentariu 2
+                    </p>
+                </div>
+            </div>
+
+            <div class = "problemInfo">
+                    <h3>Rating problemă:</h3>
+                    <div class = "overallRating">
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <h3>Oferă tu un rating:</h3>
+                    <div class = "starsRating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                <h3>Tag-uri:</h3>
+                <p>
+                    #clasa11a #programaredinamica #grea
+                </p>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

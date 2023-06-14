@@ -229,4 +229,52 @@ class ProblemGateway
         }
         return false;
     }
+
+    public function get_problem_comments(int $problem_id): array {
+      $this->problem_exists($problem_id);
+      $query = "SELECT c.id, c.user_comment, u.username, c.date_submitted FROM comments c JOIN users u ON c.user_id = u.id WHERE c.problem_id=$1";
+      $result = $this->conn->execute_prepared("get_problem_comments", $query, $problem_id);
+
+      $comments = array();
+      while($row = pg_fetch_row($result)) {
+          $comments[] = [
+                              "comment_id" => intval($row[0]),
+                              "comment_text" => $row[1],
+                              "username" => $row[2],
+                              "date_submitted" => $row[3]
+                          ];
+      }
+      return $comments;
+    }
+
+    public function add_comment(int $user_id, int $problem_id, string $comment): bool {
+      $this->problem_exists($problem_id);
+
+      $query = "INSERT INTO comments(problem_id, user_id, user_comment) VALUES ($1, $2, $3)";
+      $result = $this->conn->execute_prepared("add_comment", $query, $problem_id, $user_id, $comment);
+      if(pg_affected_rows($result) >= 1) {
+          return true;
+      }
+      return false;
+    }
+
+    public function get_comment_author(int $comment_id): int {
+      $query = "SELECT c.user_id FROM comments c WHERE c.id=$1";
+      $result = $this->conn->execute_prepared("get_comment_author", $query, $comment_id);
+      if(pg_num_rows($result) !== 1) {
+        throw new ClientException("Comment with id $comment_id does not exist");
+      }
+      $row = pg_fetch_row($result);
+      return $row[0];
+    }
+
+    public function delete_comment(int $problem_id, int $comment_id): bool {
+      $query = "DELETE FROM comments WHERE id=$1 AND problem_id=$2";
+      $result = $this->conn->execute_prepared("delete_comment", $query, $comment_id, $problem_id);
+      if(pg_affected_rows($result) >= 1) {
+          return true;
+      }
+      return false;
+    }
+    
 }

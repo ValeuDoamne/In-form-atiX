@@ -132,6 +132,39 @@ Exemplu:
 }
 ```
 
+```
+/api/v1/problems/${id}/comments
+
+Explicatie:
+Returneaza toate comentariile asociate unei probleme.
+
+Returnare:
+{"status":"Invalid","message":"Problem with id ${id} does not exist"} <-- cazul in care id-ul problemei nu exista
+
+{"status": "Success", "comments": [{"comment_id": `int`, 
+                                     "comment_text": `string`,
+                                     "username": `string`, 
+                                     "date_submitted": `string`}]}
+Exemplu:
+{
+  "status": "Success",
+  "comments": [
+    {
+      "comment_id": 1,
+      "comment_text": "Comentariu 1",
+      "username": "admin",
+      "date_submitted": "2023-06-12 22:42:18.037622"
+    },
+    {
+      "comment_id": 2,
+      "comment_text": "Comentariu 2",
+      "username": "student",
+      "date_submitted": "2023-06-12 22:45:54.220846"
+    }
+  ]
+}
+```
+
 ## POST
 
 ```
@@ -167,9 +200,27 @@ Trimite o solutie a unei probleme catre evaluare.
 Returneaza:
 {"status": "Invalid", "message": "Problem with id ${id} does not exist"} <-- cazul in care id-ul problemei nu exista
 {"status": "Invalid", "message": "No such programming language"} <-- daca limbajul de programare nu exista in db
-{"status": "Error", message: "The submmision could not be saved for problem with id ${id}")
+{"status": "Error", message: "The submmision could not be saved for problem with id ${id}"}
 {"status": "Success", "message": "Successfully submitted solution to problem with id ${id}"}
 ```
+
+```
+/api/v1/problems/${id}/comments
+
+Body: {
+    "comment": `string` // comentariul care va fi pus problemei
+}
+
+Endpoint-ul e autorizat pentru toata lumea.
+Explicatie:
+Adauga un comentariu unei probleme.
+
+Returneaza:
+{"status": "Invalid", "message": "Problem with id ${id} does not exist"} <-- cazul in care id-ul problemei nu exista
+{"status": "Error", "message": "Could not add comment to problem with id ${id}"} <-- cazul in care nu se poate adauga comentariul
+{"status": "Success", "message": "Successfully added comment to problem with id ${id}"}
+```
+
 
 ## DELETE
 ```
@@ -221,4 +272,22 @@ Returneaza:
 {"status": "Invalid", "message": "Not authorized"} <-- daca utilizatoru are un JWT de student
 {"status": "Invalid", "message": "There is no tag '${tag}' in the database"} <-- daca tag-ul nu exista 
 {"status": "Success", "message": "Succesfully deleted tag '${tag}' from database"}
+```
+
+```
+/api/v1/problems/${id}/comments
+
+Body: {
+    "commentId": `int` <-- id-ul comentariului care va fi sters
+}
+
+Endpoint-ul e autorizat pentru admini si user-ul care a postat comentariul.
+Explicatie:
+Sterge un comentariu postat unei probleme.
+
+Returneaza:
+{"status": "Invalid", "message": "Problem with id ${id} does not exist"} <-- cazul in care id-ul problemei nu exista
+{"status": "Invalid", "message": "Not authorized"} <-- daca utilizatoru are un JWT de admin si nu este autorul comentariului
+{"status": "Invalid", "message": "There is no comment with id ${commentId} in problem with id ${id}"} <-- daca id-ul comentariului nu exista
+{"status": "Success", "message": "Succesfully deleted comment with id ${commentId} from problem with id ${id}"}
 ```

@@ -265,7 +265,7 @@ class ProblemGateway
         throw new ClientException("Comment with id $comment_id does not exist");
       }
       $row = pg_fetch_row($result);
-      return $row[0];
+      return intval($row[0]);
     }
 
     public function delete_comment(int $problem_id, int $comment_id): bool {

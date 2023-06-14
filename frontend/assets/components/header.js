@@ -8,11 +8,25 @@ export default function header(authState){
     <span class="bottom"></span>
     </label>
     <nav class="menu">
-      <a href="./search.php">Search</a>
       <a href="about.html">About</a>
       <a href="help.html">Help</a>
-      <a href="login.html">${!authState ? "Login" : "Logout"}</a>
-      ${!authState ? '<a href="register.html">Register</a>' : ''}
+      ${!authState ?
+        `<a href="login.html">Login</a>
+        <a href="register.html">Register</a>`
+      :
+        `
+        <span onclick="showModal('modal-logout')">Logout</span>
+        <div class="modal" id="modal-logout">
+          <div class="container">
+            <h2>Logout from your account</h2>
+            <div class="button-list">
+              <button type="button" class="submit" onclick="logout()">Logout</button>
+              <button type="button" class="cancel" onclick="hideModal('modal-logout')">Cancel</button>
+            </div>
+          </div>
+        </div>
+        `
+      }
     </nav>
   `;
   return headerContents;

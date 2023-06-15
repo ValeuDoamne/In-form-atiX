@@ -7,10 +7,10 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Configure PHP-FPM
-RUN sed -i "s/^listen =.*/listen = 0.0.0.0:9000/" /etc/php/7.4/fpm/pool.d/www.conf && \
-    sed -i "s/^listen\.allowed_clients =.*/listen.allowed_clients = 127.0.0.1/" /etc/php/7.4/fpm/pool.d/www.conf && \
-    echo "clear_env = no" >> /etc/php/7.4/fpm/pool.d/www.conf && \
-    echo "catch_workers_output = yes" >> /etc/php/7.4/fpm/pool.d/www.conf
+RUN sed -i "s/^listen =.*/listen = 0.0.0.0:9000/" /etc/php/8.2/fpm/pool.d/www.conf && \
+    sed -i "s/^listen\.allowed_clients =.*/listen.allowed_clients = 127.0.0.1/" /etc/php/8.2/fpm/pool.d/www.conf && \
+    echo "clear_env = no" >> /etc/php/8.2/fpm/pool.d/www.conf && \
+    echo "catch_workers_output = yes" >> /etc/php/8.2/fpm/pool.d/www.conf
 
 # Copy Nginx configuration files
 COPY default.conf /etc/nginx/conf.d/default.conf
@@ -23,4 +23,4 @@ RUN mkdir -p /var/www/html
 RUN chown -R nginx:nginx /var/www/html
 
 # Start PHP-FPM and Nginx
-CMD ["sh", "-c", "service php7.4-fpm start && nginx -g 'daemon off;'"]
+CMD ["sh", "-c", "service php8.2-fpm start && nginx -g 'daemon off;'"]

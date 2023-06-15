@@ -421,7 +421,7 @@ form.register button.anchor {
 .card {
   border-radius: 20px;
   border: 1px solid #E16428;
-  background-color: #272121;
+  background-color: #222;
   color: #f2f2f2;
   padding: 20px;
   margin: 30px;
@@ -459,7 +459,7 @@ form.register button.anchor {
 .informationCard {
   border-radius: 20px;
   border: 1px solid #E16428;
-  background-color: #272121;
+  background-color: #222;
   color: #f2f2f2;
   padding: 20px;
   margin: 30px;
@@ -547,18 +547,28 @@ form.register button.anchor {
   font-size: 16px;
   border-color: #E16428;
   background-color: #272121;
+  
 }
 
 .problemInfo button {
   font-size: 16px;
   color:#272121;
   margin-top:15px;
+  cursor: pointer;
+  font-family: 'Noto Sans', sans-serif;
 }
 
 .problemInfo select {
   font-size: 13px;
   color:#272121;
   margin-top:15px;
+  cursor: pointer;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.problemInfo input {
+  cursor: pointer;
+  font-family: 'Noto Sans', sans-serif;
 }
 
 .comment {
@@ -588,6 +598,146 @@ form.register button.anchor {
 
 .overallRating .checked{
   color:yellow;
+}
+
+/* Start Classroom Section */
+
+.mainClass { 
+  margin-top: 85px;
+  text-align:center;
+}
+
+.classContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.mainClass h1 {
+  margin-top: 15px;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 40px;
+  color:#f2f2f2;
+  border-bottom: 3px solid #E16428;
+  display: inline-block;
+}
+
+.mainClass h2 {
+  margin-top: 1px;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 25px;
+  color:#f2f2f2;
+  border-bottom: 3px solid #E16428;
+  display: inline-block;
+}
+
+.classcard {
+  border-radius: 20px;
+  border: 1px solid #E16428;
+  background-color: #222;
+  color: #f2f2f2;
+  padding: 20px;
+  margin: 30px;
+  width: 290px;
+  flex-basis: 28%;
+  text-align: center;
+}
+
+.classcard .name {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: bold;
+}
+
+.classcard .info {
+  font-size: 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: bold;
+}
+
+.students{
+  font-family: 'Noto Sans', sans-serif;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  margin-top: 35px;
+  table-layout: auto;
+}
+
+.students th {
+  font-family: 'Noto Sans', sans-serif;
+  color:#E16428;
+  border: 1px solid #ddd;
+  background-color: #222;
+  padding: 8px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.students td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.students tr{
+  background-color: #272121;
+}
+
+.students tr:nth-child(odd){
+  background-color: #2d2626;
+}
+
+.students tr:hover {
+  background-color: #3a3333;
+}
+
+.fullButton {
+  font-size: 18px;
+  font-family: 'Noto Sans', sans-serif;
+  color: #ddd;
+  cursor: pointer;
+  padding: 14px 28px;
+  width: 64%;
+  border-color: #E16428;
+  background-color:#E16428;
+  font-weight: bold;
+  border-radius: 20px;
+}
+
+.fullButtonHomework {
+  font-size: 18px;
+  font-family: 'Noto Sans', sans-serif;
+  color: #ddd;
+  cursor: pointer;
+  padding: 14px 28px;
+  width: 50%;
+  border-color: #E16428;
+  background-color:#E16428;
+  font-weight: bold;
+  border-radius: 20px;
+}
+
+.fullButton:hover {
+  background-color: #c05625;
+  color:#ddd;
+}
+
+.fullButtonHomework:hover {
+  background-color: #c05625;
+  color:#ddd;
+}
+
+.mainClass span {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-size: 17px;
+  font-family: 'Noto Sans', sans-serif;
 }
 
 /* Help page layout */

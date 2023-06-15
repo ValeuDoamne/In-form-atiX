@@ -77,7 +77,7 @@ CREATE TABLE comments (
     date_submitted TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE rating (
+CREATE TABLE ratings (
     user_id INTEGER PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
     problem_id INTEGER REFERENCES problems(id) ON DELETE CASCADE,
     stars INTEGER CHECK (stars >= 1 AND stars <= 5)
@@ -105,6 +105,14 @@ CREATE TABLE unreleased_problems (
     date_submitted TIMESTAMP DEFAULT NOW()
 );
 
+CREATE TABLE unreleased_comments (
+    id SERIAL NOT NULL PRIMARY KEY,
+    problem_id INTEGER REFERENCES unreleased_problems(id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    user_comment TEXT,
+    date_submitted TIMESTAMP DEFAULT NOW()
+);
+
 CREATE TABLE homeworks (
     id SERIAL NOT NULL PRIMARY KEY,
     name TEXT,
@@ -121,6 +129,7 @@ CREATE TABLE homework_problems (
 
 CREATE TABLE admin_posts(
     id SERIAL NOT NULL PRIMARY KEY,
+    title TEXT,
     content TEXT,
     author INTEGER REFERENCES users(id) ON DELETE CASCADE,
     date_created TIMESTAMP DEFAULT NOW()

@@ -20,6 +20,7 @@ p.small {
   font-size: smaller;
 }
 
+
 .main h1 {
   font-family: 'Noto Sans', sans-serif;
   color:#f2f2f2;
@@ -66,6 +67,11 @@ p.small {
 
 main { 
   margin-top: 85px;
+}
+
+.highlight {
+  color: #E16428;
+  display: inline;
 }
 
 .main {
@@ -159,7 +165,9 @@ form.register input[type] {
 }
 
 form.login button.submit,
-form.register button.submit {
+form.register button.submit,
+div.card button.submit,
+div.news-content button.submit {
   background-color: #E16428;
   border: none;
   color: #F6E9E9;
@@ -728,6 +736,40 @@ form.register button.anchor {
   cursor: pointer;
 }
 
+/* Profile page */ 
+
+div.profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+input.admin-profile-post {
+  border-radius: 20px;
+  border: 1px solid #E16428;
+  background-color: #222;
+  color: #f2f2f2;
+  padding: 20px;
+  margin: 30px;
+  width: 85%;
+  text-align: center;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 17px;
+}
+
+textarea.admin-profile-post {
+  border-radius: 20px;
+  border: 1px solid #E16428;
+  background-color: #222;
+  color: #f2f2f2;
+  padding: 20px;
+  margin: 30px;
+  width: 85%;
+  height: 400px;
+  text-align: justify;
+  font-family: 'Noto Sans', sans-serif;
+}
+
 /* Responsive Final */
 
 @media only screen and (max-width: 850px) {
@@ -815,5 +857,18 @@ form.register button.anchor {
     border-right: none;
     border-bottom: solid;
     border-image: linear-gradient(to right, #363333, #E16428) 1;
+  }
+
+  div.profile {
+    flex-flow: column;
+    justify-content: space-evenly;
+  }
+
+  input.admin-profile-post {
+    width: 75%;
+  }
+
+  textarea.admin-profile-post {
+    width: 75%;
   }
 }

@@ -15,6 +15,7 @@ export default function header(authState){
         <a href="register.html">Register</a>`
       :
         `
+        <a href="profile.html">Profile</a>
         <span class="modal-button" onclick="showModal('modal-logout')">Logout</span>
         <div class="modal" id="modal-logout">
           <div class="container">

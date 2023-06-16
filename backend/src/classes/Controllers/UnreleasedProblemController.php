@@ -95,7 +95,7 @@ class UnreleasedProblemController implements Controller {
         $this->reject_problem($problem_id);
       } else {
         http_response_code(400);
-        Utils::sendinvalid("Invalid action");
+        Utils::sendinvalid("Invalid action (required: 'approve' | 'deny')");
       }
     } else {
       http_response_code(401);

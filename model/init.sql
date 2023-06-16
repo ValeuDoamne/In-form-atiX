@@ -33,6 +33,7 @@ CREATE TABLE teachers_schools (
 CREATE TABLE classrooms (
     id SERIAL NOT NULL PRIMARY KEY,
     name TEXT,
+    code TEXT,
     teacher_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 
@@ -83,7 +84,6 @@ CREATE TABLE ratings (
     stars INTEGER CHECK (stars >= 1 AND stars <= 5)
 );
 
-
 CREATE TABLE submissions (
     id SERIAL PRIMARY KEY NOT NULL,
     problem_id INTEGER REFERENCES problems(id) ON DELETE CASCADE,
@@ -127,7 +127,7 @@ CREATE TABLE homework_problems (
     CONSTRAINT unique_homework_problem UNIQUE (homework_id, problem_id)
 );
 
-CREATE TABLE admin_posts(
+CREATE TABLE admin_posts (
     id SERIAL NOT NULL PRIMARY KEY,
     title TEXT,
     content TEXT,
@@ -149,7 +149,15 @@ INSERT INTO problems_tags(problem_id, tag_id) VALUES (1, 1), (1, 3), (1, 4), (1,
 
 INSERT INTO users(username, user_type_id, name, email, password) VALUES ('admin', (SELECT id FROM user_types WHERE name='admin'), 'Admin', 'admin@admining.com', 'f5cbc3b5d2f2faf4015014e6df64f638c95cf1f0c948013d173bbe98ad41e9f9b7a8268f32f76c642327e89b1f523cb61a99aa4d3e353d78fd059338a7f86aae'); -- parola admin
 INSERT INTO users(username, user_type_id, name, email, password) VALUES ('teacher', (SELECT id FROM user_types WHERE name='teacher'), 'Dobrescu George', 'georgi@gmail.com', '1bc297bd2bff5221a035e72559f1f52b358590d7f7b5d49ee055a71c91067f56c361bd75e6bbf8984cdd5d5a4994babfbe1b0069df93169537944e46f78e65b4'); -- parola teacher
+INSERT INTO users(username, user_type_id, name, email, password) VALUES ('teacher2', (SELECT id FROM user_types WHERE name='teacher'), 'Dobrescu Alexandru', 'gale@gmail.com', '1bc297bd2bff5221a035e72559f1f52b358590d7f7b5d49ee055a71c91067f56c361bd75e6bbf8984cdd5d5a4994babfbe1b0069df93169537944e46f78e65b4'); -- parola teacher
 INSERT INTO users(username, user_type_id, name, email, password) VALUES ('student', (SELECT id FROM user_types WHERE name='student'), 'Alexandru Geogel', 'alexucul.tau@gmail.com', '033c6b034b5e13b1e0ff9eea3bf5bef0e7472d6c24b964b522e0722f941b44c91843ae5d00f15c2d55902e009c9f09a0f0305ae6061fe03240ad35f39589fcd5'); -- parola student
+INSERT INTO users(username, user_type_id, name, email, password) VALUES ('student2', (SELECT id FROM user_types WHERE name='student'), 'Alexandra Stan', 'alexandra.stan@gmail.com', '033c6b034b5e13b1e0ff9eea3bf5bef0e7472d6c24b964b522e0722f941b44c91843ae5d00f15c2d55902e009c9f09a0f0305ae6061fe03240ad35f39589fcd5'); -- parola student
+INSERT INTO users(username, user_type_id, name, email, password) VALUES ('student3', (SELECT id FROM user_types WHERE name='student'), 'Alexandru Farcas', 'alexbubu@gmail.com', '033c6b034b5e13b1e0ff9eea3bf5bef0e7472d6c24b964b522e0722f941b44c91843ae5d00f15c2d55902e009c9f09a0f0305ae6061fe03240ad35f39589fcd5'); -- parola student
 
 INSERT INTO schools(name) VALUES ('Colegiul National \"A.T.Laurian\" Botosani');
-INSERT INTO teachers_schools(teacher_id, school_id) VALUES (2, 1);
+INSERT INTO schools(name) VALUES ('Colegiul National \"Mihai Eminescu\" Botosani');
+INSERT INTO teachers_schools(teacher_id, school_id) VALUES (2, 1), (3, 2);
+
+INSERT INTO classrooms(name, code, teacher_id) VALUES ('clasa 9 B', 'beeeee', 1);
+INSERT INTO classrooms(name, code, teacher_id) VALUES ('clasa 10 A', 'aaaaaa', 2);
+INSERT INTO classrooms_students(classroom_id, student_id) VALUES (1, 4), (2, 5);

@@ -57,6 +57,10 @@ class PostgreSQLDB {
         return false; 
     }
 
+    public function raw_pg_connection() {
+        return $this->conn;
+    }
+
     public function close(): void {
         pg_close($this->conn);
         $this->conn = null;

@@ -862,6 +862,26 @@ form.register button.anchor {
   justify-content: center;
 }
 
+.modal .container .input-list {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.modal .container .input-list .input-modal {
+  margin-bottom: 1em;
+  border-radius: 20px;
+  border: 1px solid #E16428;
+  background-color: #222;
+  color: #f2f2f2;
+  padding: 10px;
+  margin: 30px;
+  text-align: justify;
+  font-size:large;
+  font-family: 'Noto Sans', sans-serif;
+}
+
 .modal .container .button-list .submit {
   padding: 0.4em 0.8em;
   margin: 0 0.4em;

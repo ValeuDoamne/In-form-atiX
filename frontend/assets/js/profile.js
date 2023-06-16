@@ -187,5 +187,3 @@ fetch("http://localhost:8000/api/v1/users/me",
   });
 
 document.getElementById("edit-profile-details").addEventListener('click', editAccountDetails);
-
-

@@ -25,7 +25,7 @@ async function getNews() {
                     <h2>
                         ${title}
                     </h2>
-                    <p>
+                    <p id="post-content">
                         ${content} 
                     </p>
                   </div>

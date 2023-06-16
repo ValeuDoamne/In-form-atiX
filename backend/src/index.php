@@ -25,6 +25,7 @@ Route::route_address("/api/v1/login",    "Login");
 Route::route_address("/api/v1/register", "Register");
 Route::route_address("/api/v1/search",   "Search");
 Route::route_address("/api/v1/problems", "Problem");
+Route::route_address("/api/v1/unreleased_problems", "UnreleasedProblem");
 
 $method = $_SERVER["REQUEST_METHOD"];
 $uri    = $_SERVER["REQUEST_URI"];

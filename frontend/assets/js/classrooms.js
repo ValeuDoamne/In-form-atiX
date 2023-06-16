@@ -33,6 +33,7 @@ async function createClassroom() {
     }).catch(err => {
         console.log(err);
     });
+    hideModal('modal-create-classroom');
 }
 
 async function joinClassroom() {

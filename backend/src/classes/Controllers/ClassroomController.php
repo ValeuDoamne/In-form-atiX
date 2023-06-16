@@ -35,6 +35,15 @@ class ClassroomController implements Controller {
             } else {
                 throw new ClientException("Not authorized");
             }
+        } else if (preg_match("/^\/api\/v1\/classrooms\/(\d+)$/", $uri, $matches)) {
+            $class_id = intval($matches[1]);
+            if($this->authorization["user_type"] === "student") {
+                $this->send_student_classroom($class_id);
+            } else if($this->authorization["user_type"] === "teacher") {
+                $this->send_teacher_classroom($class_id);
+            } else {
+                throw new ClientException("Not authorized");
+            }
         } else if (preg_match("/^\/api\/v1\/classrooms\/colleagues/", $uri)) {
             if($this->authorization["user_type"] === "student") {
                 $this->send_student_colleagues();
@@ -64,7 +73,23 @@ class ClassroomController implements Controller {
             "data" => $this->gateway->get_teacher_classrooms($user_id) 
         ]);
     }
+
+    private function send_student_classroom(int $classroom_id): void {
+        $user_id = $this->authorization["user_id"];
+        Utils::sendmsg([
+            "status" => "Success",
+            "data" => $this->gateway->get_student_classroom($user_id, $classroom_id) 
+        ]);
+    }
     
+    private function send_teacher_classroom(int $classroom_id): void {
+        $user_id = $this->authorization["user_id"];
+        Utils::sendmsg([
+            "status" => "Success",
+            "data" => $this->gateway->get_teacher_classroom($user_id, $classroom_id) 
+        ]);
+    }
+
     private function send_student_colleagues(): void {
         $class_id = intval($_GET["class_id"]);
         Utils::sendmsg([
@@ -144,15 +169,16 @@ class ClassroomController implements Controller {
     }
      
     private function handle_delete(string $uri): void {
-        if($uri === "/api/v1/classrooms/delete") {
+        if(preg_match("/^\/api\/v1\/classrooms\/(\d+)$/", $uri, $matches)) {
             if($this->authorization["user_type"] === "teacher") {
-                $this->delete_classroom();
+                $class_id = intval($matches[1]);
+                $this->delete_classroom($class_id);
             } else {
                 throw new ClientException("Not authorized");
             }
         } else if($uri === "/api/v1/classrooms/remove_student") {
             if($this->authorization["user_type"] === "teacher") {
-                $this->delete_classroom();
+                $this->delete_student_from_classroom();
             } else {
                 throw new ClientException("Not authorized");
             }
@@ -162,9 +188,7 @@ class ClassroomController implements Controller {
         }
     }
 
-    private function delete_classroom(): void {
-        $json_message = Utils::recvmsg();
-        $class_id = Utils::filter($json_message["class_id"]);
+    private function delete_classroom(int $class_id): void {
         $teacher_id = $this->authorization["user_id"];
         if($this->gateway->delete_classroom($teacher_id, $class_id)) {
             Utils::sendsuccess("Successfuly deleted classroom");

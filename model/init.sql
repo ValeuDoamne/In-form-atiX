@@ -101,15 +101,6 @@ CREATE TABLE unreleased_problems (
     solution    TEXT,
     solution_programming_language_id INTEGER REFERENCES programming_languages(id),
     author INTEGER REFERENCES users(id) ON DELETE CASCADE,
-    status TEXT,
-    date_submitted TIMESTAMP DEFAULT NOW()
-);
-
-CREATE TABLE unreleased_comments (
-    id SERIAL NOT NULL PRIMARY KEY,
-    problem_id INTEGER REFERENCES unreleased_problems(id) ON DELETE CASCADE,
-    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-    user_comment TEXT,
     date_submitted TIMESTAMP DEFAULT NOW()
 );
 
@@ -117,7 +108,6 @@ CREATE TABLE homeworks (
     id SERIAL NOT NULL PRIMARY KEY,
     name TEXT,
     time_limit TIMESTAMP DEFAULT (NOW()+INTERVAL '2 DAY'),
-    status TEXT,
     classroom_id INTEGER REFERENCES classrooms(id) ON DELETE CASCADE
 );
 
@@ -154,8 +144,8 @@ INSERT INTO users(username, user_type_id, name, email, password) VALUES ('studen
 INSERT INTO users(username, user_type_id, name, email, password) VALUES ('student2', (SELECT id FROM user_types WHERE name='student'), 'Alexandra Stan', 'alexandra.stan@gmail.com', '033c6b034b5e13b1e0ff9eea3bf5bef0e7472d6c24b964b522e0722f941b44c91843ae5d00f15c2d55902e009c9f09a0f0305ae6061fe03240ad35f39589fcd5'); -- parola student
 INSERT INTO users(username, user_type_id, name, email, password) VALUES ('student3', (SELECT id FROM user_types WHERE name='student'), 'Alexandru Farcas', 'alexbubu@gmail.com', '033c6b034b5e13b1e0ff9eea3bf5bef0e7472d6c24b964b522e0722f941b44c91843ae5d00f15c2d55902e009c9f09a0f0305ae6061fe03240ad35f39589fcd5'); -- parola student
 
-INSERT INTO schools(name) VALUES ('Colegiul National \"A.T.Laurian\" Botosani');
-INSERT INTO schools(name) VALUES ('Colegiul National \"Mihai Eminescu\" Botosani');
+INSERT INTO schools(name) VALUES ('Colegiul National "A.T.Laurian" Botosani');
+INSERT INTO schools(name) VALUES ('Colegiul National "Mihai Eminescu" Botosani');
 INSERT INTO teachers_schools(teacher_id, school_id) VALUES (2, 1), (3, 2);
 
 INSERT INTO classrooms(name, code, teacher_id) VALUES ('clasa 9 B', 'beeeee', 1);

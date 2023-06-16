@@ -119,7 +119,7 @@ class UserController implements Controller
         $json_message = Utils::recvmsg();
         $password = Utils::filter($json_message["password"]);
 
-        if($this->gateway->update_user_password($user_id, $email)) {
+        if($this->gateway->update_user_password($user_id, $password)) {
             Utils::sendsuccess("Successfuly updated password");
         } else {
             Utils::senderr("Could not update password");

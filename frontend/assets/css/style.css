@@ -697,6 +697,27 @@ form.register button.anchor {
   background-color: #3a3333;
 }
 
+.buttonHomeworkContainer {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.buttonSubmit {
+  background-color: #E16428;
+  border: none;
+  color: #F6E9E9;
+  border-radius:30px;
+  display: block;
+  padding: 0.5em 2em;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
+
 .fullButton {
   font-size: 18px;
   font-family: 'Noto Sans', sans-serif;
@@ -721,6 +742,8 @@ form.register button.anchor {
   background-color:#E16428;
   font-weight: bold;
   border-radius: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .fullButton:hover {
@@ -865,6 +888,7 @@ form.register button.anchor {
 .modal .container .input-list {
   display: flex;
   flex-flow: column;
+  align-items: center;
   justify-content: center;
   font-family: 'Noto Sans', sans-serif;
 }

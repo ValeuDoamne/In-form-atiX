@@ -40,6 +40,51 @@
         <div id="content"></div>
       </div>
     </div>
+    <div class="modal" id="modal-edit-profile">
+      <div class="container">
+        <h2>Edit Profile</h2>
+        <h2>No field is required</h2>
+        <div class="notification-box"></div>
+        <div class="input-list">
+          <h4>
+            <span>
+              New Name:
+            </span>
+            <span>
+              <input id="modal-name" class="input-modal" placeholder="full name..."></input>
+            </span>
+          </h4>
+          <h4>
+            <span>
+              New Email:
+            </span>
+            <span>
+              <input id="modal-email" class="input-modal" placeholder="email..."></input>
+            </span>
+          </h4>
+          <h4>
+            <span>
+              New Password:
+            </span>
+            <span>
+              <input id="modal-new-password" type="password" class="input-modal" placeholder="password..."></input>
+            </span>
+          </h4>
+          <h4>
+            <span>
+              Password Confirm:
+            </span>
+            <span>
+              <input id="modal-new-password-confirm" type="password" class="input-modal" placeholder="password..."></input>
+            </span>
+          </h4>
+        </div>
+        <div class="button-list">
+          <button type="button" class="submit" id="modal-save-button">Save</button>
+          <button type="button" class="cancel" onclick="hideModal('modal-edit-profile')">Cancel</button>
+        </div>
+      </div>
+    </div>
   </main>
 </body>
 </html>

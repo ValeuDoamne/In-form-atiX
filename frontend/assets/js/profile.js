@@ -4,24 +4,67 @@ function capitalizeFirstLetter(text) {
   return text[0].toUpperCase()+text.slice(1);
 }
 
-function teacherCreateClass() {
-    window.location.replace("teacher/create-class.html");
+async function getClassrooms() {
+    let classrooms = undefined;
+    await fetch('http://localhost:8000/api/v1/classrooms/mine', {
+        headers: {Authorization: "Bearer "+localStorage.getItem('token')}
+    }).then(data => data.json())
+      .then(data => {
+        if(data.status == "Success") {
+            classrooms = data.data;
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+    return classrooms;
 }
 
-function renderContentTeacher() {
-  const profileImage = document.querySelector(".card img");
-  profileImage.src = "assets/imgs/teacher.svg";
+async function renderContentAccademic(userType) {
+  if(userType == "student") {
+    const profileImage = document.querySelector(".card img");
+    profileImage.src = "assets/imgs/student.svg";
+  } else {
+    const profileImage = document.querySelector(".card img");
+    profileImage.src = "assets/imgs/teacher.svg";
+  }
   const content = document.querySelector("main #content");
-
   content.insertAdjacentHTML('afterbegin', `
       <div class="news-container">
         <div class="news-content">
-          <h2>My Classes</h2>
-          <button id="teacher-profile-class" class="submit">Create Class</button>
+          <h2 id="myclasses-title">My Classes</h2>
+          <button id="view-classrooms" class="submit">View classrooms</button>
         </div>
       </div>`);
-
-  document.getElementById("teacher-profile-class").addEventListener('click', teacherCreateClass);
+  document.getElementById(`view-classrooms`).addEventListener('click', function() {
+     window.location.replace("/classrooms.html#");
+  });
+  const classrooms = await getClassrooms();
+  const classesTitle = document.getElementById("myclasses-title");
+  for(const i in classrooms) {
+    const classroom = classrooms[i];
+    classesTitle.insertAdjacentHTML('afterend', `
+        <div class="news-container">
+          <div class="news-content profile">
+            <div>
+            <h4>
+              <span class="highlight">Class:</span>
+              <span>${classroom.name}</span>
+            </h4>
+            <h5>
+              <span class="highlight">School Name:</span>
+              <span>${classroom.school_name}</span>
+            <h5>
+            </div>
+            <div>
+              <button class="submit" id="class-button-${i}">View</button>
+            </div>
+          </div>
+        </div>
+        `);
+     document.getElementById(`class-button-${i}`).addEventListener('click', function() {
+        window.location.replace("/classroom.html#"+classroom.id);
+     });
+  } 
 }
 
 function adminCreatePost() {
@@ -147,17 +190,139 @@ async function renderContentAdmin() {
   document.getElementById("admin-profile-manage-new-problems").addEventListener('click', adminManageNewProblems);
 }
 
+const validEmail = (email) => {
+  return String(email)
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    ) !== null;
+}
+
+async function refreshProfileCard() {
+  const fullName = document.querySelector(".card #user-fullName");
+  const username = document.querySelector(".card #user-username");
+  const usertype = document.querySelector(".card #user-type");
+  const email = document.querySelector(".card #user-email");
+
+  await fetch("http://localhost:8000/api/v1/users/me",
+    {
+       headers: { Authorization: "Bearer "+localStorage.getItem('token') } 
+    }).then(response => response.json())
+    .then(data => {
+      if(data.status=="Success")
+      {
+        fullName.textContent = data.user.name;
+        username.textContent = data.user.username;
+        email.textContent = data.user.email;
+        usertype.textContent = capitalizeFirstLetter(data.user.user_type);
+      }
+   }).catch(err => {
+     console.log(err);
+   });
+}
+
+async function changeEmail(email) {
+  await fetch('http://localhost:8000/api/v1/users/me/email', {
+    method: 'POST',
+    headers: {Authorization: "Bearer "+localStorage.getItem('token')},
+    body: JSON.stringify({email})
+  }).then(data => data.json())
+    .then(data => {
+        if(data.status != "Success") {
+            displayNotification(data.status, data.message);
+            console.log(data);
+        }
+    }).catch(err => {
+    console.log(err);
+  })
+}
+
+async function changePassword(password) {
+  await fetch('http://localhost:8000/api/v1/users/me/password', {
+    method: 'POST',
+    headers: {Authorization: "Bearer "+localStorage.getItem('token')},
+    body: JSON.stringify({password})
+  }).then(data => data.json())
+    .then(data => {
+        if(data.status != "Success") {
+            displayNotification(data.status, data.message);
+            console.log(data);
+        }
+    }).catch(err => {
+    console.log(err);
+  })
+}
+
+async function changeName(name) {
+  await fetch('http://localhost:8000/api/v1/users/me/name', {
+    method: 'POST',
+    headers: {Authorization: "Bearer "+localStorage.getItem('token')},
+    body: JSON.stringify({name})
+  }).then(data => data.json())
+    .then(data => {
+        if(data.status != "Success") {
+            displayNotification(data.status, data.message);
+            console.log(data);
+        }
+    }).catch(err => {
+    console.log(err);
+  })
+}
+
+async function submitEditProfile() {
+  const nameElement = document.getElementById('modal-name');
+  const emailElement = document.getElementById('modal-email');
+  const newPasswordElement = document.getElementById('modal-new-password');
+  const newPasswordConfirmElement = document.getElementById('modal-new-password-confirm');
+
+  const email = emailElement.value;
+  if (email.length > 0) {
+    if(validEmail(email)) {
+      await changeEmail(email);
+    } else {
+      displayNotification("invalid", "Not a valid email address");
+      return;
+    }
+  }
+
+  const password = newPasswordElement.value;
+  if (password.length > 0) {
+      const newPasswordConfirm = newPasswordConfirmElement.value;
+      if (password.length < 8) {
+        displayNotification("invalid", "The password cannot be less than 8");
+        return;
+      }
+      if (password == newPasswordConfirm) { 
+        changePassword(password);
+      } else {
+        displayNotification("invalid", "The password does not match confirmation");
+        return;
+      }
+  }
+  
+  const name = nameElement.value;
+  if (name.length > 0) {
+    await changeName(name);
+  }
+
+
+  emailElement.value='';
+  nameElement.value='';
+  newPasswordElement.value='';
+  await refreshProfileCard();
+  hideModal('modal-edit-profile');
+}
+
 function editAccountDetails() {
-    window.location.replace("/edit-profile.html");
+    showModal('modal-edit-profile');
 }
 
 function renderContent(accountType) {
   switch(accountType) {
     case "student":
-      renderContentStudent();
+      renderContentAccademic(accountType);
       break;
     case "teacher":
-      renderContentTeacher();
+      renderContentAccademic(accountType);
       break;
     case "admin":
       renderContentAdmin();
@@ -165,25 +330,45 @@ function renderContent(accountType) {
   }
 }
 
-const fullName = document.querySelector(".card #user-fullName");
-const username = document.querySelector(".card #user-username");
-const usertype = document.querySelector(".card #user-type");
-const email = document.querySelector(".card #user-email");
+function renderProfileCard() {
+  const fullName = document.querySelector(".card #user-fullName");
+  const username = document.querySelector(".card #user-username");
+  const usertype = document.querySelector(".card #user-type");
+  const email = document.querySelector(".card #user-email");
 
-fetch("http://localhost:8000/api/v1/users/me",
-   {
-       headers: { Authorization: "Bearer "+localStorage.getItem('token') } 
-   })
-  .then(response => response.json())
-  .then(data => {
-    if(data.status=="Success")
+  fetch("http://localhost:8000/api/v1/users/me",
     {
+       headers: { Authorization: "Bearer "+localStorage.getItem('token') } 
+    }).then(response => response.json())
+    .then(data => {
+      if(data.status=="Success")
+      {
         fullName.textContent = data.user.name;
         username.textContent = data.user.username;
         email.textContent = data.user.email;
         usertype.textContent = capitalizeFirstLetter(data.user.user_type);
         renderContent(data.user.user_type);
-    }
-  });
+      }
+   }).catch(err => {
+     console.log(err);
+   });
+}
+
+
+renderProfileCard();
 
 document.getElementById("edit-profile-details").addEventListener('click', editAccountDetails);
+document.getElementById("modal-save-button").addEventListener('click', submitEditProfile);
+
+
+function displayNotification(type, message){
+  const notificationBox = document.querySelector(".notification-box");
+  //remove all children
+  notificationBox.textContent = "";
+  //reset classes
+  notificationBox.classList = "notification-box";
+  //add message
+  notificationBox.classList.add(type.toLowerCase());
+  notificationBox.appendChild(document.createTextNode(message));
+}
+

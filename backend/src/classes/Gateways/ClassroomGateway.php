@@ -24,7 +24,7 @@ class ClassroomGateway {
     private function is_classroom_owned_by_teacher(int $class_id, int $teacher_id): void {
         $query =  "SELECT * FROM classrooms WHERE id=$1 AND teacher_id=$2"; 
         if($this->conn->records_are_present("check_classroom_id", $query, $class_id, $teacher_id) === false) {
-            throw new ClientException("There is no such class id $class_id or you don't own the class");
+            throw new ClientException("There is no such class id $class_id or you are not in the class");
         }
     }
     
@@ -55,7 +55,7 @@ class ClassroomGateway {
     }
 
     public function get_student_classrooms(int $user_id): array {
-        $query = "SELECT c.id, c.name, c.code, c.teacher_id, u.name AS \"teacher_name\", s.name AS \"school_name\" FROM classrooms_students cs JOIN classrooms c ON cs.classroom_id=c.id JOIN users u ON c.teacher_id=u.id JOIN teachers_schools ts ON c.teacher_id=ts.teacher_id JOIN schools s ON s.id=ts.school_id  WHERE cs.student_id=$1";
+        $query = "select c.id, c.name, c.code, c.teacher_id, u.name as \"teacher_name\", s.name as \"school_name\" from classrooms_students cs join classrooms c on cs.classroom_id=c.id join users u on c.teacher_id=u.id join teachers_schools ts on c.teacher_id=ts.teacher_id join schools s on s.id=ts.school_id  where cs.student_id=$1";
         $result = $this->conn->execute_prepared("get_student_classrooms", $query, $user_id);
         $classrooms = array();
         while($row = pg_fetch_assoc($result)) {
@@ -81,6 +81,30 @@ class ClassroomGateway {
             $classrooms[] = $row;
         }
         return $classrooms;
+    }
+    
+    public function get_student_classroom(int $user_id, int $classroom_id): array {
+        $this->is_student_in_classroom($user_id, $classroom_id);
+        $query = "select c.id, c.name, c.code, c.teacher_id, u.name as \"teacher_name\", s.name as \"school_name\" from classrooms_students cs join classrooms c on cs.classroom_id=c.id join users u on c.teacher_id=u.id join teachers_schools ts on c.teacher_id=ts.teacher_id join schools s on s.id=ts.school_id  WHERE cs.student_id=$1 AND c.id=$2";
+        $result = $this->conn->execute_prepared("get_student_classroom", $query, $user_id, $classroom_id);
+        $classroom = pg_fetch_assoc($result);
+        $classroom["id"] = intval($classroom["id"]);
+        $classroom["teacher_id"] = intval($classroom["teacher_id"]);
+        return $classroom;
+    }
+    
+    public function get_teacher_classroom(int $user_id, int $classroom_id): array {
+        $this->user_is_teacher($user_id);
+        $this->is_classroom_owned_by_teacher($classroom_id, $user_id);
+        $query = "SELECT c.id, c.name, c.code, u.name AS \"teacher_name\" FROM classrooms c JOIN users u ON u.id=c.teacher_id WHERE c.teacher_id=$1 AND c.id=$2";
+
+        $result = $this->conn->execute_prepared("get_teacher_classroom", $query, $user_id, $classroom_id);
+    
+        $school_name = $this->get_school_name($user_id);
+        $classroom = pg_fetch_assoc($result);
+        $classroom["id"] = intval($classroom["id"]);
+        $classroom["school_name"] = $school_name;
+        return $classroom;
     }
 
     public function get_colleagues_from_classroom(int $student_id, int $class_id): array {
@@ -163,7 +187,7 @@ class ClassroomGateway {
 
         $result = $this->conn->execute_prepared("delete_student_from_class", $query, $class_id, $student_id);
 
-        if(pg_affected_rows($result) === 1) {
+        if(pg_affected_rows($result) >= 1) {
             return true;
         }
         return false;

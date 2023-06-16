@@ -547,7 +547,6 @@ form.register button.anchor {
   font-size: 16px;
   border-color: #E16428;
   background-color: #272121;
-  
 }
 
 .problemInfo button {
@@ -761,6 +760,113 @@ form.register button.anchor {
   margin-bottom: 5px;
   font-size: 17px;
   font-family: 'Noto Sans', sans-serif;
+}
+
+/* Start Solution Section */
+
+.mainSolution { 
+  margin-top: 85px;
+  text-align:center;
+}
+
+.solutionContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.mainSolution h1 {
+  margin-top: 15px;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 40px;
+  color:#f2f2f2;
+  border-bottom: 3px solid #E16428;
+  display: inline-block;
+}
+
+.mainSolution h2 {
+  margin-top: 1px;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 25px;
+  color:#f2f2f2;
+  border-bottom: 3px solid #E16428;
+  display: inline-block;
+}
+
+.mainSolution h3 {
+  margin-top: 1px;
+  font-family: 'Noto Sans', sans-serif;
+  color:#ddd;
+  margin-bottom: 1px;
+}
+
+.mainSolution h4 {
+  font-family: 'Noto Sans', sans-serif;
+  color:#E16428;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.solutionPanel {
+  border-radius: 20px;
+  border: 1px solid #E16428;
+  background-color: #272121;
+  color: #f2f2f2;
+  padding: 30px;
+  margin: 30px;
+  width: 1000px;
+  text-align: justify;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.submitPanel {
+  border-radius: 15px;
+  border: 1px solid #E16428;
+  background-color: #222;
+  color: #f2f2f2;
+  padding: 30px;
+  margin: 15px;
+  width: 1000px;
+  text-align: center;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.submitPanel input {
+  font-family: 'Noto Sans', sans-serif;
+  color:#ddd;
+  background-color: #272121;
+  border-radius: 5px;
+  border-color:#E16428;
+  font-size: 17px;
+  width: 10%;
+  text-align: right;
+  height: 25%;
+}
+
+@media only screen and (max-width: 600px) {
+  .submitPanel input {
+    width: 50%; 
+    height: auto;
+  }
+}
+
+.submitGrade {
+  margin-top: 15px;
+  font-size: 18px;
+  font-family: 'Noto Sans', sans-serif;
+  color: #ddd;
+  cursor: pointer;
+  padding: 6px 5px;
+  border-color: #E16428;
+  background-color:#E16428;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.submitGrade:hover {
+  background-color: #c05625;
+  color:#ddd;
 }
 
 /* Help page layout */

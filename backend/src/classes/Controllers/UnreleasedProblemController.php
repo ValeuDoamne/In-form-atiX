@@ -65,8 +65,11 @@ class UnreleasedProblemController implements Controller {
         http_response_code(401);
         Utils::sendinvalid("Not Authorized"); 
       }
+    } else if (preg_match("/^\/api\/v1\/unreleased_problems\/(\d+)$/", $uri, $matches)) {
+      $problem_id = intval($matches[1], 10);
+      $this->handle_problem_with_id($problem_id);
     } else {
-      http_response_code(501);
+      http_response_code(404);
       Utils::sendinvalid("Not found");
     } 
   }
@@ -81,6 +84,41 @@ class UnreleasedProblemController implements Controller {
       Utils::senderr("Could not propose problem");
     }
   }
+
+  private function handle_problem_with_id(int $problem_id): void {
+    if($this->authorization["user_type"] === "admin") {
+      $json_message = Utils::recvmsg();
+      $verdict = Utils::filter($json_message["verdict"]);
+      if(strcmp($verdict, "approve") === 0) {
+        $this->accept_problem($problem_id);
+      } else if(strcmp($verdict, "deny") === 0) {
+        $this->reject_problem($problem_id);
+      } else {
+        http_response_code(400);
+        Utils::sendinvalid("Invalid action");
+      }
+    } else {
+      http_response_code(401);
+      Utils::sendinvalid("Not Authorized");
+    }
+  }
+
+  private function accept_problem(int $problem_id): void {
+    if($this->gateway->accept_problem($problem_id) === true) {
+      Utils::sendsuccess("Problem with id $problem_id accepted");
+    } else {
+      Utils::senderr("Could not accept problem with id $problem_id");
+    }
+  }
+
+  private function reject_problem(int $problem_id): void {
+    if($this->gateway->reject_problem($problem_id) === true) {
+      Utils::sendsuccess("Problem with id $problem_id rejected");
+    } else {
+      Utils::senderr("Could not reject problem with id $problem_id");
+    }
+  }
+
 }
 
 ?>

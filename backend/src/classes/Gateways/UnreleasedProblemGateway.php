@@ -89,6 +89,37 @@ class UnreleasedProblemGateway {
     return false;
   }
 
+  public function accept_problem(int $problem_id): bool {
+    $this->problem_exists($problem_id);
+
+    //insert into problems
+    $query = "INSERT INTO problems (name, description, solution, solution_programming_language_id, author) 
+      SELECT name, description, solution, solution_programming_language_id, author FROM unreleased_problems WHERE id=$1";
+    $result = $this->conn->execute_prepared("accept_problem", $query, $problem_id);
+    if(pg_affected_rows($result) < 1) {
+      return false;
+    }
+
+    //delete from unreleased_problems
+    $query = "DELETE FROM unreleased_problems WHERE id=$1";
+    $result = $this->conn->execute_prepared("delete_unreleased", $query, $problem_id);
+    if(pg_affected_rows($result) < 1) {
+      return false;
+    }
+    return true;
+  }
+
+  public function reject_problem(int $problem_id): bool {
+    $this->problem_exists($problem_id);
+    //delete from unreleased_problems
+    $query = "DELETE FROM unreleased_problems WHERE id=$1";
+    $result = $this->conn->execute_prepared("reject_problem", $query, $problem_id);
+    if(pg_affected_rows($result) < 1) {
+      return false;    
+    }
+    return true;
+  }
+
 }
 
 ?>

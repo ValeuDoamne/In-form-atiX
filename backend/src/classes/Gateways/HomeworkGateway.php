@@ -8,14 +8,14 @@ class HomeworkGateway {
 	}
 
   private function homework_exists(int $homework_id): void {
-    if($this->conn->records_are_present("homework_exists", "SELECT * FROM homeworks WHERE id=$1", $homework_id) === false) {
+    if($this->conn->records_are_present("homework_exists_".$homework_id, "SELECT * FROM homeworks WHERE id=$1", $homework_id) === false) {
         throw new ClientException("Homework with id $homework_id does not exist", 404);
     }
   }
 
   private function class_exists(int $class_id): void {
     if($this->conn->records_are_present("class_exists", "SELECT * FROM classrooms WHERE id=$1", $class_id) === false) {
-        throw new ClientException("Class with id $class_id does not exist", 404);
+        throw new ClientException("Classroom with id $class_id does not exist", 404);
     }
   }
 
@@ -41,7 +41,7 @@ class HomeworkGateway {
     $data["id"] = intval($row["id"]);
     $data["classroom_id"] = intval($row["classroom_id"]);
     $data["name"] = $row["name"];
-    $data["time_limit"] = intval($row["time_limit"]);
+    $data["time_limit"] = $row["time_limit"];
     $data["problems"] = array();
     do {
       $data["problems"][] = intval($row["problem_id"]);

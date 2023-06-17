@@ -796,6 +796,8 @@ pre.comment-content {
 .solutionContainer {
   display: flex;
   flex-wrap: wrap;
+  flex-flow: column;
+  align-items: center;
   justify-content: center;
   margin-bottom: 10px;
 }
@@ -839,7 +841,7 @@ pre.comment-content {
   color: #f2f2f2;
   padding: 30px;
   margin: 30px;
-  width: 1000px;
+  width: 80%;
   text-align: justify;
   font-family: 'Noto Sans', sans-serif;
 }
@@ -851,7 +853,7 @@ pre.comment-content {
   color: #f2f2f2;
   padding: 30px;
   margin: 15px;
-  width: 1000px;
+  width: 80%;
   text-align: center;
   font-family: 'Noto Sans', sans-serif;
 }
@@ -891,6 +893,56 @@ pre.comment-content {
 .submitGrade:hover {
   background-color: #c05625;
   color:#ddd;
+}
+
+.mainSolution .btn {
+  margin: 10px;
+  color: #ddd;
+  font-family: 'Noto Sans', sans-serif;
+  background-color: #272121;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  column-gap: var(--gap);
+  padding: 0.6rem;
+  cursor: pointer;
+  border-radius: var(--radius);
+  border: none;
+  box-shadow: var(--shadow);
+  width: 69%;
+}
+
+.mainSolution .bx {
+  font-size: 1.1rem;
+}
+
+.mainSolution .dropdown {
+  width: 70%;
+  display: none;
+  border-style: solid;
+  border-radius: 5px;
+  border-color:#E16428;
+  margin-top: 0.3rem;
+  background: white;
+  background-color: #272121;
+  opacity: 0;
+  transition: all 0.1s cubic-bezier(0.16, 1, 0.5, 1);
+}
+
+.mainSolution .dropdown div {
+  display: flex;
+  align-items: center;
+  column-gap: var(--gap);
+  padding: 0.8rem 1rem;
+  text-decoration: none;
+}
+
+.mainSolution .show {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  visibility: visible;
+  opacity: 1;
 }
 
 /* Help page layout */

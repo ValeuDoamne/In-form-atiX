@@ -20,6 +20,18 @@ p.small {
   font-size: smaller;
 }
 
+p.tag {
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 2px;
+  padding: 5px;
+  margin: 10px;
+  border-color: #E16428;
+}
+
+p.tag:hover {
+  color: #f2f2f2;
+}
 
 .main h1 {
   font-family: 'Noto Sans', sans-serif;
@@ -522,7 +534,13 @@ form.register button.anchor {
   text-align: justify;
   font-family: 'Noto Sans', sans-serif;
 }
-  
+ 
+.problemInfo code {
+  font-size: 16px;
+  color:#f2f2f2;
+  background-color: #272121;
+}
+
 .problemInfo textarea {
   width: 89%;
   height: 350px;
@@ -578,6 +596,12 @@ form.register button.anchor {
   padding: 20px;
   margin-bottom: 22px;
   font-family: 'Noto Sans', sans-serif;
+}
+
+pre.comment-content {
+  color: #f2f2f2;
+  font-size: 17px;
+  font-family: 'Roboto', sans-serif;
 }
 
 .problemInfo .starsRating i{

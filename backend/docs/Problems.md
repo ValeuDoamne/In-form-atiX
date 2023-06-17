@@ -278,7 +278,7 @@ Returneaza:
 /api/v1/problems/${id}/comments
 
 Body: {
-    "commentId": `int` <-- id-ul comentariului care va fi sters
+    "comment_id": `int` <-- id-ul comentariului care va fi sters
 }
 
 Endpoint-ul e autorizat pentru admini si user-ul care a postat comentariul.

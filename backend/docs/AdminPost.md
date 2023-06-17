@@ -23,7 +23,7 @@ Exemplu:
   "status": "Success",
   "announcements": [
     {
-      "id": "1",
+      "id": 1,
       "title": "Welcome",
       "content": "This is our first post hope you will enjoy",
       "username": "admin",

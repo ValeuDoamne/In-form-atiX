@@ -232,7 +232,7 @@ class ProblemGateway
 
     public function get_problem_comments(int $problem_id): array {
       $this->problem_exists($problem_id);
-      $query = "SELECT c.id, c.user_comment, u.username, c.date_submitted FROM comments c JOIN users u ON c.user_id = u.id WHERE c.problem_id=$1";
+      $query = "SELECT c.id, c.user_comment, u.username, c.date_submitted FROM comments c JOIN users u ON c.user_id = u.id WHERE c.problem_id=$1 ORDER BY c.date_submitted DESC";
       $result = $this->conn->execute_prepared("get_problem_comments", $query, $problem_id);
 
       $comments = array();

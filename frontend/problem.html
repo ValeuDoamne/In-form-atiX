@@ -12,16 +12,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="module" src="./assets/js/main.js"></script>
-    <script src="./assets/js/ratingproblem.js" defer></script>
+    <script src="./assets/js/ratingproblem.js"></script>
+    <script src="./assets/js/problem.js"></script>
 </head>
 <body>
     <header>  
     </header>
     <div class="mainProblem">
-        <h1>LimbajFormal</h1>
+        <h1 id="title">LimbajFormal</h1>
         <div class="problemContainer">
 
-            <div class="problemInfo">
+            <div class="problemInfo" id="description">
                 <h4>Requirement:</h4>
                 <p>
                     RAU-Gigel se pregătește pentru admiterea la facultate. Curios din fire, el împrumută niște cursuri de la un prieten student, de unde află despre limbajele formale, gramatici, automate finite, expresii regulate și multe alte lucruri interesante. Găsește acolo și o problemă:
@@ -92,15 +93,14 @@
                     <select name="languages" id="languages">
                         <option value="C/C++">C/C++</option>
                         <option value="Python">Python</option>
-                        <option value="Java">Java</option>
                         <option value="Rust">Rust</option>
                       </select> 
-                     <input type="file" id="upload" accept=".txt, .c, .cpp, .py, .java, .rs">
+                     <input type="file" id="upload" accept=".txt, .c, .cpp, .py, .rs">
                 </h3>
                 <h3>Web editor:</h3>
-                <textarea placeholder="Insert the code here..."></textarea>
+                <textarea id="editor" placeholder="Insert the code here..."></textarea>
                 <br>
-                <button type="button">Submit</button> 
+                <button id="send-solution" class="buttonSubmit" type="button">Submit</button> 
             </div>
 
             <div class = "problemInfo">
@@ -121,30 +121,42 @@
                         <i class="fa fa-star"></i>
                     </div>
                 <h3>Tags:</h3>
-                <p>
+                <p id="tags">
                     #class11 #dynamicprogramming #hard
                 </p>
             </div>
 
             <div class = "problemInfo">
                 <h3>Leave a comment:</h3>
-                <textarea class="com" placeholder="Insert the comment here..."></textarea>
+                <textarea id="send-comment" class="com" placeholder="Insert the comment here..."></textarea>
                 <br>
-                <button type="button">Submit</button> 
+                <button id="send-comment-button" class="buttonSubmit" type="button">Submit</button> 
                 <h3>Comments:</h3>
-                <div class = "comment">
+                <div id="comments-section">
+                  <div class = "comment">
                     <p>
                         comentariu 1 comentariu 1 comentariu 1 comentariu 1
                     </p>
-                </div>
-                <div class = "comment">
+                  </div>
+                  <div class = "comment">
                     <p>
                         comment 2 comment 2 comment 2 comment 2 comment 2
                     </p>
+                  </div>
                 </div>
             </div>
 
         </div>
     </div>
+    <div class="modal" id="modal-delete-comment">
+      <div class="container">
+        <h2>Are you sure?</h2>
+        <div class="button-list">
+          <button type="button" class="submit" id='delete-comment-button' style="background-color: red; border-color: red;">Delete Comment</button>
+          <button type="button" class="cancel" onclick="hideModal('modal-delete-comment')">Cancel</button>
+        </div>
+     </div>
+   </div>
+
 </body>
 </html>

@@ -94,7 +94,7 @@ class ProblemController implements Controller {
     private function send_problem_tags_with_id(int $problem_id): void {
         http_response_code(200);
         Utils::sendmsg([
-            "status" => "Succes",
+            "status" => "Success",
             "tags" => $this->gateway->get_problem_tags($problem_id)        
         ]);    
     }
@@ -206,7 +206,7 @@ class ProblemController implements Controller {
             $problem_id = intval($matches[1], 10);
 
             $json_message = Utils::recvmsg();
-            $comment_id = Utils::filter($json_message["commentId"]);
+            $comment_id = Utils::filter($json_message["comment_id"]);
 
             $this->delete_comment($problem_id, $comment_id);
         } else {

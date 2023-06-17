@@ -35,6 +35,10 @@ class HomeworkController implements Controller {
       $class_id = intval($matches[1], 10);
       $this->check_class_authorization($class_id);
       $this->get_all_homework_of_class($class_id);
+    } else if (preg_match("/^\/api\/v1\/homework\/submissions\/(\d+)$/", $uri, $matches)){
+      $homework_id = intval($matches[1], 10);
+      $this->check_homework_authorization($homework_id);
+      $this->get_all_submissions_of_homework($homework_id);
     } else {
       http_response_code(404);
       Utils::sendinvalid("Not found");
@@ -69,6 +73,11 @@ class HomeworkController implements Controller {
   private function get_all_homework_of_class(int $class_id): void {
     http_response_code(200);
     Utils::sendmsg(["status" => "Success", "homework"=> $this->gateway->get_all_homework_of_class($class_id)]);
+  }
+
+  private function get_all_submissions_of_homework(int $homework_id): void {
+    http_response_code(200);
+    Utils::sendmsg(["status" => "Success", "submissions"=> $this->gateway->get_all_submissions_of_homework($homework_id)]);
   }
 
   private function handle_post(string $uri): void {

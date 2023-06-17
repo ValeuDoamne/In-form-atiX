@@ -151,3 +151,12 @@ INSERT INTO teachers_schools(teacher_id, school_id) VALUES (2, 1), (3, 2);
 INSERT INTO classrooms(name, code, teacher_id) VALUES ('clasa 9 B', 'beeeee', 1);
 INSERT INTO classrooms(name, code, teacher_id) VALUES ('clasa 10 A', 'aaaaaa', 2);
 INSERT INTO classrooms_students(classroom_id, student_id) VALUES (1, 4), (2, 5);
+
+INSERT INTO submissions(problem_id, user_id, programming_language_id, solution, score) VALUES (1, 4, 1, '#include <iostream>\nint main()\n{\n\tint a,b;\n\tstd::cin >> a >> b;\n\tstd::cout << a + b;\n}', null);
+INSERT INTO submissions(problem_id, user_id, programming_language_id, solution, score) VALUES (1, 5, 1, '#include <iostream>\nint main()\n{\n\tint a,b;\n\tstd::cin >> a >> b;\n\tstd::cout << b + a;\n}', null);
+INSERT INTO submissions(problem_id, user_id, programming_language_id, solution, score) VALUES (2, 4, 1, '#include <iostream>\nint main()\n{\n\tint a,b;\n\tstd::cin >> a >> b;\n\tstd::cout << a + b;\n}', null);
+
+INSERT INTO homeworks(name, classroom_id) VALUES ('Tema 1', 1);
+INSERT INTO homework_problems(homework_id, problem_id) VALUES (1, 1), (1, 2);
+INSERT INTO homeworks(name, classroom_id) VALUES ('Tema 2', 2);
+INSERT INTO homework_problems(homework_id, problem_id) VALUES (2, 1), (2, 2), (2, 3);

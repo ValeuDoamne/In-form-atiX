@@ -62,6 +62,30 @@ class HomeworkGateway {
     return $data;
   }
 
+  public function get_all_submissions_of_homework(int $homework_id): array {
+    $this->homework_exists($homework_id);
+    $query = "SELECT s.user_id, s.solution, s.problem_id, s.date_submitted FROM homework_problems hp
+                JOIN homeworks h ON h.id=hp.homework_id
+                JOIN classrooms c ON c.id=h.classroom_id
+                JOIN classrooms_students cs ON cs.classroom_id=c.id
+                JOIN submissions s ON hp.problem_id = s.problem_id
+                WHERE s.user_id=cs.student_id
+                      AND h.time_limit >= s.date_submitted
+                      AND hp.homework_id=$1
+                      ORDER BY s.user_id, s.date_submitted DESC";
+    $result = $this->conn->execute_prepared("get_all_submissions_of_homework_".$homework_id, $query, $homework_id);
+    $data = array();
+    while($row = pg_fetch_assoc($result)) {
+      $data[] = array(
+        "user_id" => intval($row["user_id"]),
+        "solution" => $row["solution"],
+        "problem_id" => intval($row["problem_id"]),
+        "date_submitted" => $row["date_submitted"]
+      );
+    }
+    return $data;
+  }
+
   public function post_homework(int $class_id, string $name, int $time_limit, array $problems): bool {
     $this->class_exists($class_id);
     $query = "INSERT INTO homeworks (classroom_id, name, time_limit) VALUES ($1, $2, $3) RETURNING id";

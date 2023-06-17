@@ -10,8 +10,9 @@ export default async function checkAuthState(){
   if(decodedToken?.payload?.exp < Date.now() / 1000) {
     return false;
   }
-  return true;
+  return decodedToken?.payload?.user_type;
 }
+
 
 /**
  * Decodes a JWT

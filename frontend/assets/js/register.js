@@ -215,4 +215,3 @@ function displayNotification(type, message){
   notificationBox.classList.add(type.toLowerCase());
   notificationBox.appendChild(document.createTextNode(message));
 }
-

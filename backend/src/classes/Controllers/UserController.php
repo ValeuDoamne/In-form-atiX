@@ -41,6 +41,12 @@ class UserController implements Controller
                 "status" => "Success",
                 "user" => $this->gateway->get_user_info($user_id)
             ]);
+        } else if($uri === "/api/v1/users/me/user_type") {
+            $user_type = $this->authorization["user_type"];
+            Utils::sendmsg([
+                "status" => "Success",
+                "user_type" => $user_type 
+            ]);
         } else if(preg_match("/^\/api\/v1\/users\/(\d+)/", $uri, $matches)) {
             $this->is_admin();
 
@@ -113,7 +119,7 @@ class UserController implements Controller
         $json_message = Utils::recvmsg();
         $password = Utils::filter($json_message["password"]);
 
-        if($this->gateway->update_user_password($user_id, $email)) {
+        if($this->gateway->update_user_password($user_id, $password)) {
             Utils::sendsuccess("Successfuly updated password");
         } else {
             Utils::senderr("Could not update password");

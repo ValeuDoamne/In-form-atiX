@@ -18,7 +18,7 @@ if(headerElement) {
  */
 window.logout = function logout() {
   localStorage.removeItem('token');
-  location.reload();
+  location.href = "/index.html";
 }
 
 const modals = document.querySelectorAll('.modal');

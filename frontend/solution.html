@@ -12,50 +12,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="module" src="./assets/js/main.js"></script>
+    <script src="./assets/js/solution.js"></script>
 </head>
 <body>
     <header>  
     </header>
     <div class="mainSolution">
-        <h1>LimbajFormal Solution</h1>
+        <h1 id="problemTitle"></h1>
         <br>
-        <h2>Student: Rusu Vlad</h2>
-        <h3>Homework: Tema1</h3>
-        <h3>Class: 9B</h3>
-        <div class = "solutionContainer">
+        <h2>My submissions</h2>
+        <div id="solution-container" class = "solutionContainer">
+            <button class="btn" id="btn">
+                <h3>Dropdown</h3>
+            </button>
+            <div class="dropdown" id="dropdown">
+                <div id="solution-content" class = "solutionPanel">
+                </div>
 
-            <div class = "solutionPanel">
-                <p>
-                    #include &lt;iostream&gt;<br>
-                    <br>
-                    using namespace std;<br>
-                    <br>
-                    int main()<br>
-                    {<br>
-                        &emsp; cin &gt;&gt; n &gt;&gt; m;<br>
-                        &emsp; cout &lt;&lt; n+m;<br>
-                        &emsp; return 0;<br>
-                        &emsp; //programul aduna doua numere a si b<br>
-                    }<br>
-                    #include &lt;iostream&gt;<br>
-                    <br>
-                    using namespace std;<br>
-                    <br>
-                    int main()<br>
-                    {<br>
-                        &emsp; cin &gt;&gt; n &gt;&gt; m;<br>
-                        &emsp; cout &lt;&lt; n+m;<br>
-                        &emsp; return 0;<br>
-                        &emsp; //programul aduna doua numere a si b<br>
-                    }<br>
-                </p>
-            </div>
-
-            <div class = "submitPanel">
-                <h4>Grade this solution: </h4>
-                <input type="text" name="gradeSolution" id="gradeSolution" placeholder="1 to 10">
-                &ensp;
-                <button type = "button" class = "submitGrade">Submit</button> 
+                <div class = "submitPanel">
+                    <h4>Grade this solution: </h4>
+                    <input type="text" name="gradeSolution" id="gradeSolution" placeholder="1 to 100">
+                    &ensp;
+                    <button type = "button" class = "submitGrade">Submit</button> 
+                </div>
             </div>
 
         </div>

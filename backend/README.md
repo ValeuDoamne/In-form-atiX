@@ -42,3 +42,5 @@ Pentru request-urile de tip ``POST`` se asteapta ca body sa fie un singur JSON
 ### [Stats](docs/Stats.md)
 
 ### [Classrooms](docs/Classrooms.md)
+
+### [Homework](docs/Homework.md)

@@ -29,6 +29,7 @@ Route::route_address("/api/v1/stats", "Stats");
 Route::route_address("/api/v1/announcements", "AdminPost");
 Route::route_address("/api/v1/classrooms", "Classroom");
 Route::route_address("/api/v1/unreleased_problems", "UnreleasedProblem");
+Route::route_address("/api/v1/homework", "Homework");
 
 
 $method = $_SERVER["REQUEST_METHOD"];

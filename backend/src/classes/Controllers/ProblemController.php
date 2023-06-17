@@ -46,6 +46,9 @@ class ProblemController implements Controller {
         } else if (preg_match("/^\/api\/v1\/problems\/(\d+)\/comments$/", $uri, $matches)) {
             $problem_id = intval($matches[1], 10);
             $this->send_problem_comments_with_id($problem_id); 
+        } else if (preg_match("/^\/api\/v1\/problems\/(\d+)\/ratings$/", $uri, $matches)) {
+            $problem_id = intval($matches[1], 10);
+            $this->send_stars_rating($problem_id); 
         } else {
             http_response_code(404);
             Utils::sendinvalid("Not found");
@@ -115,13 +118,21 @@ class ProblemController implements Controller {
         ]);
     } 
 
-    private function send_problem_comments_with_id($problem_id): void {
+    private function send_problem_comments_with_id(int $problem_id): void {
         $comments = $this->gateway->get_problem_comments($problem_id);
         Utils::sendmsg([
             "status" => "Success",
             "comments" => $comments 
         ]);
     }
+
+    private function send_stars_rating(int $problem_id): void {
+        http_response_code(200);
+        Utils::sendmsg([
+            "status" => "Success",
+            "rating" => $this->gateway->get_stars_rating($problem_id)
+        ]);
+}
 
 	private function handle_post(string $uri): void {
         if (preg_match("/^\/api\/v1\/problems\/(\d+)\/tags$/", $uri, $matches)) {
@@ -151,6 +162,13 @@ class ProblemController implements Controller {
             $comment = Utils::filter($json_message["comment"]);
 
             $this->post_comment($problem_id, $comment);
+        } else if (preg_match("/^\/api\/v1\/problems\/(\d+)\/ratings$/", $uri, $matches)) {
+            $problem_id = intval($matches[1], 10);
+
+            $json_message = Utils::recvmsg();
+            $rating = intval($json_message["rating"]);
+
+            $this->set_rating($problem_id, $rating);
         } else {
             http_response_code(404);
             Utils::sendinvalid("Not found");
@@ -182,6 +200,14 @@ class ProblemController implements Controller {
       } else {
           Utils::senderr("Could not add comment to problem with id $problem_id");
       }
+    }
+
+    private function set_rating(int $problem_id, int $rating): void {
+        $user_id = $this->authorization["user_id"];
+        if($this->gateway->add_rating($problem_id, $rating, $user_id) === true)
+            Utils::sendsuccess("Succesfully added rating to problem with id $problem_id");
+        else
+            Utils::senderr("Could not add rating to problem with id $problem_id");
     }
     
     private function handle_delete(string $uri): void {

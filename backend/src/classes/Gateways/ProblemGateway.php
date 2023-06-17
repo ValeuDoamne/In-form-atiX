@@ -230,6 +230,30 @@ class ProblemGateway
         return false;
     }
 
+    public function get_stars_rating(int $problem_id): float {
+        $this->problem_exists($problem_id);
+        $query = "SELECT AVG(stars) FROM ratings WHERE problem_id=$1";
+        $result = $this->conn->execute_prepared("get_stars_rating", $query, $problem_id);
+
+        $row = pg_fetch_row($result);
+        if($row === false)
+        {
+            throw new Exception("Error: no rating found");
+        }
+        return floatval($row[0]);
+    }
+
+    public function add_rating(int $problem_id, int $rating, int $user_id): bool {
+        $this->problem_exists($problem_id);
+        $query = "INSERT INTO ratings(user_id, problem_id, stars) VALUES ($1, $2, $3)";
+        $result = $this->conn->execute_prepared("add_rating", $query, $user_id, $problem_id, $rating);
+
+        if(pg_affected_rows($result) >= 1) {
+            return true;
+        }
+        return false;
+    }
+
     public function get_problem_comments(int $problem_id): array {
       $this->problem_exists($problem_id);
       $query = "SELECT c.id, c.user_comment, u.username, c.date_submitted FROM comments c JOIN users u ON c.user_id = u.id WHERE c.problem_id=$1 ORDER BY c.date_submitted DESC";

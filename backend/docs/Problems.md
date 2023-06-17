@@ -165,6 +165,21 @@ Exemplu:
 }
 ```
 
+```
+/api/v1/problems/${id}/ratings
+
+Explicatie:
+Returneaza rating-ul unei probleme ca un float.
+
+Returnare:
+{"status":"Invalid","message":"Problem with id ${id} does not exist"} <-- cazul in care id-ul problemei nu exista
+
+{
+    "status": "Success",
+    "rating": 2.5
+}
+```
+
 ## POST
 
 ```
@@ -221,6 +236,22 @@ Returneaza:
 {"status": "Success", "message": "Successfully added comment to problem with id ${id}"}
 ```
 
+```
+/api/v1/problems/${id}/ratings
+
+Body: {
+    "rating": `int` // comentariul care va fi pus problemei
+}
+
+Endpoint-ul e autorizat pentru toata lumea.
+Explicatie:
+Adauga un singur rating unei probleme.
+
+Returneaza:
+{"status": "Invalid", "message": "Problem with id ${id} does not exist"} <-- cazul in care id-ul problemei nu exista
+{"status": "Error", "message": "Could not add rating to problem with id ${id}"} <-- cazul in care nu se poate adauga comentariul
+{"status": "Success", "message": "Successfully added rating to problem with id ${id}"}
+```
 
 ## DELETE
 ```

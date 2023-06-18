@@ -10,33 +10,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
   <script type="module" src="../assets/js/main.js"></script>
-  <script type="module" src="../assets/js/manage-users.js"></script>
-  <title>Manage Users</title>
+  <script type="module" src="../assets/js/manage-unreleased.js"></script>
+  <title>Manage Unreleased Problems</title>
 </head>
 <body>
   <header></header>
   <main class="centered-page">
-    <h1>Manage users</h1>
+    <h1>Manage unreleased problems</h1>
     <div id="loader">
       Loading...
     </div>
-    <div class="waiting-auth">
-      <table class="students">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Username</th>
-            <th>Created</th>
-            <th>Role</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="users-table">
-        </tbody>
-      </table>
-    </div>
+    <div class="waiting-auth" id="problems"></div>
   </main>
 </body>
 </html>

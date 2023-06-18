@@ -1192,6 +1192,10 @@ div.propose-container button.submit:hover {
   position: relative;
 }
 
+.modal .container.scroll {
+  transform: translateY(calc(100% - 100vh));
+}
+
 @media screen and (max-width: 360px) {
   .modal .container {
     min-width: 100%;

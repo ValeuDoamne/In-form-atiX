@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="module" src="./assets/js/main.js"></script>
+    <script src="./assets/js/proposeproblem.js"></script>
 </head>
 <body>
     <header>  
@@ -23,11 +24,16 @@
 
                 <div class="propose-content">   
                     <h2>Information about the problem</h2>
-                    <input name="title" class="proposeproblem" placeholder="Title">
-                    <textarea name="content" class="proposeproblem" placeholder="Description of the problem"></textarea>
-                    <textarea name="content" class="proposeproblem" placeholder="Official solution for the problem"></textarea>
-                    <input name="tags" class="proposeproblem" placeholder="#tags">
-                    <button id="proposeproblem" class="submit">Propose new problem</button>
+                    <input id="problem-title" name="title" class="proposeproblem" placeholder="Title">
+                    <textarea id="problem-description" name="content" class="proposeproblem" placeholder="Description of the problem"></textarea>
+                    <textarea id="problem-solution" name="content" class="proposeproblem" placeholder="Official solution for the problem"></textarea>
+                    <select class="proposeproblem" name="languages" id="languages">
+                        <option value="C/C++">C/C++</option>
+                        <option value="Python">Python</option>
+                        <option value="Rust">Rust</option>
+                    </select>
+                    <div class="notification-box"></div>
+                    <button id="propose-problem" onclick="proposeProblem()" class="submit">Propose new problem</button>
                 </div>
 
               </div>

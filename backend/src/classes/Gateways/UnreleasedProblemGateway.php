@@ -80,11 +80,10 @@ class UnreleasedProblemGateway {
 
   public function propose_problem(int $user_id, string $name, string $description, string $solution, string $programming_language): bool {
     $query = "INSERT INTO unreleased_problems (name, description, solution, solution_programming_language_id, author) 
-      VALUES ($1, $2, $3, (SELECT id FROM programming_languages WHERE name=$4), $5)
-    ";
+      VALUES ($1, $2, $3, (SELECT id FROM programming_languages WHERE name=$4), $5)";
     $result = $this->conn->execute_prepared("propose_problem", $query, $name, $description, $solution, $programming_language, $user_id);
     if(pg_affected_rows($result) >= 1) {
-      return true;    
+      return true; 
     }
     return false;
   }

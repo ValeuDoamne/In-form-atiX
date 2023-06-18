@@ -15,6 +15,9 @@ export default function header(authState){
         <a href="register.html">Register</a>`
       : 
         `
+        ${authState == "teacher" || authState == "admin" ? 
+        `<a href="proposeproblem.html">Propose Problem</a>` : ``
+        }
         ${authState == "student" || authState == "teacher" ? 
         `<a href="classrooms.html">Classrooms</a>` : ``
         }

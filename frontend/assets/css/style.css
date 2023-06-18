@@ -7,7 +7,7 @@ body {
   color: #F6E9E9;
 }
 
-a, h2, h3, h4, p, li, span {
+a, h2, h3, h4, p, li, span, section {
   font-family: 'Noto Sans', sans-serif;
 }
 
@@ -1155,21 +1155,29 @@ div.propose-container button.submit:hover {
   height: 100%;
   overflow: auto;
   background-color: rgba(34, 34, 34, 0.5);
+  justify-content: center;
+  align-items: center;
 }
 
 .modal.active {
-  display: block;
+  display: flex;
 }
 
 .modal .container {
   background-color: #222;
-  margin: 25% auto;
   padding: 20px;
   border: 1px solid #888;
+  min-width: 300px;
   max-width: 600px;
   border-radius: 6px;
   box-shadow: 0 0.6em 1em #272121;
   position: relative;
+}
+
+@media screen and (max-width: 360px) {
+  .modal .container {
+    min-width: 100%;
+  }
 }
 
 .modal .close-btn {
@@ -1381,3 +1389,57 @@ textarea.admin-profile-post {
     width: 75%;
   }
 }
+
+.waiting-auth {
+  display: none;
+}
+
+main section.admin-main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1em;
+  background-color: #222;
+  color: #f2f2f2;
+  border-radius: 10px;
+  border: 1px solid #E16428;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+section.admin-main > div {
+  border: 1px solid #E16428;  
+  border-radius: 10px;
+  margin: 0 1em 1em 1em;
+  width: 250px;
+  padding: 0 0.5em 1em 0.5em;
+}
+
+section.admin-main > div h2 {
+  font-size: 1.2em;
+  display: inline-block;
+  border-bottom: 1px solid #E16428;
+}
+
+section.admin-main > div span {
+  border: 1px solid gray;
+  display: block;
+  width: 2em;
+  margin: 0.5em auto;
+  color:#E16428;
+}
+
+a.submit {
+  background-color: #E16428;
+  color: #f2f2f2;
+  border-radius: 20px;
+  padding: 0.2em 1em;
+}
+
+/* section.admin-main > div a {
+  width: 150px;
+  background-color: #E16428;
+  color: #f2f2f2;
+  border-radius: 20px;
+  padding: 0.2em 1em;
+} */

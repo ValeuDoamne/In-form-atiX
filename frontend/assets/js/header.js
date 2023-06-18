@@ -1,6 +1,12 @@
 export default function header(authState){
+  //check pathname depth
+  const locationDepth = window.location.pathname.split("/").length;
+  let adjustedPaths = "";
+  for(let i=0; i<locationDepth-1; i++) {
+    adjustedPaths += "../";
+  }
   const headerContents = `
-    <a href="index.html" class="title">In-form-atiX</a>
+    <a href="${adjustedPaths}index.html" class="title">In-form-atiX</a>
     <input class="toggle"  id="toggle" type="checkbox">
     <label class="hamburger" for="toggle">
     <span class="top"></span>
@@ -8,17 +14,20 @@ export default function header(authState){
     <span class="bottom"></span>
     </label>
     <nav class="menu">
-      <a href="about.html">About</a>
-      <a href="help.html">Help</a>
+      <a href="${adjustedPaths}about.html">About</a>
+      <a href="${adjustedPaths}help.html">Help</a>
       ${!authState ?
-        `<a href="login.html">Login</a>
-        <a href="register.html">Register</a>`
-      : 
+        `<a href="${adjustedPaths}login.html">Login</a>
+        <a href="${adjustedPaths}register.html">Register</a>`
+      :  
         `
         ${authState == "student" || authState == "teacher" ? 
-        `<a href="classrooms.html">Classrooms</a>` : ``
+        `<a href="${adjustedPaths}classrooms.html">Classrooms</a>`
+        : authState == "admin" ?
+        `<a href="${adjustedPaths}admin/index.html">Admin</a>`
+        : ""
         }
-        <a href="profile.html">Profile</a>
+        <a href="${adjustedPaths}profile.html">Profile</a>
         <span class="modal-button" onclick="showModal('modal-logout')">Logout</span>
         <div class="modal" id="modal-logout">
           <div class="container">

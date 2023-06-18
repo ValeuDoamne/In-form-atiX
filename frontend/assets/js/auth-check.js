@@ -1,7 +1,8 @@
 /**
  * Checks if a user is logged in by validation the JWT from local storage
+ * @returns {false | string} Returns false if not logged in, username if logged in
  */
-export default async function checkAuthState(){
+export default function checkAuthState(){
   const token = localStorage.getItem('token');
   if(!token) {
     return false;

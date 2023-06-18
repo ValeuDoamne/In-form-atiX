@@ -54,9 +54,7 @@ function genereteDropdowns(problem_submissions) {
                         <span>${problem_submissions[i].score}/100</span></h5>
                         `}
                     <div class="solutionPanel">
-                        <code>
-                            <pre>${problem_submissions[i].solution}</pre>
-                        </code>
+                            <pre class="submissionCode" style="border-style: none">${problem_submissions[i].solution}</pre>
                     </div>
                 </div>
             `);

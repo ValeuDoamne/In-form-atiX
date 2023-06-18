@@ -74,7 +74,7 @@ function genereteDropdowns(submission_map) {
     for(const student of submission_map) {
         solutionCotainer.insertAdjacentHTML('afterbegin', `
                 <button class="btn" id="btn-${student[0]}">
-                        <p><span class="highlight">Student: </span><span>${student[0]}</span></p>
+                        <span class="highlight">Student: </span><span>${student[0]}</span>
                 </button>
                 <div id="dropdown-${student[0]}" class="dropdown">
                 <div>
@@ -88,19 +88,23 @@ function genereteDropdowns(submission_map) {
         });
         for(const solution of student[1]) {
             dropDownSubmissions.insertAdjacentHTML('afterbegin',`
-                <button class="btn" id="btn-${solution.id}">
-                    <div class="profile" style="width: 100%; border-style: solid;">
-                        <p><span class="highlight">Submission ID: </span><span>${solution.id}</span></p>
-                        <p>
-                            <span class="highlight">Username: </span><span>${solution.username}</span>
-                        </p>
-                        <p>
+                <button class="btn profile" style="width: 100%; border-style: solid;" id="btn-${solution.id}">
+                        <span><span class="highlight">Submission ID: </span><span>${solution.id}</span></span>
+                        <span>
                             <span class="highlight">Time Submitted: </span><span>${solution.date_submitted}</span>
-                        </p>
-                    </div>
+                        </span>
                 </button>
                 <div id="dropdown-${solution.id}" class="dropdown">
                     <h4>Solution Code</h4>
+                    <p>
+                        <span class="highlight">Username: </span><span>${solution.username}</span>
+                    </p>
+                    <p>
+                        <span class="highlight">Problem Name: </span><span>${solution.problem_name}</span>
+                    </p>
+                    <p>
+                        <span class="highlight">Time Submitted: </span><span>${solution.date_submitted}</span>
+                    </p>
                     ${solution.score != null ? `<p>Previously given score: ${solution.score}</p>` : ``}
                     <p>Programming language: ${solution.programming_language}</p>
                     <code class="submissionCode">

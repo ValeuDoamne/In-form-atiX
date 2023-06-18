@@ -4,6 +4,24 @@ function capitalizeFirstLetter(text) {
   return text[0].toUpperCase()+text.slice(1);
 }
 
+function deleteAccount() {
+  fetch("http://localhost:8000/api/v1/users/me",
+    {
+       method: "DELETE",
+       headers: { Authorization: "Bearer "+localStorage.getItem('token') } 
+    }).then(response => response.json())
+    .then(data => {
+      if(data.status!="Success")
+      {
+        console.log(data);
+      }
+   }).catch(err => {
+     console.log(err);
+   });
+  localStorage.removeItem('token');
+  window.location.replace("/index.html");
+}
+
 async function getClassrooms() {
     let classrooms = undefined;
     await fetch('http://localhost:8000/api/v1/classrooms/mine', {
@@ -359,6 +377,7 @@ renderProfileCard();
 
 document.getElementById("edit-profile-details").addEventListener('click', editAccountDetails);
 document.getElementById("modal-save-button").addEventListener('click', submitEditProfile);
+document.getElementById("delete-account-button-modal").addEventListener('click', deleteAccount);
 
 
 function displayNotification(type, message){

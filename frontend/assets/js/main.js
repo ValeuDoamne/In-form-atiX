@@ -32,6 +32,8 @@ if(modals.length) {
       closeButton.addEventListener('click', () => {
         hideModal(modal.getAttribute('id'));
       });
+      const container = modal.querySelector('.container');
+      container.appendChild(closeButton);
     });
   }
 }

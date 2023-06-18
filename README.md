@@ -2,7 +2,9 @@
 
 Situl de probleme de informatica.
 
-Static generated site at: https://valeudoamne.github.io/In-form-atiX/
+Link prezentare vide: https://youtu.be/lKMyNnFJXk8
+
+Link catre deployment: https://informatix.hackersoffii.com/
 
 
 Pentru a rula local trebuie instalat `docker` si `docker-compose`

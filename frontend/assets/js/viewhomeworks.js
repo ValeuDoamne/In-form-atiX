@@ -98,12 +98,10 @@ function genereteDropdowns(homeworks_given, all_problems, user_type) {
     for(const i in homeworks_given) {
         solutionCotainer.insertAdjacentHTML('afterbegin', `
                 <button class="btn" id="btn-${i}">
-                    <div class="profile" style="width: 100%">
-                        <p><span class="highlight">Homework: </span><span>${homeworks_given[i].name}</span></p>
-                        <p>
+                        <span><span class="highlight">Homework: </span><span>${homeworks_given[i].name}</span></span>
+                        <span>
                             <span class="highlight">Time Limit: </span><span>${homeworks_given[i].time_limit}</span>
-                        </p>
-                    </div>
+                        </span>
                 </button>
                 
                 <div id="dropdown-${i}" class="dropdown">

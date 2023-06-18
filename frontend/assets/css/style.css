@@ -7,7 +7,7 @@ body {
   color: #F6E9E9;
 }
 
-a, h2, h3, h4, p, li, span, section {
+a, h2, h3, h4, p, li, span, label {
   font-family: 'Noto Sans', sans-serif;
 }
 
@@ -1036,9 +1036,10 @@ textarea.proposeproblem {
   resize: none;
   margin: 25px;
   width: 70%;
-  height: 350px;
+  height: 200px;
   text-align: justify;
   font-family: 'Noto Sans', sans-serif;
+  resize: vertical;
 }
 
 .propose-container {
@@ -1493,4 +1494,20 @@ a.submit {
   margin-top:0;
   font-size:smaller;
   color: #E16428;
+}
+
+.import-problem {
+  visibility: hidden;
+}
+
+.import-problem-label {
+  background-color: #E16428;
+  color: #f2f2f2;
+  border-radius: 20px;
+  padding: 0.3em 1em;
+  border:none;
+  cursor: pointer;
+  display: block;
+  max-width: 200px;
+  margin: 0.5em auto 0 auto;
 }

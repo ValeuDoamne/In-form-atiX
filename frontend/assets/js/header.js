@@ -22,7 +22,7 @@ export default function header(authState){
       :  
         `
         ${authState == "teacher" || authState == "admin" ? 
-        `<a href="proposeproblem.html">Propose Problem</a>` : ``
+        `<a href="${adjustedPaths}proposeproblem.html">Propose Problem</a>` : ``
         }
         ${authState == "student" || authState == "teacher" ? 
         `<a href="${adjustedPaths}classrooms.html">Classrooms</a>`

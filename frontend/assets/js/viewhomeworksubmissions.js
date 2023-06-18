@@ -101,7 +101,7 @@ function genereteDropdowns(submission_map) {
                 </button>
                 <div id="dropdown-${solution.id}" class="dropdown">
                     <h4>Solution Code</h4>
-                    ${solution.score != null ? `<p>Previously given score: ${solution.score}}</p>` : ``}
+                    ${solution.score != null ? `<p>Previously given score: ${solution.score}</p>` : ``}
                     <p>Programming language: ${solution.programming_language}</p>
                     <code class="submissionCode">
                         <pre>${solution.solution}</pre>

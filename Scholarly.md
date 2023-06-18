@@ -1,8 +1,8 @@
 # Software Requirements Specification
 ## For In-form-atiX 
-Version 1.0 approved
-Prepared by Alexa Constantin-Cosmin
-09.04.2023
+Version 2.0 approved
+Prepared by Nita Alexandru
+18.06.2023
 
 Table of Contents
 =================
@@ -46,10 +46,9 @@ Table of Contents
 The purpose of the product is to help highschool students in solving **algorithmic** problems for a future career in the IT industry and help teachers in managing their class by setting homeworks.
 
 ### 1.2 Intended Audience and Reading Suggestions
-This document is intended for developers, administrators and users. 
+This document is intended for developers, administrators and users. The target audience for this site are students aspiring to improve their programming skills and teachers seeking a more interactive approach to collaborate with their class.
 
-### 1.3 Product Scope
-The scope of the product is to improve the education system and the teacher-student relation.
+The scope of the product is to improve the education system and the teacher-student relation by providing a user-friendly and enjoyable environment for students to develop their programming skills. 
 
 ### 1.4 References
 [PBinfo](https://pbinfo.ro)
@@ -57,25 +56,33 @@ The scope of the product is to improve the education system and the teacher-stud
 ## Overall Description
 
 ### 2.1 Product Perspective
-This project is inspired by pbinfo.ro with the object to make the platform more appealing to the new generation.
+This project is inspired by pbinfo.ro with the aim of simplifying and enhancing the learning experience of programming for students. This platform want to create an interactive environment that not only makes the learning process easier but also provides teachers with effective tools for managing their students.
 
 ### 2.2 Product Functions
-This product will let the teachers to propose problems and the problems proposed will be evaluated by a admin, the teacher can set homeworks for students. The students can see their solved problems, statistics on their success rate, rating of the problems proposed and comments. The solution accepted will be wrote in C/C++.
+The platform allows the creation of student or teacher accounts.
+→Teachers can create classes of students, create homeworks for them, mark their solutions and offer new problems for the platform(which will be reviewed by admins).
+→Students can solve different problems on the platform and assignments provided by teachers, give a rating to the problems and leave comments. They can see different statistics like total submissions and number of correct submissions for a problem.
+→Admins can post different news on the index page, can delete accounts, approve problems and see different statistics like number of users, problems, submissions etc.
+Each user has a profile page where they can modify different user information, for example: name, password, email. 
 
 ### 2.3 User Classes and Characteristics
-The product consists of 3 user classes: administrator, teacher and student. The administrator approves problems proposed by teachers and manages the site (like rude comments on the problem). The teacher can manage their classes of students and can set homeworks for them, based on the problems on the site. The student can solve problems on the site, rate and comment on problems.
+The product consists of 3 user classes: administrator, teacher and student.
+The administrator approves problems proposed by teachers and manages the site (like rude comments on a problem).
+The teacher can manage their classes of students and can set homeworks for them, based on the problems on the site.
+The student can solve problems and homeworks on the site, rate and comment on problems. 
 
 ### 2.4 Operating Environment
-The operating system used for this product is a Debian GNU/Linux server running on DigitalOcean with a php backend and postgres database server and the webserver ngnix. For checking the solution of a problem it will be used docker with the **official solution** of the problem.
+The operating system used for this product is a Debian GNU/Linux server running on DigitalOcean with a PHP backend and PostGres database server and the webserver ngnix.
 
 ### 2.5 Design and Implementation Constraints
 * Server: Debian GNU/Linux
 * WebServer: nginx
 * Database: postgres
 * Backend: php
+* Frontend: HTML, CSS, JavaScript
 
 ### 2.6 User Documentation
-TODO: Final video with showcase of the web application.
+In case users encounter any difficulties while using this site, they can access the help button to consult this document which contains screenshots and information about the platform. 
 
 ### 2.7 Assumptions and Dependencies
 The user knows how to use a web brower and solve a problem :D.
@@ -83,7 +90,35 @@ The user knows how to use a web brower and solve a problem :D.
 ## External Interface Requirements
 
 ### 3.1 User Interfaces
-The user interface is composed of a web application.
+The user interface is composed of a web application. Some screenshots:
+Register:
+[](frontend/assets/imgs/register.png)
+[](frontend/assets/imgs/registerexample.png)
+Login:
+[](frontend/assets/imgs/login.png)
+Student profile: at /profile.html:
+[](frontend/assets/imgs/studentprofile.png)
+Teacher profile: at /profile.html:
+[](frontend/assets/imgs/profileteacher.png)
+Admin profile: at /profile.html:
+[](frontend/assets/imgs/admin1.png)
+[](frontend/assets/imgs/adminprofile2.png)
+Problem: at /problem.html#{id} (ex: /problem.html#2):
+[](frontend/assets/imgs/problem1.png)
+[](frontend/assets/imgs/problem2.png)
+Solutions: at /solution.html#{id} (ex: /solution.html#2). You need to submit a solution to see it there:
+[](frontend/assets/imgs/solution.png)
+Propose problem: at /proposeproblem.html:
+[](frontend/assets/imgs/proposeproblem.png)
+[](frontend/assets/imgs/proposeproblem2.png)
+Classrooms: at /classrooms.html:
+[](frontend/assets/imgs/classroomsteacher.png)
+Classroom details: at /classroom.html#{id} (ex: classroom.html#2):
+[](frontend/assets/imgs/classroom.png)
+Homework: at /viewhomeworks.html#{id} (ex:/viewhomeworks.html#2):
+[](frontend/assets/imgs/homework1.png)
+Homework submissions: at /viewhomeworksubmissions.html#{id} (ex: /viewhomeworksubmissions.html#2). You need to be logged as a teacher
+[](frontend/assets/imgs/homework2.png)
 
 ### 3.2 Hardware Interfaces
 The hardware interface in this project is flexible, not being dependend on anything.
@@ -95,13 +130,12 @@ The persistend data consists of:
 * algorithmic problems, rating, comments
 * username, password 
 
-The solution of the problem is stored on the local storage with the filename as the id of the problem in which the controller will use to compare the solution submitted by a student. The controller will run both to solutions of the problem inside a docker container and will compare the output and the time took for the problem to the solution to appear.
+The solution of the problem is stored on the local storage with the filename as the id of the problem in which the controller will use to compare the solution submitted by a student.
 
 ### 3.4 Communications Interfaces
-The product will use as a protocol of communication with the user the HTTP protocol, so a web browser is required. The communication with the database made by the controller it will be done eighter by UNIX local sockets or TCP. The controller will use commands to send the solution to be checked by the docker instance. The choice for a docker instance is because of security, in which a malitious user can send a program and be run directly on the server. The docker container in which the problem solution is being run does **not have access to Internet**.
+The communication between the frontend and backend takes place through the API provided by the backend docker container. 
 
 ## System Features
-This template illustrates organizing the functional requirements for the product by system features, the major services provided by the product. You may prefer to organize this section by use case, mode of operation, user class, object class, functional hierarchy, or combinations of these, whatever makes the most logical sense for your product.
 
 ### 4.1 Frontend
 
@@ -127,8 +161,14 @@ This template illustrates organizing the functional requirements for the product
  * User register with username (email maybe), password.
  * User login using username and password.
  * Teacher submission of problems and checking them with an administrator.
- * Student submission of solution to problems.
- * Student homework assignment by the teacher.
+ * Teachers can create classrooms and manage the students in the classrooms.
+ * Teachers can grade soultions (and solutions in homeworks).
+ * Teachers can view/create/delete homeworks for their classes. 
+ * Student submission of solution to problems(and problems in homeworks)
+ * Students can see his previous submissions and correct submissions.
+ * Students can rate and comment on a problem.
+ * Students can see their homeworks.
+ * Each user has a profile page with different information based on the user type(classes for teachers/students, statistics(number of users,problems etc) for admins).
 
 4.2.3   Functional Requirements
 
@@ -139,7 +179,7 @@ This template illustrates organizing the functional requirements for the product
 ## Other Nonfunctional Requirements
 
 ### 5.1 Performance Requirements
-In the docker container if the problem that is being run by the container takes more than 10 minutes, the container should be destroyed and give 0 points to the problem. 
+Trying to limit the DOM manipulation just for the begginng of page loading. 
 
 ### 5.2 Safety Requirements
 Security and GDPR compliance.

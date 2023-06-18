@@ -59,17 +59,17 @@ The scope of the product is to improve the education system and the teacher-stud
 This project is inspired by pbinfo.ro with the aim of simplifying and enhancing the learning experience of programming for students. This platform want to create an interactive environment that not only makes the learning process easier but also provides teachers with effective tools for managing their students.
 
 ### 2.2 Product Functions
-The platform allows the creation of student or teacher accounts.
-→Teachers can create classes of students, create homeworks for them, mark their solutions and offer new problems for the platform(which will be reviewed by admins).
-→Students can solve different problems on the platform and assignments provided by teachers, give a rating to the problems and leave comments. They can see different statistics like total submissions and number of correct submissions for a problem.
-→Admins can post different news on the index page, can delete accounts, approve problems and see different statistics like number of users, problems, submissions etc.
+The platform allows the creation of student or teacher accounts.\
+→Teachers can create classes of students, create homeworks for them, mark their solutions and offer new problems for the platform(which will be reviewed by admins).\
+→Students can solve different problems on the platform and assignments provided by teachers, give a rating to the problems and leave comments. They can see different statistics like total submissions and number of correct submissions for a problem.\
+→Admins can post different news on the index page, can delete accounts, approve problems and see different statistics like number of users, problems, submissions etc.\
 Each user has a profile page where they can modify different user information, for example: name, password, email. 
 
 ### 2.3 User Classes and Characteristics
-The product consists of 3 user classes: administrator, teacher and student.
-The administrator approves problems proposed by teachers and manages the site (like rude comments on a problem).
-The teacher can manage their classes of students and can set homeworks for them, based on the problems on the site.
-The student can solve problems and homeworks on the site, rate and comment on problems. 
+The product consists of 3 user classes: administrator, teacher and student.\
+The administrator approves problems proposed by teachers and manages the site (like rude comments on a problem).\
+The teacher can manage their classes of students and can set homeworks for them, based on the problems on the site.\
+The student can solve problems and homeworks on the site, rate and comment on problems.\
 
 ### 2.4 Operating Environment
 The operating system used for this product is a Debian GNU/Linux server running on DigitalOcean with a PHP backend and PostGres database server and the webserver ngnix.
@@ -90,35 +90,35 @@ The user knows how to use a web brower and solve a problem :D.
 ## External Interface Requirements
 
 ### 3.1 User Interfaces
-The user interface is composed of a web application. Some screenshots:
-Register:
-[](frontend/assets/imgs/register.png)
-[](frontend/assets/imgs/registerexample.png)
-Login:
-[](frontend/assets/imgs/login.png)
-Student profile: at /profile.html:
-[](frontend/assets/imgs/studentprofile.png)
-Teacher profile: at /profile.html:
-[](frontend/assets/imgs/profileteacher.png)
-Admin profile: at /profile.html:
-[](frontend/assets/imgs/admin1.png)
-[](frontend/assets/imgs/adminprofile2.png)
-Problem: at /problem.html#{id} (ex: /problem.html#2):
-[](frontend/assets/imgs/problem1.png)
-[](frontend/assets/imgs/problem2.png)
-Solutions: at /solution.html#{id} (ex: /solution.html#2). You need to submit a solution to see it there:
-[](frontend/assets/imgs/solution.png)
-Propose problem: at /proposeproblem.html:
-[](frontend/assets/imgs/proposeproblem.png)
-[](frontend/assets/imgs/proposeproblem2.png)
-Classrooms: at /classrooms.html:
-[](frontend/assets/imgs/classroomsteacher.png)
-Classroom details: at /classroom.html#{id} (ex: classroom.html#2):
-[](frontend/assets/imgs/classroom.png)
-Homework: at /viewhomeworks.html#{id} (ex:/viewhomeworks.html#2):
-[](frontend/assets/imgs/homework1.png)
-Homework submissions: at /viewhomeworksubmissions.html#{id} (ex: /viewhomeworksubmissions.html#2). You need to be logged as a teacher
-[](frontend/assets/imgs/homework2.png)
+The user interface is composed of a web application. Some screenshots:\
+Register:\
+![Register1](frontend/assets/imgs/register.png)\
+![Register2](frontend/assets/imgs/registerexample.png)\
+Login:\
+![Login](frontend/assets/imgs/login.png)\
+Student profile: at /profile.html:\
+![ProfileStudent](frontend/assets/imgs/studentprofile.png)\
+Teacher profile: at /profile.html:\
+![ProfileTeacher](frontend/assets/imgs/profileteacher.png)\
+Admin profile: at /profile.html:\
+![ProfileAdmin1](frontend/assets/imgs/admin1.png)\
+![ProfileAdmin2](frontend/assets/imgs/adminprofile2.png)\
+Problem: at /problem.html#{id} (ex: /problem.html#2):\
+![Problem1](frontend/assets/imgs/problem1.png)\
+![Problem2](frontend/assets/imgs/problem2.png)\
+Solutions: at /solution.html#{id} (ex: /solution.html#2). You need to submit a solution to see it there:\
+![Solution](frontend/assets/imgs/solution.png)\
+Propose problem: at /proposeproblem.html:\
+![Propose1](frontend/assets/imgs/proposeproblem.png)\
+![Propose2](frontend/assets/imgs/proposeproblem2.png)\
+Classrooms: at /classrooms.html:\
+![Classroom](frontend/assets/imgs/classroomsteacher.png)\
+Classroom details: at /classroom.html#{id} (ex: classroom.html#2):\
+![ClassroomDetails](frontend/assets/imgs/classroom.png)\
+Homework: at /viewhomeworks.html#{id} (ex:/viewhomeworks.html#2):\
+![Homework](frontend/assets/imgs/homework1.png)\
+Homework submissions: at /viewhomeworksubmissions.html#{id} (ex: /viewhomeworksubmissions.html#2). You need to be logged as a teacher\
+![HomeworkSubmissions](frontend/assets/imgs/homework2.png)\
 
 ### 3.2 Hardware Interfaces
 The hardware interface in this project is flexible, not being dependend on anything.

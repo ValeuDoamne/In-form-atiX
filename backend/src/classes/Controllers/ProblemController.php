@@ -49,6 +49,8 @@ class ProblemController implements Controller {
         } else if (preg_match("/^\/api\/v1\/problems\/(\d+)\/ratings$/", $uri, $matches)) {
             $problem_id = intval($matches[1], 10);
             $this->send_stars_rating($problem_id); 
+        } else if(preg_match("/^\/api\/v1\/problems\/search/", $uri)) {
+            $this->send_search_results();
         } else {
             http_response_code(404);
             Utils::sendinvalid("Not found");
@@ -132,7 +134,20 @@ class ProblemController implements Controller {
             "status" => "Success",
             "rating" => $this->gateway->get_stars_rating($problem_id)
         ]);
-}
+    }
+    
+    private function send_search_results(): void {
+        if(array_key_exists("tags", $_GET)) {
+            $tags = explode(',', $_GET["tags"]);
+            foreach($tags as &$tag) {
+                $tag = Utils::filter($tag);
+            }
+            Utils::sendmsg([
+                "status" => "Success",
+                "results" => $this->gateway->search_problems_by_tags($tags)
+            ]);
+        }
+    }
 
 	private function handle_post(string $uri): void {
         if (preg_match("/^\/api\/v1\/problems\/(\d+)\/tags$/", $uri, $matches)) {

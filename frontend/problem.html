@@ -23,71 +23,8 @@
         <div class="problemContainer">
 
             <div class="problemInfo" id="description">
-                <h4>Requirement:</h4>
-                <p>
-                    RAU-Gigel se pregătește pentru admiterea la facultate. Curios din fire, el împrumută niște cursuri de la un prieten student, de unde află despre limbajele formale, gramatici, automate finite, expresii regulate și multe alte lucruri interesante. Găsește acolo și o problemă:
-                    Se consideră un alfabet X format din N simboluri (diferite două câte două). Pe mulțimea X este definită o relație de ordine totală (să o numim lexicografică) astfel: orice două elemente a și b alegem din X (a diferit de b), avem fie a &lt; b, fie b &lt; a.
-                    Câte cuvinte se pot forma cu simboluri din alfabetul X astfel încât simbolurile prezente în cuvânt să fie în ordine strict crescătoare (de la stânga spre dreapta) și să nu existe în cuvânt două simboluri consecutive lexicografic?
-                    Deoarece calculele devin destul de complicate, RAU-Gigel ar avea nevoie de ajutorul vostru. În plus, numerele obținute s-ar putea să fie destul de mari, RAU-Gigel ar vrea să le calculați modulo MOD. 
-                </p>
-
-                <br>
-
-                <h4>Input:</h4>
-                <p>
-                    Fișierul de intrare limbajformal.in conține pe prima linie numărul N reprezentând numărul de simboluri din alfabet. 
-                </p>
-
-                <br>
-
-                <h4>Output:</h4>
-                <p>
-                    Fișierul de ieșire limbajformal.out va conține un singur rând, pe care se află un sigur număr reprezentând răspunsul la întrebare. 
-                </p>
-                    
-                <br>
-
-                <h4>Restrictions and specifications:</h4>
-                <p>
-                    1 ≤ N ≤ 1.000.000.000, MOD = 1.000.000.009
-                    <br>
-                    Cuvintele au cel puțin un simbol
-                    <br>
-                    Pentru teste în valoare de 10 de puncte: N  ≤ 10
-                    <br>
-                    Pentru teste în valoare de încă 30 de puncte: N  ≤ 1.000.000
-                    <br>
-                </p>
-
-                <br>
-
-                <h4>Example:</h4>
-                <p>
-                    limbajformal.in
-                    <br>
-                    5
-                    <br><br>
-                    limbajformal.out
-                    <br>
-                    12
-                </p>
-
-                <br>
-
-                <h4>Explication:</h4>
-                <p>
-                    Alfabetul conține 5 simboluri. Să le notăm A, B, C, D, E, cu A &lt; B &lt; C &lt; D &lt; E.
-                    <br>
-                    Există 12 cuvinte care respectă cerințele problemei:
-                    <br>
-                    A, B, C, D, E, AC, AD, AE, BD, BE, CE, ACE
-                    <br>
-                    Secvența AB nu este validă pentru că simbolurile A și B sunt consecutive lexicografic.
-                    <br>
-                    Secvența ADE nu este validă pentru că simbolurile D și E sunt consecutive lexicografic.
-                </p>
             </div>
-
+                <button id="go-to-submissions" class="fullButtonHomework" onclick="goToSubmissions()">Go to submissions</button>
             <div class = "problemInfo">
                 <h3>Upload file(s):
                     <select name="languages" id="languages">

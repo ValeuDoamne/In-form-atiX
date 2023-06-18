@@ -14,7 +14,7 @@ class HomeworkGateway {
   }
 
   private function class_exists(int $class_id): void {
-    if($this->conn->records_are_present("class_exists", "SELECT * FROM classrooms WHERE id=$1", $class_id) === false) {
+    if($this->conn->records_are_present("classroom_exists$class_id", "SELECT * FROM classrooms WHERE id=$1", $class_id) === false) {
         throw new ClientException("Classroom with id $class_id does not exist", 404);
     }
   }
@@ -29,6 +29,18 @@ class HomeworkGateway {
     $this->class_exists($class_id);
     $query = "SELECT * FROM classrooms WHERE id=$1 AND teacher_id=$2";
     return $this->conn->records_are_present("is_user_teacher_of_class", $query, $class_id, $user_id);
+  }
+
+  public function is_user_student_of_class(int $user_id, int $class_id): bool {
+    $query = "SELECT * FROM classrooms_students WHERE classroom_id=$1 AND student_id=$2";
+    return $this->conn->records_are_present("is_user_student_of_class", $query, $class_id, $user_id);
+  }
+
+  public function is_teacher_of_student(int $teacher_id, int $student_id): void {
+    $query = "SELECT * FROM classrooms c JOIN classrooms_students cs ON c.id=cs.classroom_id WHERE c.teacher_id = $1 AND cs.student_id=$2";
+    if($this->conn->records_are_present("is_teacher_of_student", $query, $teacher_id, $student_id) === false) {
+        throw new ClientException("Is not teacher of student");
+    }
   }
 
   public function get_homework(int $homework_id): array {
@@ -51,7 +63,6 @@ class HomeworkGateway {
   }
 
   public function get_all_homework_of_class(int $class_id): array {
-    $this->class_exists($class_id);
     //get all homeworks of class using get_homework
     $query = "SELECT id FROM homeworks WHERE classroom_id=$1";
     $result = $this->conn->execute_prepared("get_all_homework_of_class_".$class_id, $query, $class_id);
@@ -63,12 +74,13 @@ class HomeworkGateway {
   }
 
   public function get_all_submissions_of_homework(int $homework_id): array {
-    $this->homework_exists($homework_id);
-    $query = "SELECT s.user_id, s.solution, s.problem_id, s.date_submitted FROM homework_problems hp
+    $query = "SELECT s.id, s.user_id, u.username, u.name, s.score, p.name as programming_language, s.solution, s.problem_id, s.date_submitted FROM homework_problems hp
                 JOIN homeworks h ON h.id=hp.homework_id
                 JOIN classrooms c ON c.id=h.classroom_id
                 JOIN classrooms_students cs ON cs.classroom_id=c.id
                 JOIN submissions s ON hp.problem_id = s.problem_id
+                JOIN users u ON s.user_id = u.id
+                JOIN programming_languages p ON s.programming_language_id = p.id
                 WHERE s.user_id=cs.student_id
                       AND h.time_limit >= s.date_submitted
                       AND hp.homework_id=$1
@@ -77,8 +89,13 @@ class HomeworkGateway {
     $data = array();
     while($row = pg_fetch_assoc($result)) {
       $data[] = array(
+        "id" => intval($row["id"]),
         "user_id" => intval($row["user_id"]),
+        "score" =>  $row["score"] === null ? $row["score"] : intval($row["score"]),
+        "username" => $row["username"],
+        "full_name" => $row["name"],
         "solution" => $row["solution"],
+        "programming_language" => $row["programming_language"],
         "problem_id" => intval($row["problem_id"]),
         "date_submitted" => $row["date_submitted"]
       );
@@ -86,10 +103,9 @@ class HomeworkGateway {
     return $data;
   }
 
-  public function post_homework(int $class_id, string $name, int $time_limit, array $problems): bool {
-    $this->class_exists($class_id);
+  public function post_homework(int $class_id, string $name, string $time_limit, array $problems): bool {
     $query = "INSERT INTO homeworks (classroom_id, name, time_limit) VALUES ($1, $2, $3) RETURNING id";
-    $result = $this->conn->execute_prepared("post_homework_".$class_id, $query, $class_id, $name, date("Y-m-d H:i:s", $time_limit));
+    $result = $this->conn->execute_prepared("post_homework_".$class_id, $query, $class_id, $name, $time_limit);
     $row = pg_fetch_assoc($result);
     $homework_id = intval($row["id"]);
     foreach($problems as $problem_id) {
@@ -99,8 +115,18 @@ class HomeworkGateway {
     return true;
   }
 
+  public function set_submission_score(int $submission_id, int $score, int $student_id, int $teacher_id): bool {
+    $this->is_teacher_of_student($teacher_id, $student_id);
+    $query = "UPDATE submissions SET score=$1 WHERE id=$2";
+    $result = $this->conn->execute_prepared("update_submission", $query, $score, $submission_id);
+    if(pg_affected_rows($result) >= 1) {
+        return true;
+    }
+    return false;
+  }
+
+
   public function delete_homework(int $homework_id): bool {
-    $this->homework_exists($homework_id);
     $query = "DELETE FROM homeworks WHERE id=$1";
     $result = $this->conn->execute_prepared("delete_homework_".$homework_id, $query, $homework_id);
     if(pg_affected_rows($result) > 0) {
@@ -108,7 +134,7 @@ class HomeworkGateway {
     }
     return false;
   }
-
+  
 }
 
 ?>

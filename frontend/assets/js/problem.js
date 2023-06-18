@@ -1,4 +1,8 @@
 
+function goToSubmissions() {
+    window.location.replace("/solution.html"+window.location.hash);
+}
+
 async function getUser() {
   let user = undefined;
   await fetch('http://localhost:8000/api/v1/users/me',
@@ -145,6 +149,7 @@ function renderPage() {
   const sendCommentButton = document.getElementById('send-comment-button');
   sendSolution.addEventListener('click', sendProblemSolution);
   sendCommentButton.addEventListener('click', sendComment);
+  document.getElementById('go-to-submissions').addEventListener('click', goToSubmissions);
 
   fetch('http://localhost:8000/api/v1/problems/'+problem_id,
     {

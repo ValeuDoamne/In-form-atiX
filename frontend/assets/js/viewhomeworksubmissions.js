@@ -73,16 +73,16 @@ function genereteDropdowns(submission_map) {
     solutionCotainer.innerHTML = '';
     for(const student of submission_map) {
         solutionCotainer.insertAdjacentHTML('afterbegin', `
-                <button class="btn" id="btn-${student[0]}">
+                <button class="btn" id="btn-${student[1][0].username}">
                         <span class="highlight">Student: </span><span>${student[0]}</span>
                 </button>
-                <div id="dropdown-${student[0]}" class="dropdown">
+                <div id="dropdown-${student[1][0].username}" class="dropdown">
                 <div>
             `);
         
-        const dropDownSubmissions = document.getElementById(`dropdown-${student[0]}`);
+        const dropDownSubmissions = document.getElementById(`dropdown-${student[1][0].username}`);
 
-        document.getElementById(`btn-${student[0]}`).addEventListener('click', function(e) {
+        document.getElementById(`btn-${student[1][0].username}`).addEventListener('click', function(e) {
             e.stopPropagation();
             dropDownSubmissions.classList.toggle("show");
         });
@@ -107,9 +107,7 @@ function genereteDropdowns(submission_map) {
                     </p>
                     ${solution.score != null ? `<p>Previously given score: ${solution.score}</p>` : ``}
                     <p>Programming language: ${solution.programming_language}</p>
-                    <code class="submissionCode">
-                        <pre>${solution.solution}</pre>
-                    </code>
+                        <pre class="submissionCode">${solution.solution}</pre>
                     <input class="submitScoreProblem" id="submit-score-text-${solution.id}" placeholder="0 to 100" type="text"></input>
                     <button id="submit-score-${solution.id}" class="buttonSubmit" onclick="giveScore(${solution.id}, ${solution.user_id})">Give score</button>
                 <div>
@@ -121,62 +119,13 @@ function genereteDropdowns(submission_map) {
 
         }
     }
-
-
-    for(const i in homeworks_given) {
-        solutionCotainer.insertAdjacentHTML('afterbegin', `
-                <button class="btn" id="btn-${i}">
-                    <div class="profile" style="width: 100%">
-                        <p><span class="highlight">Homework: </span><span>${homeworks_given[i].name}</span></p>
-                        <p>
-                            <span class="highlight">Time Limit: </span><span>${homeworks_given[i].time_limit}</span>
-                        </p>
-                    </div>
-                </button>
-                
-                <div id="dropdown-${i}" class="dropdown">
-                    <table class="students" style="margin-bottom: 20px">
-                        <tbody>
-                            <tr id="homework-problems-${homeworks_given[i].id}">
-                                <th>Name</th>
-                                <th>Page</th>
-                            </tr>
-                        </tbody>
-                    </table>
-                    ${user_type == "teacher" ? `
-                            <button onclick="viewSubmissions(${homeworks_given[i].id})" id="view-homework-submissions-${homeworks_given[i].id}" style="margin-bottom: 20px" class="buttonHomeworkPage">View Submissions</button>
-                            <button onclick="deleteHomework(${homeworks_given[i].id})" id="delete-homework-${homeworks_given[i].id}" style="background-color: red; margin-bottom: 20px" class="buttonHomeworkPage">Delete</button>
-                            ` : ``}
-                </div>
-            `);
-        document.getElementById(`btn-${i}`).addEventListener('click', function(e) {
-            e.stopPropagation();
-            document.getElementById(`dropdown-${i}`).classList.toggle("show");
-        })
-        
-        const tableHeader = document.getElementById(`homework-problems-${homeworks_given[i].id}`);
-        console.log(all_problems);
-        for(const j in homeworks_given[i].problems) {
-            for(const k in all_problems) {
-                if(homeworks_given[i].problems[j] == all_problems[k].id) {
-                    tableHeader.insertAdjacentHTML('afterend', `
-                            <tr>
-                                <td>${all_problems[k].name}</td>
-                                <td><button class="buttonHomeworkPage" id="view-${homeworks_given[i].id}-${all_problems[k].id}" onclick="newTabProblem(${all_problems[k].id})">View</button></td>
-                            </tr>
-                        `);
-                    break;
-                }
-            }
-        }
-    } 
 }
 
 async function renderPage() {
     const classroom_id = parseInt(window.location.hash.slice(1));
     const page_title = document.getElementById("problemTitle");
     const submissions_given = await getSubmissions(classroom_id);
-    page_title.innerText = "Homeworks";
+    page_title.innerText = "Submissions";
    
 
     const submission_map = new Map();

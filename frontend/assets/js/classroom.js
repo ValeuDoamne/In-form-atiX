@@ -66,7 +66,9 @@ function removeStudent(student_id) {
 async function getColleagues(tableHeader, userType) {
   /* Make get the classerooms from the server */
   const class_id = window.location.hash.slice(1);
-  console.log(class_id);
+  if(userType == "teacher") {
+    tableHeader.insertAdjacentHTML('beforeend', `<th>Remove</th>`);
+  }
   await fetch('http://localhost:8000/api/v1/classrooms/colleagues?class_id='+class_id, {
         headers: {Authorization: "Bearer "+localStorage.getItem('token')}
   }).then(data => data.json())
@@ -229,7 +231,7 @@ async function getAllProblems() {
                    <td>${data.problems[i].name}</td>
                    <td id="tags-problem-${data.problems[i].id}"></td>
                    <td><button class="buttonSubmit" id="button-add-problem-${data.problems[i].id}" onclick="addToSend(${data.problems[i].id})">Add</button></td>
-                   <td><button class="buttonSubmit id="button-view-${data.problems[i].id}" onclick="goToProblemPage(${data.problems[i].id})">View</button></td>
+                   <td><button class="buttonSubmit" id="button-view-${data.problems[i].id}" onclick="goToProblemPage(${data.problems[i].id})">View</button></td>
                    </tr> 
                 `);
                getProblemsTags(data.problems[i].id);

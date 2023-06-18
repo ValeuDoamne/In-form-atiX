@@ -9,7 +9,7 @@ class UnreleasedProblemController implements Controller {
 	}
 
 	public function handle(string $method, string $uri): void {
-    $this->authorization = Utils::getAuthorization();
+        $this->authorization = Utils::getAuthorization();
 		switch($method) {
 			case "GET":
 				$this->handle_get($uri);
@@ -58,7 +58,6 @@ class UnreleasedProblemController implements Controller {
       $description = Utils::filter($json_message["description"]);
       $solution = Utils::filter($json_message["solution"]);
       $programming_language = Utils::filter($json_message["programming_language"]);
-      
       if($this->authorization["user_type"] === "teacher" || $this->authorization["user_type"] === "admin") { 
         $this->propose_problem($name, $description, $solution, $programming_language);
       } else {

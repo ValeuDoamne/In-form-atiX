@@ -71,7 +71,7 @@ async function renderContentAccademic(userType) {
             <h5>
               <span class="highlight">School Name:</span>
               <span>${classroom.school_name}</span>
-            <h5>
+            </h5>
             </div>
             <div>
               <button class="submit" id="class-button-${i}">View</button>

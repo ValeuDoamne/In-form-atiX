@@ -220,12 +220,16 @@ form.register button.anchor {
   }
 }
 
+.notification-bigger {
+  font-size: medium !important;
+}
+
 .notification-box.error {
   border: 1px solid rgba(255, 0, 0, 0.5);
   background-color: rgba(255, 0, 0, 0.05);
   border-radius: 10px;
   padding: 0.5em 1em;
-  font-size:small;
+  font-size: small;
   margin: 1em 0;
   color: rgb(251, 89, 89);
 }
@@ -999,6 +1003,17 @@ pre.comment-content {
   display: inline-block;
 }
 
+select.proposeproblem {
+  border-radius: 20px;
+  background-color: #222;
+  color: #f2f2f2;
+  padding: 20px;
+  margin: 30px;
+  width: 60%;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 17px;
+}
+
 input.proposeproblem {
   border-radius: 20px;
   border: 1px solid #E16428;
@@ -1082,10 +1097,12 @@ div.propose-container button.submit:hover {
 	margin-left: 10px;
 	margin-right: 10px;
 	margin-bottom: 20px;
+  margin-top: 50px;
 }
 
 .help-layout p {
   text-indent: 10px;
+  text-align: justify;
 }
 
 /* register.html */

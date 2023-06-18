@@ -70,7 +70,7 @@ class ProblemGateway
     }
     
     public function get_problem_with_solution(int $problem_id): array {
-        $query = "SELECT * FROM problems WHERE id=$1";
+        $query = "SELECT id, name, description, solution, solution_programming_language_id, date_submitted FROM problems WHERE id=$1";
         $result = $this->conn->execute_prepared("problem_with_solution", $query, $problem_id);
 
         if(pg_num_rows($result) !== 1) {

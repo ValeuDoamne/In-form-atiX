@@ -1,5 +1,5 @@
 import header from './header.js';
-import authCheck from './auth-check.js';
+import {authCheck} from './auth-check.js';
 
 //Check auth state
 const authState = authCheck();

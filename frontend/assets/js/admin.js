@@ -1,4 +1,4 @@
-import authCheck from "./auth-check.js";
+import {verifyAdminLogin} from "./auth-check.js";
 
 const user  = await verifyAdminLogin();
 if(user == null) {
@@ -11,35 +11,9 @@ if(user == null) {
 
 const stats = await getStats();
 if(stats != null) {
-    console.log(stats)
-    document.getElementById("total-users").textContent = stats.users;
-    document.getElementById("total-problems").textContent = stats.problems;
-    document.getElementById("total-proposed-problems").textContent = stats.new_problems;
-}
-
-/**
- * Verifies if the user is logged in and is an admin
- * @returns user data if logged in, null if not logged in
- */
-export default async function verifyAdminLogin() {
-  if(authCheck() == false) {
-    return null;
-  }
-  const adminInfo = fetch("http://localhost:8000/api/v1/users/me", {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`
-    } 
-  }).then(response => response.json())
-  .then(data => {
-    if(data.status!="Success" || data.user.user_type != "admin") {
-      return null;
-    }
-    return data.user;
-  }).catch(err => {
-    console.error(err);
-    return null;
-  });
-  return adminInfo;
+  document.getElementById("total-users").textContent = stats.users;
+  document.getElementById("total-problems").textContent = stats.problems;
+  document.getElementById("total-proposed-problems").textContent = stats.new_problems;
 }
 
 async function getStats() {

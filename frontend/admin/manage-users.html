@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
+  <script type="module" src="../assets/js/main.js"></script>
+  <script type="module" src="../assets/js/manage-users.js"></script>
+  <title>Manage Users</title>
+</head>
+<body>
+  <header></header>
+  <main class="centered-page">
+    <h1>Manage users</h1>
+    <div id="loader">
+      Loading...
+    </div>
+    <section class="waiting-auth">
+      <table class="students">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Created</th>
+            <th>Role</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="users-table">
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

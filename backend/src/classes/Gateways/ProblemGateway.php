@@ -271,6 +271,31 @@ class ProblemGateway
       return $comments;
     }
 
+    private function previously_added_problem(array $problems, int $id): bool {
+        foreach($problems as $problem) {
+            if($problem["id"] === $id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function search_problems_by_tags(array $tags): array {
+        $query = "SELECT p.id, p.name FROM problems p JOIN problems_tags pt ON pt.problem_id=p.id JOIN tags t ON t.id = pt.tag_id WHERE t.name=$1";
+        $problems = array();
+
+        foreach($tags as $tag) {
+            $result = $this->conn->execute_prepared("get_problems_with_tag_".$tag, $query, $tag);
+            while($row = pg_fetch_assoc($result)) {
+                $row["id"] = intval($row["id"]);
+                if($this->previously_added_problem($problems, $row["id"]) === false) {
+                    $problems[] = $row;
+                } 
+            }
+        }
+        return $problems;
+    }
+
     public function add_comment(int $user_id, int $problem_id, string $comment): bool {
       $this->problem_exists($problem_id);
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solution</title>
+    <title>Homeworks</title>
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,15 +12,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="module" src="./assets/js/main.js"></script>
-    <script src="./assets/js/solution.js"></script>
+    <script src="./assets/js/viewhomeworks.js"></script>
 </head>
 <body>
     <header>  
     </header>
     <div class="mainSolution">
         <h1 id="problemTitle"></h1>
-        <br>
-        <h2>My submissions</h2>
         <div id="solution-container" class = "solutionContainer">
             <button class="btn" id="btn">
                 <h3>Dropdown</h3>
@@ -28,10 +26,15 @@
             <div class="dropdown" id="dropdown">
                 <div id="solution-content" class = "solutionPanel">
                 </div>
+
+                <div class = "submitPanel">
+                    <h4>Problems: </h4>
+                    <input type="text" name="gradeSolution" id="gradeSolution" placeholder="1 to 100">
+                    <button type = "button" class = "submitGrade">Submit</button> 
+                </div>
             </div>
 
         </div>
-    <button id="go-to-problem" class="fullButtonHomework" onclick="goToProblem()">Go to problem</button>
     </div>
 </body>
 </html>

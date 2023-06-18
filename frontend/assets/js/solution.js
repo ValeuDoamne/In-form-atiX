@@ -1,4 +1,6 @@
-
+function goToProblem() {
+    window.location.replace("/problem.html"+window.location.hash);
+}
 
 async function getProblemDetails(problem_id) {
     let problem_data = undefined;

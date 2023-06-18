@@ -60,8 +60,8 @@ class HomeworkController implements Controller {
       return;
     }
     $user_id = $this->authorization["user_id"];
-    if($this->gateway->is_user_teacher_of_class($user_id, $class_id) === false) {
-      throw new ClientException("User $user_id is not a valid teacher for $class_id", 401);
+    if($this->gateway->is_user_teacher_of_class($user_id, $class_id) === false && $this->gateway->is_user_student_of_class($user_id, $class_id) === false) {
+      throw new ClientException("User $user_id is not a valid teacher/student for $class_id", 401);
     }
   }
 
@@ -85,6 +85,9 @@ class HomeworkController implements Controller {
       $class_id = intval($matches[1], 10);
       $this->check_class_authorization($class_id);
       $this->post_homework($class_id);
+    } else if(preg_match("/^\/api\/v1\/homework\/submission\/(\d+)$/", $uri, $matches)) {
+      $submission_id = intval($matches[1]);
+      $this->set_submission_score($submission_id);
     } else {
       http_response_code(404);
       Utils::sendinvalid("Not found");
@@ -94,13 +97,26 @@ class HomeworkController implements Controller {
   private function post_homework(int $class_id): void {
     $json_message = Utils::recvmsg();
     $name = Utils::filter($json_message["name"]);
-    $time_limit = intval(Utils::filter($json_message["time_limit"]));
+    $time_limit = Utils::filter($json_message["time_limit"]);
     $problems = $json_message["problems"];
     if($this->gateway->post_homework($class_id, $name, $time_limit, $problems) === true) {
       Utils::sendsuccess("Homework for class $class_id posted");
     } else {
       Utils::sendinvalid("Homework for class $class_id could not be posted");
     }
+  }
+
+  private function set_submission_score(int $submission_id): void {
+    $json_message = Utils::recvmsg();
+    $student_id = intval($json_message["student_id"]);
+    $score = intval($json_message["score"]);
+    $teacher_id = $this->authorization["user_id"];
+    if($this->gateway->set_submission_score($submission_id, $score, $student_id, $teacher_id) === true) {
+      Utils::sendsuccess("Successfully updated score");
+    } else {
+      Utils::sendinvalid("Could not update score");
+    }
+    
   }
 
   private function handle_delete(string $uri): void {

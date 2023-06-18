@@ -107,7 +107,7 @@ class ProblemController implements Controller {
     private function send_problem_raport_with_id(int $problem_id): void {
         http_response_code(200);
         Utils::sendmsg([
-            "status" => "Succes",
+            "status" => "Success",
             "raport" => $this->gateway->get_problem_raport($problem_id)        
         ]);    
     }

@@ -21,7 +21,8 @@
     <div class="mainProblem">
         <h1 id="title">LimbajFormal</h1>
         <div class="problemContainer">
-
+            <div class="problemInfo profile" id="raport">
+            </div>
             <div class="problemInfo" id="description">
             </div>
                 <button id="go-to-submissions" class="fullButtonHomework" onclick="goToSubmissions()">Go to submissions</button>
@@ -41,8 +42,7 @@
             </div>
 
             <div class = "problemInfo">
-                    <h3>Overall rating:</h3>
-                    <div class = "overallRating">
+                    <div class = "overallRating" id="overallRating">
                         <i class="fa fa-star checked"></i>
                         <i class="fa fa-star checked"></i>
                         <i class="fa fa-star checked"></i>
@@ -50,12 +50,9 @@
                         <i class="fa fa-star"></i>
                     </div>
                     <h3>Leave a rating for this problem:</h3>
-                    <div class = "starsRating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
+                    <div class = "starsRating" id="giveRating">
+                        <input id="rating-score-input" class="submitScoreProblem" type="text" placeholder="1 to 5">
+                        <button id="button-submit-rating" class="buttonSubmit" onclick="submitRating()">Submit Rating</button>
                     </div>
                 <h3>Tags:</h3>
                 <p id="tags">

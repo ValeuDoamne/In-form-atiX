@@ -74,13 +74,14 @@ class HomeworkGateway {
   }
 
   public function get_all_submissions_of_homework(int $homework_id): array {
-    $query = "SELECT s.id, s.user_id, u.username, u.name, s.score, p.name as programming_language, s.solution, s.problem_id, s.date_submitted FROM homework_problems hp
+    $query = "SELECT s.id, s.user_id, u.username, u.name, s.score, p.name as programming_language, pr.name as problem_name, s.solution, s.problem_id, s.date_submitted FROM homework_problems hp
                 JOIN homeworks h ON h.id=hp.homework_id
                 JOIN classrooms c ON c.id=h.classroom_id
                 JOIN classrooms_students cs ON cs.classroom_id=c.id
                 JOIN submissions s ON hp.problem_id = s.problem_id
                 JOIN users u ON s.user_id = u.id
                 JOIN programming_languages p ON s.programming_language_id = p.id
+                JOIN problems pr ON s.problem_id = pr.id
                 WHERE s.user_id=cs.student_id
                       AND h.time_limit >= s.date_submitted
                       AND hp.homework_id=$1
@@ -95,6 +96,7 @@ class HomeworkGateway {
         "username" => $row["username"],
         "full_name" => $row["name"],
         "solution" => $row["solution"],
+        "problem_name" => $row["problem_name"],
         "programming_language" => $row["programming_language"],
         "problem_id" => intval($row["problem_id"]),
         "date_submitted" => $row["date_submitted"]

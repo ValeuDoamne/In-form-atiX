@@ -18,6 +18,66 @@ async function getUser() {
     return user
 }
 
+async function submitRating() {
+  const problem_id=parseInt(window.location.hash.slice(1));
+  const ratingGivenElem = document.getElementById("rating-score-input");
+  const rating = parseInt(ratingGivenElem.value);
+  await fetch('http://localhost:8000/api/v1/problems/'+problem_id+'/ratings', {
+        method: 'POST',
+        headers: {Authorization: "Bearer "+localStorage.getItem('token')},
+        body: JSON.stringify({rating})
+  }).catch(err => {
+    console.log(err);
+  });
+  ratingGivenElem.value = '';
+  await getScore();
+}
+
+async function getScore() {
+  const problem_id=parseInt(window.location.hash.slice(1));
+  await fetch('http://localhost:8000/api/v1/problems/'+problem_id+'/ratings',
+      {
+          headers: {Authorization: "Bearer "+localStorage.getItem('token')}
+      }).then(data => data.json())
+        .then(data => {
+            if(data.status == "Success") {
+                const overallRating = document.getElementById("overallRating");
+                overallRating.innerHTML = `<h3>
+                                        <span class="highlight">Total Ratings: </span>
+                                        <span>${data.rating}/5</span>
+                                    </h3>
+                    `;
+            }
+        }).catch(err => {
+          console.log(err);
+        });
+
+}
+
+async function getRaport() {
+  const raport = document.getElementById("raport");
+  const problem_id=parseInt(window.location.hash.slice(1));
+  await fetch('http://localhost:8000/api/v1/problems/'+problem_id+'/raport',
+      {
+          headers: {Authorization: "Bearer "+localStorage.getItem('token')}
+      }).then(data => data.json())
+        .then(data => {
+            if(data.status == "Success") {
+                const raport = document.getElementById("raport");
+                raport.innerHTML = `<h3>
+                                        <span class="highlight">Total submissions: </span>
+                                        <span>${data.raport.total_submissions}</span>
+                                    </h3>
+                                    <h3>
+                                        <span class="highlight">Correct submissions: </span>
+                                        <span>${data.raport.successful_submissions}</span>
+                                    </h3>`;
+            }
+        }).catch(err => {
+          console.log(err);
+        });
+}
+
 async function fetchComments() {
   const comments_section = document.getElementById('comments-section');
   const problem_id = parseInt(window.location.hash.slice(1));
@@ -201,7 +261,10 @@ function renderPage() {
     }).catch(err => {
       console.log(err);
     });
-   fetchComments();
+  
+  getScore();
+  getRaport();
+  fetchComments();
 }
 
 //check for changes in the hash

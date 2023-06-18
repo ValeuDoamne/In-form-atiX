@@ -37,6 +37,78 @@
         </tbody>
       </table>
     </section>
+
+        <div class="modal" id="modal-edit-profile">
+      <div class="container">
+        <h2>Edit Profile</h2>
+        <h2>No field is required</h2>
+        <div class="notification-box"></div>
+        <div class="input-list">
+          <h4>
+            <span>
+              New Username:
+            </span>
+            <span>
+              <input id="modal-username" class="input-modal" placeholder="username...">
+            </span>
+          </h4>
+          <h4>
+            <span>
+              New Name:
+            </span>
+            <span>
+              <input id="modal-name" class="input-modal" placeholder="full name...">
+            </span>
+          </h4>
+          <h4>
+            <span>
+              New Email:
+            </span>
+            <span>
+              <input id="modal-email" class="input-modal" placeholder="email...">
+            </span>
+          </h4>
+          <h4>
+            <span>
+              New Password:
+            </span>
+            <span>
+              <input id="modal-new-password" type="password" class="input-modal" placeholder="password...">
+            </span>
+          </h4>
+          <h4>
+            <span>
+              Password Confirm:
+            </span>
+            <span>
+              <input id="modal-new-password-confirm" type="password" class="input-modal" placeholder="password...">
+            </span>
+          </h4>
+          <h4>Change user type:</h4>
+          <select class="proposeproblem" name="user_types" style="margin-bottom: 10px" id="modal-edit-user-type">
+                    <option value=""></option>
+                    <option value="student">student</option>
+                    <option value="teacher">teacher</option>
+                    <option value="admin">admin</option>
+          </select>
+        </div>
+        <div class="button-list">
+          <button type="button" class="submit" id="modal-edit-save-button">Save</button>
+          <button type="button" class="cancel" onclick="hideModal('modal-edit-profile')">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal" id="modal-delete-account">
+        <div class="container">
+            <h2>Are you sure?</h2>
+            <div class="button-list">
+              <button id="delete-account-button-modal" type="button" class="submit" style="background-color: red; border-color: red;">Delete</button>
+              <button type="button" class="cancel" onclick="hideModal('modal-delete-account')">Cancel</button>
+            </div>
+        </div>
+    </div>
   </main>
 </body>
 </html>

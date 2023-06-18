@@ -29,9 +29,62 @@ function downloadJSON(data, filename) {
   document.body.removeChild(link);
 }
 
+function escapeQuotes(str) {
+  return str.replace(/"/g, '\\"');
+}
+
+// Function to convert JSON to CSV
+function convertToCSV(objArray) {
+    const array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+
+    const keys = Object.keys(array);
+    const values = Object.values(array);
+    const header = keys.join(',');
+    let array_values = [];
+    for(const element of values) {
+       if(typeof element === "string") {
+           array_values.push(`"${escapeQuotes(element)}"`); 
+       } else {
+           array_values.push(element); 
+       }
+    }
+    const values_string = array_values.join(',');
+    return header+"\r\n"+values_string;
+}
+// Function to download CSV file
+function downloadCSV(data, filename) {
+  const csv = convertToCSV(data);
+  
+  // Create a blob from the CSV string
+  const blob = new Blob([csv], { type: 'text/csv' });
+
+  // Create a temporary link element
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+
+  // Set the filename for the downloaded file
+  link.download = filename;
+
+  // Append the link to the document body
+  document.body.appendChild(link);
+
+  // Simulate a click event to trigger the download
+  link.click();
+
+  // Clean up the temporary link
+  document.body.removeChild(link);
+}
+
+function exportProblemCSV() {
+    downloadCSV(PROBLEM_JSON_DATA, "export.csv");
+}
+
+function exportProblemJSON() {
+    downloadJSON(PROBLEM_JSON_DATA, "export.json");
+}
 
 function exportProblem() {
-    downloadJSON(PROBLEM_JSON_DATA, "export.json");
+    showModal("modal-export-problem")
 }
 
 async function getUser() {
@@ -147,6 +200,56 @@ async function fetchComments() {
   }).catch(err => {
     console.log(err);
   });
+
+}
+
+async function addNewTag() {
+    const newTagElem = document.getElementById('modal-input-tag');
+    const newTag = newTagElem.value;
+    const problem_id = parseInt(window.location.hash.slice(1));
+    fetch("http://localhost:8000/api/v1/problems/"+problem_id+"/tags", {
+        method: "POST",
+        headers: {Authorization: "Bearer "+localStorage.getItem('token')},
+        body: JSON.stringify({tag: newTag})
+    }).then(data => data.json())
+    .then(data => {
+        if(data.status != "Success")
+            console.log(data);
+    }).catch(err => console.log(err));
+
+    newTagElem.value = '';
+    hideModal('modal-tag-problem')
+    await getTags();
+}
+
+async function addTagModal() {
+    const tags = document.getElementById('tags');
+    const user = await getUser();
+    if(user.user_type == "admin" || user.user_type == "teacher") {
+        const modalTaguri = `
+                <div class="modal" id="modal-tag-problem">
+                  <div class="container">
+                    <h2 style="margin: 0 auto;">Add tag</h2>
+                        <div style="display: flex; flex-flow: column; align-items: center; justify-content: center; margin-bottom: 10px;">
+                        <input type="text" id="modal-input-tag">
+                        <button type="button" class="buttonSubmit" id="modal-add-tag-button">Add</button>
+                        </div>
+                    <div class="button-list">
+                      <button type="button" class="cancel" onclick="hideModal('modal-tag-problem')">Close</button>
+                    </div>
+                 </div>
+               </div>
+        `;
+        tags.insertAdjacentHTML('beforeend', modalTaguri);
+        const buttonAddTag = document.createElement('button');
+        tags.appendChild(buttonAddTag);
+        buttonAddTag.innerText = "Add tag";
+        buttonAddTag.classList.add("buttonSubmit"); 
+        buttonAddTag.addEventListener('click', function() {
+            showModal('modal-tag-problem');
+        });
+        document.getElementById('modal-add-tag-button').addEventListener('click', addNewTag);
+    } 
 }
 
 async function deleteComment(comment_id) {
@@ -231,17 +334,40 @@ function sendProblemSolution() {
   }
 }
 
+async function getTags() {
+  const problem_id = parseInt(window.location.hash.slice(1));
+  const tags = document.getElementById('tags');
+  tags.innerHTML = ''; 
+  await fetch('http://localhost:8000/api/v1/problems/'+problem_id+'/tags',
+    {
+        headers: {Authorization: "Bearer "+localStorage.getItem('token')}
+    }).then(data => data.json())
+    .then(data => {
+      if(data.status == "Success") {
+        tags.innertext="";
+        for(const i in data.tags) {
+            tags.innerHTML+='<p class="highlight tag" >#'+data.tags[i]+" </p>";
+        } 
+      } else {
+        console.log(data);
+      }
+    }).catch(err => {
+      console.log(err);
+    });
+} 
+
 function renderPage() {
   const problem_id = parseInt(window.location.hash.slice(1));
   const title = document.getElementById('title');
   const description = document.getElementById('description');
-  const tags = document.getElementById('tags');
   const sendSolution = document.getElementById('send-solution');
   const sendCommentButton = document.getElementById('send-comment-button');
   sendSolution.addEventListener('click', sendProblemSolution);
   sendCommentButton.addEventListener('click', sendComment);
   document.getElementById('go-to-submissions').addEventListener('click', goToSubmissions);
   document.getElementById('export-problem-data').addEventListener('click', exportProblem);
+  document.getElementById('modal-export-json').addEventListener('click', exportProblemJSON);
+  document.getElementById('modal-export-csv').addEventListener('click', exportProblemCSV);
 
   fetch('http://localhost:8000/api/v1/problems/'+problem_id,
     {
@@ -277,27 +403,13 @@ function renderPage() {
     }).catch(err => {
       console.log(err);
     });
-  fetch('http://localhost:8000/api/v1/problems/'+problem_id+'/tags',
-    {
-        headers: {Authorization: "Bearer "+localStorage.getItem('token')}
-    }).then(data => data.json())
-    .then(data => {
-      if(data.status == "Success") {
-        tags.innerText="";
-        console.log(data.tags);
-        for(const i in data.tags) {
-            tags.innerHTML+='<p class="highlight tag" >#'+data.tags[i]+" </p>";
-        } 
-      } else {
-        console.log(data);
-      }
-    }).catch(err => {
-      console.log(err);
-    });
-  
+ 
+
+  getTags();
   getScore();
   getRaport();
   fetchComments();
+  addTagModal();
 }
 
 //check for changes in the hash

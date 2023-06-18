@@ -76,6 +76,18 @@
 
         </div>
     </div>
+    <div class="modal" id="modal-export-problem">
+      <div class="container">
+        <h2>Select Export Format</h2>
+            <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+            <button type="button" class="buttonSubmit" id="modal-export-json">JSON</button>
+            <button type="button" class="buttonSubmit" id="modal-export-csv">CSV</button>
+            </div>
+        <div class="button-list">
+          <button type="button" class="cancel" onclick="hideModal('modal-export-problem')">Close</button>
+        </div>
+     </div>
+   </div>
     <div class="modal" id="modal-delete-comment">
       <div class="container">
         <h2>Are you sure?</h2>

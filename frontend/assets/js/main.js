@@ -32,8 +32,6 @@ if(modals.length) {
       closeButton.addEventListener('click', () => {
         hideModal(modal.getAttribute('id'));
       });
-      const container = modal.querySelector('.container');
-      container.appendChild(closeButton);
     });
   }
 }
@@ -45,6 +43,10 @@ if(modals.length) {
 window.showModal = function showModal(modalId) {
   const modal = document.getElementById(modalId);
   modal.classList.add('active');
+  const container = modal.querySelector('.container');
+  if(container.clientHeight > window.innerHeight) {
+    container.classList.add('scroll');
+  }
   document.addEventListener('click', (e) => {
     if (e.target.id === modalId) {
       hideModal(modalId);

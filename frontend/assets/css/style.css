@@ -1411,7 +1411,7 @@ textarea.admin-profile-post {
   display: none;
 }
 
-main section.admin-main {
+main div.admin-main {
   max-width: 900px;
   margin: 0 auto;
   padding: 1em;
@@ -1424,7 +1424,7 @@ main section.admin-main {
   flex-wrap: wrap;
 }
 
-section.admin-main > div {
+div.admin-main > div {
   border: 1px solid #E16428;  
   border-radius: 10px;
   margin: 0 1em 1em 1em;
@@ -1432,13 +1432,13 @@ section.admin-main > div {
   padding: 0 0.5em 1em 0.5em;
 }
 
-section.admin-main > div h2 {
+div.admin-main > div h2 {
   font-size: 1.2em;
   display: inline-block;
   border-bottom: 1px solid #E16428;
 }
 
-section.admin-main > div span {
+div.admin-main > div span {
   border: 1px solid gray;
   display: block;
   width: 2em;
@@ -1453,10 +1453,44 @@ a.submit {
   padding: 0.2em 1em;
 }
 
-table .delete-btn {
+.delete-btn {
   background-color: #bd2c2c;
   color: #f2f2f2;
   border-radius: 5px;
   padding: 0.3em 1em;
   border:none;
+  cursor: pointer;
+}
+
+.view-btn {
+  background-color: #E16428;
+  color: #f2f2f2;
+  border-radius: 5px;
+  padding: 0.3em 1em;
+  border:none;
+  margin-top: 0.5em;
+  cursor: pointer;
+}
+
+#problems > div {
+  background-color: #222;
+  color: #f2f2f2;
+  border-radius: 10px;
+  border: 1px solid #E16428;
+  margin: 0 auto 1em auto;
+  padding: 0.5em 2em;
+  width:700px;
+  text-align: left;
+}
+
+#problems .problem-title {
+  display: inline-block;
+  border-bottom: 1px solid #E16428;
+  margin-bottom: 0;
+}
+
+#problems .username {
+  margin-top:0;
+  font-size:smaller;
+  color: #E16428;
 }

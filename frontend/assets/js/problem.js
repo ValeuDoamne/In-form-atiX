@@ -3,6 +3,37 @@ function goToSubmissions() {
     window.location.replace("/solution.html"+window.location.hash);
 }
 
+let PROBLEM_JSON_DATA = undefined;
+
+function downloadJSON(data, filename) {
+  // Convert JSON object to a string
+  const json = JSON.stringify(data);
+  
+  // Create a blob from the JSON string
+  const blob = new Blob([json], { type: 'application/json' });
+
+  // Create a temporary link element
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+
+  // Set the filename for the downloaded file
+  link.download = filename;
+
+  // Append the link to the document body
+  document.body.appendChild(link);
+
+  // Simulate a click event to trigger the download
+  link.click();
+
+  // Clean up the temporary link
+  document.body.removeChild(link);
+}
+
+
+function exportProblem() {
+    downloadJSON(PROBLEM_JSON_DATA, "export.json");
+}
+
 async function getUser() {
   let user = undefined;
   await fetch('http://localhost:8000/api/v1/users/me',
@@ -210,6 +241,7 @@ function renderPage() {
   sendSolution.addEventListener('click', sendProblemSolution);
   sendCommentButton.addEventListener('click', sendComment);
   document.getElementById('go-to-submissions').addEventListener('click', goToSubmissions);
+  document.getElementById('export-problem-data').addEventListener('click', exportProblem);
 
   fetch('http://localhost:8000/api/v1/problems/'+problem_id,
     {
@@ -217,6 +249,7 @@ function renderPage() {
     }).then(data => data.json())
     .then(data => {
       if(data.status == "Success") {
+        PROBLEM_JSON_DATA = data.problem;
         title.innerText = data.problem.name;
         description.innerHTML = `<h4>Description:</h4><br>${data.problem.description}`;
         if(data.problem.solution != undefined) {

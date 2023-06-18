@@ -79,7 +79,7 @@ CREATE TABLE comments (
 );
 
 CREATE TABLE ratings (
-    user_id INTEGER PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
     problem_id INTEGER REFERENCES problems(id) ON DELETE CASCADE,
     stars INTEGER CHECK (stars >= 1 AND stars <= 5)
 );

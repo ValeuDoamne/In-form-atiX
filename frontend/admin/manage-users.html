@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
+  <script type="module" src="../assets/js/main.js"></script>
+  <script type="module" src="../assets/js/manage-users.js"></script>
+  <title>Manage Users</title>
+</head>
+<body>
+  <header></header>
+  <main class="centered-page">
+    <h1>Manage users</h1>
+    <div id="loader">
+      Loading...
+    </div>
+    <section class="waiting-auth">
+      <table class="students">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Created</th>
+            <th>Role</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="users-table">
+        </tbody>
+      </table>
+    </section>
+
+        <div class="modal" id="modal-edit-profile">
+      <div class="container">
+        <h2>Edit Profile</h2>
+        <h2>No field is required</h2>
+        <div class="notification-box"></div>
+        <div class="input-list">
+          <h4>
+            <span>
+              New Username:
+            </span>
+            <span>
+              <input id="modal-username" class="input-modal" placeholder="username...">
+            </span>
+          </h4>
+          <h4>
+            <span>
+              New Name:
+            </span>
+            <span>
+              <input id="modal-name" class="input-modal" placeholder="full name...">
+            </span>
+          </h4>
+          <h4>
+            <span>
+              New Email:
+            </span>
+            <span>
+              <input id="modal-email" class="input-modal" placeholder="email...">
+            </span>
+          </h4>
+          <h4>
+            <span>
+              New Password:
+            </span>
+            <span>
+              <input id="modal-new-password" type="password" class="input-modal" placeholder="password...">
+            </span>
+          </h4>
+          <h4>
+            <span>
+              Password Confirm:
+            </span>
+            <span>
+              <input id="modal-new-password-confirm" type="password" class="input-modal" placeholder="password...">
+            </span>
+          </h4>
+          <h4>Change user type:</h4>
+          <select class="proposeproblem" name="user_types" style="margin-bottom: 10px" id="modal-edit-user-type">
+                    <option value="">&nbsp;</option>
+                    <option value="student">student</option>
+                    <option value="teacher">teacher</option>
+                    <option value="admin">admin</option>
+          </select>
+        </div>
+        <div class="button-list">
+          <button type="button" class="submit" id="modal-edit-save-button">Save</button>
+          <button type="button" class="cancel" onclick="hideModal('modal-edit-profile')">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal" id="modal-delete-account">
+        <div class="container">
+            <h2>Are you sure?</h2>
+            <div class="button-list">
+              <button id="delete-account-button-modal" type="button" class="submit" style="background-color: red; border-color: red;">Delete</button>
+              <button type="button" class="cancel" onclick="hideModal('modal-delete-account')">Cancel</button>
+            </div>
+        </div>
+    </div>
+  </main>
+</body>
+</html>

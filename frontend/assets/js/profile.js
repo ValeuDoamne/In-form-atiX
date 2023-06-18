@@ -110,16 +110,6 @@ function adminCreatePost() {
     contentElement.value=""
 }
 
-function adminManageUsers() {
-    window.location.replace("/admin/manage-users.html");
-}
-function adminManageProblems() {
-    window.location.replace("/admin/manage-problems.html");
-}
-function adminManageNewProblems() {
-    window.location.replace("/admin/manage-new-problems.html");
-}
-
 async function renderContentAdmin() {
   const content = document.querySelector("main #content");
   const innerContent = document.createElement("div");
@@ -137,23 +127,23 @@ async function renderContentAdmin() {
                 <div class="news-content profile">
                    <h3>Number of Users: ${data.data.users}</h3>
                    <div>
-                     <button id="admin-profile-manage-users" class="submit">Manage</button>
+                     <a class="submit" href="admin/manage-users.html">Manage</a>
                    </div>
                 </div>
             </div>
             <div class="news-container">
                 <div class="news-content profile">
-                   <h3>Number of problems: ${data.data.problems}</h3> 
+                   <h3>Number of Problems: ${data.data.problems}</h3> 
                    <div>
-                     <button id="admin-profile-manage-problems" class="submit">Manage</button>
+                      <a class="submit" href="admin/manage-problems.html">Manage</a>
                    </div>
                 </div>
             </div>
             <div class="news-container">
                 <div class="news-content profile">
-                   <h3>Number of New Problems: ${data.data.new_problems}</h3> 
+                   <h3>Number of Proposed Problems: ${data.data.new_problems}</h3> 
                    <div>
-                     <button id="admin-profile-manage-new-problems" class="submit">Manage</button>
+                      <a class="submit" href="admin/manage-unreleased.html">Manage</a>
                    </div>
                 </div>
             </div>
@@ -203,9 +193,6 @@ async function renderContentAdmin() {
         </div>
       </div>`);
   document.getElementById("admin-create-post").addEventListener('click', adminCreatePost);
-  document.getElementById("admin-profile-manage-users").addEventListener('click', adminManageUsers);
-  document.getElementById("admin-profile-manage-problems").addEventListener('click', adminManageProblems);
-  document.getElementById("admin-profile-manage-new-problems").addEventListener('click', adminManageNewProblems);
 }
 
 const validEmail = (email) => {

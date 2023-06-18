@@ -1,7 +1,8 @@
 /**
  * Checks if a user is logged in by validation the JWT from local storage
+ * @returns {false | string} Returns false if not logged in, username if logged in
  */
-export default async function checkAuthState(){
+export function authCheck(){
   const token = localStorage.getItem('token');
   if(!token) {
     return false;
@@ -11,6 +12,31 @@ export default async function checkAuthState(){
     return false;
   }
   return decodedToken?.payload?.user_type;
+}
+
+/**
+ * Verifies if the user is logged in and is an admin
+ * @returns user data if logged in, null if not logged in
+ */
+export async function verifyAdminLogin() {
+  if(authCheck() == false) {
+    return null;
+  }
+  const adminInfo = fetch("http://localhost:8000/api/v1/users/me", {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    } 
+  }).then(response => response.json())
+  .then(data => {
+    if(data.status!="Success" || data.user.user_type != "admin") {
+      return null;
+    }
+    return data.user;
+  }).catch(err => {
+    console.error(err);
+    return null;
+  });
+  return adminInfo;
 }
 
 

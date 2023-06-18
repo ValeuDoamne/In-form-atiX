@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
+  <script type="module" src="../assets/js/main.js"></script>
+  <script type="module" src="../assets/js/admin.js"></script>
+  <title>Admin dashboard</title>
+</head>
+<body>
+  <header></header>
+  <main class="centered-page">
+    <h1>Admin dashboard</h1>
+    <div id="loader">
+      <p>Loading...</p>
+    </div>
+    <section class="admin-main waiting-auth">
+      <div>
+        <h2>Users</h2>
+        <p>Currently registered users: 
+          <span id="total-users">0</span>
+        </p>
+        <a class="submit" href="manage-users.html">Manage users</a>
+      </div>
+      <div>
+        <h2>Existing problems</h2>
+        <p>Currently existing problems: 
+          <span id="total-problems">0</span>
+        </p>
+        <a class="submit" href="manage-problems.html">Manage problems</a>
+      </div>
+      <div>
+        <h2>Proposed problems</h2>
+        <p>Currently proposed problems: 
+          <span id="total-proposed-problems">0</span>
+        </p>
+        <a class="submit" href="manage-unreleased.html">Manage proposals</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

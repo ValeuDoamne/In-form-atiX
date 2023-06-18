@@ -1,8 +1,8 @@
-import header from '../components/header.js';
-import authCheck from './auth-check.js';
+import header from './header.js';
+import {authCheck} from './auth-check.js';
 
 //Check auth state
-const authState = await authCheck();
+const authState = authCheck();
 
 console.log(`Authenticated: ${authState}`);
 
